@@ -20,82 +20,82 @@ Display_Width = 1200
 Display_Height = 675
 
 """musique"""
-##musique_jeux = pygame.mixer.music.load('musiqueenjeux.mp3')
-##musique_menu = pygame.mixer.music.load('musiquemenu.mp3')
-##musique_mort = pygame.mixer.music.load('musiquemort.mp3')
-##musique_victoire = pygame.mixer.music.load('musiquevictoire.mp3')
+##musique_jeux = pygame.mixer.music.load('music/musiqueenjeux.mp3')
+##musique_menu = pygame.mixer.music.load('music/musiquemenu.mp3')
+##musique_mort = pygame.mixer.music.load('music/musiquemort.mp3')
+##musique_victoire = pygame.mixer.music.load('music/musiquevictoire.mp3')
 
 Display = pygame.display.set_mode((Display_Width,Display_Height))
-fond =pygame.image.load("fond_jeux.png").convert()
+fond =pygame.image.load("img/fond_jeux.png").convert()
 fond = pygame.transform.scale(fond,(Display_Width,Display_Height))
 FPS = 60
 prolist =[]
-pro = pygame.image.load("missile.png").convert_alpha()
+pro = pygame.image.load("img/missile.png").convert_alpha()
 
 pro = pygame.transform.scale(pro,(20,40))
 
-rocket = pygame.image.load("Rocket.png").convert_alpha()
+rocket = pygame.image.load("img/Rocket.png").convert_alpha()
 
 rocket = pygame.transform.scale(rocket,(80,80))
 
-fond_menu = pygame.image.load("fondmenu.png").convert_alpha()
-fond_base = pygame.image.load("fond.png").convert_alpha()
-titre = pygame.image.load("titre.png").convert_alpha()
-Victoire = pygame.image.load("youwin.png").convert_alpha()
-portail_fin = pygame.image.load("portailfin.png").convert_alpha()
+fond_menu = pygame.image.load("img/fondmenu.png").convert_alpha()
+fond_base = pygame.image.load("img/fond.png").convert_alpha()
+titre = pygame.image.load("img/titre.png").convert_alpha()
+Victoire = pygame.image.load("img/youwin.png").convert_alpha()
+portail_fin = pygame.image.load("img/portailfin.png").convert_alpha()
 portail_fin = pygame.transform.scale(portail_fin,(128,128))
 
-son_decolage = pygame.mixer.Sound("decolage.wav")
+son_decolage = pygame.mixer.Sound("music/decolage.wav")
 
 """menu image base"""
-play = pygame.image.load("boutonplay.png").convert_alpha()
-play_en = pygame.image.load("boutonplayenfoncer.png").convert_alpha()
-option =  pygame.image.load("boutonoption.png").convert_alpha()
-option_en =  pygame.image.load("boutonoptionenfoncer.png").convert_alpha()
-Exit =  pygame.image.load("boutonexit.png").convert_alpha()
-Exit_en = pygame.image.load("boutonexitenfoncer.png").convert_alpha()
+play = pygame.image.load("img/boutonplay.png").convert_alpha()
+play_en = pygame.image.load("img/boutonplayenfoncer.png").convert_alpha()
+option =  pygame.image.load("img/boutonoption.png").convert_alpha()
+option_en =  pygame.image.load("img/boutonoptionenfoncer.png").convert_alpha()
+Exit =  pygame.image.load("img/boutonexit.png").convert_alpha()
+Exit_en = pygame.image.load("img/boutonexitenfoncer.png").convert_alpha()
 
 """choix des niveau menu image"""
-lvl_1 = pygame.image.load("1.png").convert_alpha()
-lvl_1_en = pygame.image.load("1en.png").convert_alpha()
-lvl_2 = pygame.image.load("2.png").convert_alpha()
-lvl_2_en = pygame.image.load("2en.png").convert_alpha()
-lvl_3 = pygame.image.load("3.png").convert_alpha()
-lvl_3_en = pygame.image.load("3en.png").convert_alpha()
-lvl_4 = pygame.image.load("4.png").convert_alpha()
-lvl_4_en = pygame.image.load("4en.png").convert_alpha()
-lvl_5 = pygame.image.load("5.png").convert_alpha()
-lvl_5_en = pygame.image.load("5en.png").convert_alpha()
-lvl_6 = pygame.image.load("6.png").convert_alpha()
-lvl_6_en = pygame.image.load("6en.png").convert_alpha()
-lvl_7 = pygame.image.load("7.png").convert_alpha()
-lvl_7_en = pygame.image.load("7en.png").convert_alpha()
-lvl_8 = pygame.image.load("8.png").convert_alpha()
-lvl_8_en = pygame.image.load("8en.png").convert_alpha()
-lvl_9 = pygame.image.load("9.png").convert_alpha()
-lvl_9_en = pygame.image.load("9en.png").convert_alpha()
-lvl_10 = pygame.image.load("10.png").convert_alpha()
-lvl_10_en = pygame.image.load("10en.png").convert_alpha()
-lvl_alea = pygame.image.load("aleatoire.png").convert_alpha()
-lvl_alea_en = pygame.image.load("aleatoireen.png").convert_alpha()
-Titre_Choix_lvl = pygame.image.load("choixduniveau.png").convert_alpha()
+lvl_1 = pygame.image.load("img/1.png").convert_alpha()
+lvl_1_en = pygame.image.load("img/1en.png").convert_alpha()
+lvl_2 = pygame.image.load("img/2.png").convert_alpha()
+lvl_2_en = pygame.image.load("img/2en.png").convert_alpha()
+lvl_3 = pygame.image.load("img/3.png").convert_alpha()
+lvl_3_en = pygame.image.load("img/3en.png").convert_alpha()
+lvl_4 = pygame.image.load("img/4.png").convert_alpha()
+lvl_4_en = pygame.image.load("img/4en.png").convert_alpha()
+lvl_5 = pygame.image.load("img/5.png").convert_alpha()
+lvl_5_en = pygame.image.load("img/5en.png").convert_alpha()
+lvl_6 = pygame.image.load("img/6.png").convert_alpha()
+lvl_6_en = pygame.image.load("img/6en.png").convert_alpha()
+lvl_7 = pygame.image.load("img/7.png").convert_alpha()
+lvl_7_en = pygame.image.load("img/7en.png").convert_alpha()
+lvl_8 = pygame.image.load("img/8.png").convert_alpha()
+lvl_8_en = pygame.image.load("img/8en.png").convert_alpha()
+lvl_9 = pygame.image.load("img/9.png").convert_alpha()
+lvl_9_en = pygame.image.load("img/9en.png").convert_alpha()
+lvl_10 = pygame.image.load("img/10.png").convert_alpha()
+lvl_10_en = pygame.image.load("img/10en.png").convert_alpha()
+lvl_alea = pygame.image.load("img/aleatoire.png").convert_alpha()
+lvl_alea_en = pygame.image.load("img/aleatoireen.png").convert_alpha()
+Titre_Choix_lvl = pygame.image.load("img/choixduniveau.png").convert_alpha()
 
 """menu gameover"""
-Gameover_quit = pygame.image.load("exit.png").convert_alpha()
-Gameover_quit_en = pygame.image.load("exiten.png").convert_alpha()
-Gameover_menu = pygame.image.load("menu.png").convert_alpha()
-Gameover_menu_en = pygame.image.load("menuen.png").convert_alpha()
-Gameover_tryagain = pygame.image.load("tryagain.png").convert_alpha()
-Gameover_tryagain_en = pygame.image.load("tryagainen.png").convert_alpha()
+Gameover_quit = pygame.image.load("img/exit.png").convert_alpha()
+Gameover_quit_en = pygame.image.load("img/exiten.png").convert_alpha()
+Gameover_menu = pygame.image.load("img/menu.png").convert_alpha()
+Gameover_menu_en = pygame.image.load("img/menuen.png").convert_alpha()
+Gameover_tryagain = pygame.image.load("img/tryagain.png").convert_alpha()
+Gameover_tryagain_en = pygame.image.load("img/tryagainen.png").convert_alpha()
 
 """menu victoire"""
-credit = pygame.image.load("credit.png").convert_alpha()
-credi_en = pygame.image.load("crediten.png").convert_alpha()
-lvl_suivant = pygame.image.load("levelsuivant.png").convert_alpha()
-lvl_suivant_en = pygame.image.load("levelsuivanten.png").convert_alpha()
+credit = pygame.image.load("img/credit.png").convert_alpha()
+credi_en = pygame.image.load("img/crediten.png").convert_alpha()
+lvl_suivant = pygame.image.load("img/levelsuivant.png").convert_alpha()
+lvl_suivant_en = pygame.image.load("img/levelsuivanten.png").convert_alpha()
 
 """menu credit"""
-Creditfinal = pygame.image.load("creditfinal.png").convert_alpha()
+Creditfinal = pygame.image.load("img/creditfinal.png").convert_alpha()
 
 
 
@@ -560,7 +560,7 @@ def Menu_Base():
     global level_en_cours_numero
     MenuBase = True
     pygame.mixer.music.stop()
-    pygame.mixer.music.load('musiquemenu.mp3')
+    pygame.mixer.music.load('music/musiquemenu.mp3')
     pygame.mixer.music.play(-1)
 
 
@@ -616,7 +616,7 @@ def Menu_gameover():
     MenuGameover = True
     pygame.mixer.music.stop()
 
-    pygame.mixer.music.load('musiquemort.mp3')
+    pygame.mixer.music.load('music/musiquemort.mp3')
     pygame.mixer.music.play(-1)
 
     pygame.key.set_repeat(400,30)
@@ -810,7 +810,7 @@ def Menu_Victoire():
     MenuVictoire = True
 
     pygame.mixer.music.stop()
-    pygame.mixer.music.load('musiquevictoire.mp3')
+    pygame.mixer.music.load('music/musiquevictoire.mp3')
     pygame.mixer.music.play(-1)
 
     pygame.key.set_repeat(400,30)
@@ -922,7 +922,7 @@ def GameLoop():
     level_list.append(Level_alea(player))
 
     pygame.mixer.music.stop()
-    pygame.mixer.music.load('musiqueenjeux.mp3')
+    pygame.mixer.music.load('music/musiqueenjeux.mp3')
     pygame.mixer.music.play(-1)
 
 
