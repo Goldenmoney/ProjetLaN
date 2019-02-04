@@ -1,6 +1,6 @@
 import pygame
 pygame.init()
-from Classes.Menu import *
+from Classes.Controleur import *
 
 
 Display_Width = 1200

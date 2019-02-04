@@ -1,18 +1,22 @@
 import pygame
 pygame.init()
-from Classes.Menu import *
+from Classes.Controleur import *
 from Classes.PortailFin import *
-from Classes.Player import *
-from Classes.Lancerocket import *
 from Classes.Projectile import *
+from Classes.Lancerocket import *
 import random
 
 global level_en_cours_numero
 
+Display_Width = 1200
+Display_Height = 675
+
+Display = pygame.display.set_mode((Display_Width,Display_Height))
 pro = pygame.image.load("img/missile.png").convert_alpha()
 
 pro = pygame.transform.scale(pro,(20,40))
-
+fond =pygame.image.load("img/fond_jeux.png").convert()
+fond = pygame.transform.scale(fond,(Display_Width,Display_Height))
 class Level(object):
     def __init__(self, player):
 
@@ -355,91 +359,3 @@ class Level_alea(Level):
             lance = Lance_rocket(misille[2])
             self.pro_list.add(pro)
             self.lance_list.add(lance)
-
-def GameLoop():
-    global level_en_cours_numero
-
-
-    GameRun = True
-    GameOver = False
-
-    pos = 0
-    player = Player()
-    level_list = []
-    level_list.append(Level_1(player))
-    level_list.append(Level_2(player))
-    level_list.append(Level_3(player))
-    level_list.append(Level_4(player))
-    level_list.append(Level_5(player))
-    level_list.append(Level_6(player))
-    level_list.append(Level_7(player))
-    level_list.append(Level_8(player))
-    level_list.append(Level_9(player))
-    level_list.append(Level_10(player))
-    level_list.append(Level_alea(player))
-
-    pygame.mixer.music.stop()
-    pygame.mixer.music.load('music/musiqueenjeux.mp3')
-    pygame.mixer.music.play(-1)
-
-    global  levelchiffre
-    levelchiffre=levelnum()
-    level_en_cours = level_list[levelchiffre]
-
-    player.level = level_en_cours
-    sprite_bouge = pygame.sprite.Group()
-    sprite_bouge.add(player)
-
-    while GameRun:
-            while GameOver == True:
-                time.sleep(1)
-                pygame.mixer.music.stop()
-                Menu_gameover()
-
-
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
-                if event.type == KEYDOWN:
-                    if event.key == K_LEFT:
-                        pos = -3.5
-
-
-                    if event.key == K_RIGHT:
-                        pos = 3.5
-                if event.type == KEYUP:
-                    if event.key == K_LEFT:
-                        pos = 0
-                    if event.key == K_RIGHT:
-                        pos = 0
-
-
-            player.update(pos)
-
-
-            collision_player_missile_mask =  pygame.sprite.spritecollide(player,level_en_cours.pro_list,False,pygame.sprite.collide_mask)
-            collision_player_missile = pygame.sprite.spritecollide(player,level_en_cours.pro_list,False)
-            collision_player_fin = pygame.sprite.spritecollide(player,level_en_cours.portal,False)
-
-
-            if collision_player_missile:
-                if collision_player_missile_mask:
-                    GameOver = True
-                    son_decolage.stop()
-
-            if collision_player_fin:
-                time.sleep(1)
-                pygame.mixer.music.stop()
-                Menu_Victoire()
-
-            level_en_cours.update()
-            level_en_cours.draw(Display)
-            sprite_bouge.draw(Display)
-
-
-            pygame.display.update()
-
-
-
-            clock.tick(FPS)

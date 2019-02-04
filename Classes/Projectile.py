@@ -1,12 +1,13 @@
 import pygame
 pygame.init()
-from Classes.Level import *
-
 
 son_decolage = pygame.mixer.Sound("music/decolage.wav")
 Display_Width = 1200
 Display_Height = 675
 Display = pygame.display.set_mode((Display_Width,Display_Height))
+pro = pygame.image.load("img/missile.png").convert_alpha()
+pro = pygame.transform.scale(pro,(20,40))
+prolist=[]
 
 class Projectil(pygame.sprite.Sprite):
     def __init__(self,X,chute):
