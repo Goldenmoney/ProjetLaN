@@ -12,7 +12,7 @@ prolist=[]
 class Projectil(pygame.sprite.Sprite):
     def __init__(self,X,chute):
         pygame.sprite.Sprite.__init__(self)
-        prolist = []
+        projectileList = []
         Y =0
         self.X = X
         self.Y =Y
