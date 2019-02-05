@@ -8,7 +8,7 @@ from Classes.Projectile import *
 import time
 import sys #module systeme
 
-<<<<<<< HEAD
+#==============================================================================#
 """Ajout des images menu""" ##A GARDER
 background = pygame.image.load("images/background.png").convert_alpha()
 titre = pygame.image.load("images/titre.png").convert_alpha()
@@ -21,10 +21,12 @@ credits = pygame.transform.scale(credits0, (300, 100))
 quitter0 = pygame.image.load("images/quitter.png").convert_alpha()
 quitter = pygame.transform.scale(quitter0, (300, 100))
 
+lvl1
+
+
+#==============================================================================#
+
 """musique"""
-=======
-# musique
->>>>>>> 95f93520ed89091e21892435d6ed3f643122a66e
 ##musique_jeux = pygame.mixer.music.load('music/musiqueenjeux.mp3')
 ##musique_menu = pygame.mixer.music.load('music/musiquemenu.mp3')
 ##musique_mort = pygame.mixer.music.load('music/musiquemort.mp3')
@@ -38,24 +40,6 @@ Display_Width = 1024
 Display_Height = 768
 
 Display = pygame.display.set_mode((Display_Width,Display_Height))
-
-<<<<<<< HEAD
-# """menu image base"""
-# play = pygame.image.load("img/boutonplay.png").convert_alpha()
-# play_en = pygame.image.load("img/boutonplayenfoncer.png").convert_alpha()
-# option =  pygame.image.load("img/boutonoption.png").convert_alpha()
-# option_en =  pygame.image.load("img/boutonoptionenfoncer.png").convert_alpha()
-# Exit =  pygame.image.load("img/boutonexit.png").convert_alpha()
-# Exit_en = pygame.image.load("img/boutonexitenfoncer.png").convert_alpha()
-=======
-# menu image base
-play = pygame.image.load("img/boutonplay.png").convert_alpha()
-play_en = pygame.image.load("img/boutonplayenfoncer.png").convert_alpha()
-option =  pygame.image.load("img/boutonoption.png").convert_alpha()
-option_en =  pygame.image.load("img/boutonoptionenfoncer.png").convert_alpha()
-Exit =  pygame.image.load("img/boutonexit.png").convert_alpha()
-Exit_en = pygame.image.load("img/boutonexitenfoncer.png").convert_alpha()
->>>>>>> 95f93520ed89091e21892435d6ed3f643122a66e
 
 # choix des niveau menu image
 lvl_1 = pygame.image.load("img/1.png").convert_alpha()
@@ -103,71 +87,36 @@ Creditfinal = pygame.image.load("img/creditfinal.png").convert_alpha()
 # fond
 fond_menu = pygame.image.load("img/fondmenu.png").convert_alpha()
 fond_base = pygame.image.load("img/fond.png").convert_alpha()
-<<<<<<< HEAD
 titreaenlever = pygame.image.load("img/titre.png").convert_alpha()
-=======
-
-#
-titre = pygame.image.load("img/titre.png").convert_alpha()
->>>>>>> 95f93520ed89091e21892435d6ed3f643122a66e
 Victoire = pygame.image.load("img/youwin.png").convert_alpha()
 
 global level_en_cours_numero
 
 FPS = 60
 
-<<<<<<< HEAD
 
 def Menu_Start(): ##A GARDER
     global level_en_cours_numero
     menuStart = True
     while menuStart:
         mpos = pygame.mouse.get_pos()
-=======
-# affiche menu pour jouer...
-def Menu_Base():
-    global level_en_cours_numero
-    MenuBase = True
-    pygame.mixer.music.stop()
-    pygame.mixer.music.load('music/musiquemenu.mp3')
-    pygame.mixer.music.play(-1)
-
-
-    pygame.key.set_repeat(400,30)
-
-    while MenuBase:
-        posSouris = pygame.mouse.get_pos()
->>>>>>> 95f93520ed89091e21892435d6ed3f643122a66e
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
 
-<<<<<<< HEAD
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
                 if pla.collidepoint(mpos):
 
                     #Display.blit(play_en,(320,185)) # Image quand bouton enfoncé
-=======
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-
-                # collidepoint == verif si point est dans le rectangle
-                if jouer.collidepoint(posSouris):
-                    # Display.blit==afffiche l'image
-                    Display.blit(play_en,(320,185))
->>>>>>> 95f93520ed89091e21892435d6ed3f643122a66e
                     pygame.display.update()
                     time.sleep(1)
 
                     menu_level()
 
-<<<<<<< HEAD
                 if opt.collidepoint(mpos):
-=======
-                if exit.collidepoint(posSouris):
->>>>>>> 95f93520ed89091e21892435d6ed3f643122a66e
 
                     #Display.blit(Exit_en,(320,430))
                     pygame.display.update()
@@ -175,11 +124,7 @@ def Menu_Base():
                     pygame.quit()
                     sys.exit()
 
-<<<<<<< HEAD
                 if quit.collidepoint(mpos):
-=======
-                if opt.collidepoint(posSouris):
->>>>>>> 95f93520ed89091e21892435d6ed3f643122a66e
 
                     #Display.blit(option_en,(320,310))
                     pygame.display.update()
@@ -195,7 +140,6 @@ def Menu_Base():
         pygame.display.flip()
 
 
-<<<<<<< HEAD
 
 # def Menu_Base():
 #     global level_en_cours_numero
@@ -250,13 +194,6 @@ def Menu_Base():
 #         Exi = Display.blit(Exit,(320,430))
 #         Optio =  Display.blit(option,(320,310))
 #         pygame.display.flip()
-=======
-        Display.blit(fond_menu,(0,0))
-        jouer = Display.blit(play,(320,185))
-        exit = Display.blit(Exit,(320,430))
-        opt =  Display.blit(option,(320,310))
-        pygame.display.flip()
->>>>>>> 95f93520ed89091e21892435d6ed3f643122a66e
 
 # affiche menu quand on pert comme une merde
 def Menu_gameover():
