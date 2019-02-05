@@ -467,10 +467,9 @@ def GameLoop():
             level_en_cours.draw(Display)
             sprite_bouge.draw(Display)
 
-            if i!=1200:
+            if i!=200:
                 piece.draw()
-
-            if i == 1200:
+            else:
                 piece = Piece(Display)
                 piece.randomize()
                 piece.draw()
