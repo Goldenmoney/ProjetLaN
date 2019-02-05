@@ -38,14 +38,6 @@ lvl_3 = pygame.transform.scale(lvl_30, (300, 100))
 
 #==============================================================================#
 
-# menu gameover
-Gameover_quit = pygame.image.load("img/exit.png").convert_alpha()
-Gameover_quit_en = pygame.image.load("img/exiten.png").convert_alpha()
-Gameover_menu = pygame.image.load("img/menu.png").convert_alpha()
-Gameover_menu_en = pygame.image.load("img/menuen.png").convert_alpha()
-Gameover_tryagain = pygame.image.load("img/tryagain.png").convert_alpha()
-Gameover_tryagain_en = pygame.image.load("img/tryagainen.png").convert_alpha()
-
 # menu victoire
 credit = pygame.image.load("img/credit.png").convert_alpha()
 credi_en = pygame.image.load("img/crediten.png").convert_alpha()
@@ -67,9 +59,6 @@ Victoire = pygame.image.load("img/youwin.png").convert_alpha()
 
 """musique"""
 ##musique_jeux = pygame.mixer.music.load('music/musiqueenjeux.mp3')
-##musique_menu = pygame.mixer.music.load('music/musiquemenu.mp3')
-##musique_mort = pygame.mixer.music.load('music/musiquemort.mp3')
-##musique_victoire = pygame.mixer.music.load('music/musiquevictoire.mp3')
 
 #============================= A GARDER =======================================#
 
@@ -190,134 +179,31 @@ def Menu_options():
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
-                if ExiO.collidepoint(mpos):
+                if CredO.collidepoint(mpos):
+                    pygame.display.update()
+                    time.sleep(1)
+                    Credit()
 
+                if MenuO.collidepoint(mpos):
+                    pygame.display.update()
+                    time.sleep(1)
+                    Menu_Start()
+
+                if ExiO.collidepoint(mpos):
                     pygame.display.update()
                     time.sleep(1)
                     pygame.quit()
                     sys.exit()
 
-                if MenuO.collidepoint(mpos):
-
-                    pygame.display.update()
-                    time.sleep(1)
-                    Menu_Start()
-
         Display.blit(background,(0,0))
 
-        #TryO = Display.blit(Gameover_tryagain,(340,200))
-        MenuO =  Display.blit(Gameover_menu,(362,335))
+        CredO = Display.blit(credits,(362,335))
+        #MenuO =  Display.blit(AMODIFIER,(362,335))
         ExiO = Display.blit(quitter,(362,460))
         pygame.display.flip()
 
 
 #==============================================================================#
-
-
-# def Menu_Base():
-#     global level_en_cours_numero
-#     MenuBase = True
-#     pygame.mixer.music.stop()
-#     pygame.mixer.music.load('music/musiquemenu.mp3')
-#     pygame.mixer.music.play(-1)
-#
-#
-#     pygame.key.set_repeat(400,30)
-#
-#     while MenuBase:
-#         mpos = pygame.mouse.get_pos()
-#         for event in pygame.event.get():
-#             if event.type == QUIT:
-#                 pygame.quit()
-#                 sys.exit()
-#
-#
-#
-#
-#             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-#
-#                 if pla.collidepoint(mpos):
-#
-#                     Display.blit(play_en,(320,185))
-#                     pygame.display.update()
-#                     time.sleep(1)
-#
-#                     menu_niveau()
-#
-#                 if Exi.collidepoint(mpos):
-#
-#                     Display.blit(Exit_en,(320,430))
-#                     pygame.display.update()
-#                     time.sleep(1)
-#                     pygame.quit()
-#                     sys.exit()
-#
-#                 if Optio.collidepoint(mpos):
-#
-#                     Display.blit(option_en,(320,310))
-#                     pygame.display.update()
-#                     time.sleep(1)
-#
-#                     GameLoop()
-#
-#
-#
-#         Display.blit(fond_menu,(0,0))
-#         pla = Display.blit(play,(320,185))
-#         Exi = Display.blit(Exit,(320,430))
-#         Optio =  Display.blit(option,(320,310))
-#         pygame.display.flip()
-
-# affiche menu quand on pert comme une merde
-def Menu_gameover():
-    global level_en_cours_numero
-    MenuGameover = True
-    pygame.mixer.music.stop()
-
-    pygame.mixer.music.load('music/musiquemort.mp3')
-    pygame.mixer.music.play(-1)
-
-    pygame.key.set_repeat(400,30)
-    while MenuGameover:
-        mpos = pygame.mouse.get_pos()
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-
-                if TryO.collidepoint(mpos):
-
-                    Display.blit(Gameover_tryagain_en,(340,200))
-                    pygame.display.update()
-                    time.sleep(1)
-                    pygame.mixer.music.stop()
-                    GameLoop()
-
-
-                if ExiO.collidepoint(mpos):
-
-                    Display.blit(Gameover_quit_en,(650,300))
-                    pygame.display.update()
-                    time.sleep(1)
-                    pygame.quit()
-                    sys.exit()
-
-                if MenuO.collidepoint(mpos):
-
-                    Display.blit(Gameover_menu_en,(360,300))
-                    pygame.display.update()
-                    time.sleep(1)
-                    pygame.mixer.music.stop()
-                    Menu_Start()
-
-        Display.blit(fond_base,(0,0))
-
-        TryO = Display.blit(Gameover_tryagain,(340,200))
-        ExiO = Display.blit(Gameover_quit,(650,300))
-        MenuO =  Display.blit(Gameover_menu,(360,300))
-        pygame.display.flip()
 
 # affiche Credit
 def Credit():
@@ -343,10 +229,8 @@ def Credit():
                     Menu_Start()
 
 
-        Display.blit(fond_base,(0,0))
-        Display.blit(Creditfinal,(0,0))
+        Display.blit(background,(0,0))
 
-        MenuC =  Display.blit(Gameover_menu,(40,570))
         pygame.display.flip()
 
 # affiche Menu_Victoire
@@ -483,9 +367,6 @@ def GameLoop():
             #    if collision_player_missile_mask:
             #        GameOver = True
             #        son_decolage.stop()
-
-
-
 
             if collision_player_fin:
                 time.sleep(1)
