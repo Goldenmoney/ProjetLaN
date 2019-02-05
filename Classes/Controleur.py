@@ -207,11 +207,11 @@ def Credit():
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
-                if MenuC.collidepoint(mpos):
-                    Display.blit(Gameover_menu_en,(40,570))
-                    pygame.display.update()
-                    time.sleep(1)
-                    Menu_Start()
+                # if MenuC.collidepoint(mpos):
+                #     Display.blit(Gameover_menu_en,(40,570))
+                #     pygame.display.update()
+                #     time.sleep(1)
+                #     Menu_Start()
 
 
         Display.blit(background,(0,0))
