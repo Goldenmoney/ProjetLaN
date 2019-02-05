@@ -8,8 +8,8 @@ from Classes.Projectile import *
 import time
 import sys #module systeme
 
-#==============================================================================#
-"""Ajout des images menu""" ##A GARDER
+#============================= A GARDER =======================================#
+"""Ajout des images menu"""
 background = pygame.image.load("images/background.png").convert_alpha()
 titre = pygame.image.load("images/titre.png").convert_alpha()
 jouer0 = pygame.image.load("images/jouer.png").convert_alpha()
@@ -21,50 +21,16 @@ credits = pygame.transform.scale(credits0, (300, 100))
 quitter0 = pygame.image.load("images/quitter.png").convert_alpha()
 quitter = pygame.transform.scale(quitter0, (300, 100))
 
-lvl1
+"""Ajout des images options"""
+lvl_10 = pygame.image.load("images/1.png").convert_alpha()
+lvl_1 = pygame.transform.scale(lvl_10, (300, 100))
+lvl_20 = pygame.image.load("images/2.png").convert_alpha()
+lvl_2 = pygame.transform.scale(lvl_20, (300, 100))
+lvl_30 = pygame.image.load("images/3.png").convert_alpha()
+lvl_3 = pygame.transform.scale(lvl_30, (300, 100))
 
 
 #==============================================================================#
-
-"""musique"""
-##musique_jeux = pygame.mixer.music.load('music/musiqueenjeux.mp3')
-##musique_menu = pygame.mixer.music.load('music/musiquemenu.mp3')
-##musique_mort = pygame.mixer.music.load('music/musiquemort.mp3')
-##musique_victoire = pygame.mixer.music.load('music/musiquevictoire.mp3')
-
-# creation des variable de base
-pygame.display.set_caption("GamedDev")
-
-clock = pygame.time.Clock()
-Display_Width = 1024
-Display_Height = 768
-
-Display = pygame.display.set_mode((Display_Width,Display_Height))
-
-# choix des niveau menu image
-lvl_1 = pygame.image.load("img/1.png").convert_alpha()
-lvl_1_en = pygame.image.load("img/1en.png").convert_alpha()
-lvl_2 = pygame.image.load("img/2.png").convert_alpha()
-lvl_2_en = pygame.image.load("img/2en.png").convert_alpha()
-lvl_3 = pygame.image.load("img/3.png").convert_alpha()
-lvl_3_en = pygame.image.load("img/3en.png").convert_alpha()
-lvl_4 = pygame.image.load("img/4.png").convert_alpha()
-lvl_4_en = pygame.image.load("img/4en.png").convert_alpha()
-lvl_5 = pygame.image.load("img/5.png").convert_alpha()
-lvl_5_en = pygame.image.load("img/5en.png").convert_alpha()
-lvl_6 = pygame.image.load("img/6.png").convert_alpha()
-lvl_6_en = pygame.image.load("img/6en.png").convert_alpha()
-lvl_7 = pygame.image.load("img/7.png").convert_alpha()
-lvl_7_en = pygame.image.load("img/7en.png").convert_alpha()
-lvl_8 = pygame.image.load("img/8.png").convert_alpha()
-lvl_8_en = pygame.image.load("img/8en.png").convert_alpha()
-lvl_9 = pygame.image.load("img/9.png").convert_alpha()
-lvl_9_en = pygame.image.load("img/9en.png").convert_alpha()
-lvl_10 = pygame.image.load("img/10.png").convert_alpha()
-lvl_10_en = pygame.image.load("img/10en.png").convert_alpha()
-lvl_alea = pygame.image.load("img/aleatoire.png").convert_alpha()
-lvl_alea_en = pygame.image.load("img/aleatoireen.png").convert_alpha()
-Titre_Choix_lvl = pygame.image.load("img/choixduniveau.png").convert_alpha()
 
 # menu gameover
 Gameover_quit = pygame.image.load("img/exit.png").convert_alpha()
@@ -90,10 +56,27 @@ fond_base = pygame.image.load("img/fond.png").convert_alpha()
 titreaenlever = pygame.image.load("img/titre.png").convert_alpha()
 Victoire = pygame.image.load("img/youwin.png").convert_alpha()
 
+"""musique"""
+##musique_jeux = pygame.mixer.music.load('music/musiqueenjeux.mp3')
+##musique_menu = pygame.mixer.music.load('music/musiquemenu.mp3')
+##musique_mort = pygame.mixer.music.load('music/musiquemort.mp3')
+##musique_victoire = pygame.mixer.music.load('music/musiquevictoire.mp3')
+
+#============================= A GARDER =======================================#
+
+
+# creation des variable de base
+pygame.display.set_caption("CHICAGO ADVENTURE")
+
+clock = pygame.time.Clock()
+Display_Width = 1024
+Display_Height = 768
+
+Display = pygame.display.set_mode((Display_Width,Display_Height))
+
 global level_en_cours_numero
 
 FPS = 60
-
 
 def Menu_Start(): ##A GARDER
     global level_en_cours_numero
@@ -114,7 +97,7 @@ def Menu_Start(): ##A GARDER
                     pygame.display.update()
                     time.sleep(1)
 
-                    menu_level()
+                    menu_niveau()
 
                 if opt.collidepoint(mpos):
 
@@ -139,6 +122,57 @@ def Menu_Start(): ##A GARDER
         quit =  Display.blit(quitter,(362,580))
         pygame.display.flip()
 
+
+# affiche menu pour choix niveau
+def menu_niveau():
+    global level_en_cours_numero
+    MenuOptions = True
+
+    pygame.key.set_repeat(400,30)
+    while MenuOptions:
+        posSouris = pygame.mouse.get_pos()
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+
+                if lvl1.collidepoint(posSouris):
+
+                    #Display.blit(lvl_1_en,(370,250))
+                    pygame.display.update()
+                    time.sleep(1)
+                    level_en_cours_numero = 1
+                    #pygame.mixer.music.stop()
+                    GameLoop()
+
+                if lvl2.collidepoint(posSouris):
+
+                    #Display.blit(lvl_2_en,(470,250))
+                    pygame.display.update()
+                    time.sleep(1)
+                    level_en_cours_numero = 2
+                    #pygame.mixer.music.stop()
+                    GameLoop()
+
+
+                if lvl3.collidepoint(posSouris):
+
+                    #Display.blit(lvl_3_en,(570,250))
+                    pygame.display.update()
+                    time.sleep(1)
+                    level_en_cours_numero = 3
+                    #pygame.mixer.music.stop()
+                    GameLoop()
+
+        Display.blit(background,(0,0))
+        lvl1 = Display.blit(lvl_1,(50,250))
+        lvl2 = Display.blit(lvl_2,(370,250))
+        lvl3 =  Display.blit(lvl_3,(690,250))
+        pygame.display.flip()
+
+#==============================================================================#
 
 
 # def Menu_Base():
@@ -169,7 +203,7 @@ def Menu_Start(): ##A GARDER
 #                     pygame.display.update()
 #                     time.sleep(1)
 #
-#                     menu_level()
+#                     menu_niveau()
 #
 #                 if Exi.collidepoint(mpos):
 #
@@ -244,137 +278,6 @@ def Menu_gameover():
         TryO = Display.blit(Gameover_tryagain,(340,200))
         ExiO = Display.blit(Gameover_quit,(650,300))
         MenuO =  Display.blit(Gameover_menu,(360,300))
-        pygame.display.flip()
-
-# affiche menu pour choix niveau
-def menu_level():
-    global level_en_cours_numero
-    MenuLevel = True
-
-    pygame.key.set_repeat(400,30)
-    while MenuLevel:
-        posSouris = pygame.mouse.get_pos()
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-
-                if lvl1.collidepoint(posSouris):
-
-                    Display.blit(lvl_1_en,(370,250))
-                    pygame.display.update()
-                    time.sleep(1)
-                    level_en_cours_numero = 0
-                    pygame.mixer.music.stop()
-                    GameLoop()
-
-                if lvl2.collidepoint(posSouris):
-
-                    Display.blit(lvl_2_en,(470,250))
-                    pygame.display.update()
-                    time.sleep(1)
-                    level_en_cours_numero = 1
-                    pygame.mixer.music.stop()
-                    GameLoop()
-
-
-                if lvl3.collidepoint(posSouris):
-
-                    Display.blit(lvl_3_en,(570,250))
-                    pygame.display.update()
-                    time.sleep(1)
-                    level_en_cours_numero = 2
-                    pygame.mixer.music.stop()
-                    GameLoop()
-
-                if lvl4.collidepoint(posSouris):
-
-                    Display.blit(lvl_4_en,(670,250))
-                    pygame.display.update()
-                    time.sleep(1)
-                    level_en_cours_numero = 3
-                    pygame.mixer.music.stop()
-                    GameLoop()
-
-                if lvl5.collidepoint(posSouris):
-
-                    Display.blit(lvl_5_en,(770,250))
-                    pygame.display.update()
-                    time.sleep(1)
-                    level_en_cours_numero = 4
-                    pygame.mixer.music.stop()
-                    GameLoop()
-
-                if lvl6.collidepoint(posSouris):
-
-                    Display.blit(lvl_6_en,(370,350))
-                    pygame.display.update()
-                    time.sleep(1)
-                    level_en_cours_numero = 5
-                    pygame.mixer.music.stop()
-                    GameLoop()
-
-
-                if lvl7.collidepoint(posSouris):
-
-                    Display.blit(lvl_7_en,(470,350))
-                    pygame.display.update()
-                    time.sleep(1)
-                    level_en_cours_numero = 6
-                    pygame.mixer.music.stop()
-                    GameLoop()
-
-                if lvl8.collidepoint(posSouris):
-
-                    Display.blit(lvl_8_en,(570,350))
-                    pygame.display.update()
-                    time.sleep(1)
-                    level_en_cours_numero =7
-                    pygame.mixer.music.stop()
-                    GameLoop()
-
-                if lvl9.collidepoint(posSouris):
-
-                    Display.blit(lvl_9_en,(670,350))
-                    pygame.display.update()
-                    time.sleep(1)
-                    level_en_cours_numero = 8
-                    pygame.mixer.music.stop()
-                    GameLoop()
-
-
-                if lvl10.collidepoint(posSouris):
-                    Display.blit(lvl_10_en,(770,350))
-                    pygame.display.update()
-                    time.sleep(1)
-                    level_en_cours_numero = 9
-                    pygame.mixer.music.stop()
-                    GameLoop()
-
-
-                if lvlalea.collidepoint(posSouris):
-                    Display.blit(lvl_alea_en,(470,450))
-                    pygame.display.update()
-                    time.sleep(1)
-                    level_en_cours_numero = 10
-                    pygame.mixer.music.stop()
-                    GameLoop()
-
-        Display.blit(fond_base,(0,0))
-        Display.blit(Titre_Choix_lvl,(0,0))
-        lvl1 = Display.blit(lvl_1,(370,250))
-        lvl2 = Display.blit(lvl_2,(470,250))
-        lvl3 =  Display.blit(lvl_3,(570,250))
-        lvl4 =  Display.blit(lvl_4,(670,250))
-        lvl5 =  Display.blit(lvl_5,(770,250))
-        lvl6 =  Display.blit(lvl_6,(370,350))
-        lvl7 =  Display.blit(lvl_7,(470,350))
-        lvl8 =  Display.blit(lvl_8,(570,350))
-        lvl9 =  Display.blit(lvl_9,(670,350))
-        lvl10 =  Display.blit(lvl_10,(770,350))
-        lvlalea =  Display.blit(lvl_alea,(470,450))
         pygame.display.flip()
 
 # affiche Credit
