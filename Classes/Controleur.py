@@ -21,17 +21,14 @@ credits = pygame.transform.scale(credits0, (300, 100))
 quitter0 = pygame.image.load("images/quitter.png").convert_alpha()
 quitter = pygame.transform.scale(quitter0, (300, 100))
 
-<<<<<<< HEAD
 """Ajout des images options"""
+choixlvl = pygame.image.load("images/choixlvl.png").convert_alpha()
 lvl_10 = pygame.image.load("images/1.png").convert_alpha()
 lvl_1 = pygame.transform.scale(lvl_10, (300, 100))
 lvl_20 = pygame.image.load("images/2.png").convert_alpha()
 lvl_2 = pygame.transform.scale(lvl_20, (300, 100))
 lvl_30 = pygame.image.load("images/3.png").convert_alpha()
 lvl_3 = pygame.transform.scale(lvl_30, (300, 100))
-=======
-# lvl1
->>>>>>> cdb8a2c996494026c683105a5868e747c8d70063
 
 
 #==============================================================================#
@@ -171,9 +168,10 @@ def menu_niveau():
                     GameLoop()
 
         Display.blit(background,(0,0))
-        lvl1 = Display.blit(lvl_1,(50,250))
-        lvl2 = Display.blit(lvl_2,(370,250))
-        lvl3 =  Display.blit(lvl_3,(690,250))
+        Display.blit(choixlvl,(0,0))
+        lvl1 = Display.blit(lvl_1,(50,320))
+        lvl2 = Display.blit(lvl_2,(370,320))
+        lvl3 =  Display.blit(lvl_3,(690,320))
         pygame.display.flip()
 
 #==============================================================================#
@@ -357,7 +355,7 @@ def Menu_Victoire():
                     pygame.display.update()
                     time.sleep(1)
                     pygame.mixer.music.stop()
-                    Menu_Base()
+                    Menu_Start()
 
         Display.blit(fond_base,(0,0))
         Display.blit(Victoire,(0,0))
