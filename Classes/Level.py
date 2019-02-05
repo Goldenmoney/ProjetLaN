@@ -4,7 +4,7 @@ from Classes.Controleur import *
 from Classes.PortailFin import *
 # from Classes.Projectile import *
 # from Classes.Lancerocket import *
-import random
+
 
 global level_en_cours_numero
 
@@ -26,6 +26,7 @@ class Level(object):
         self.portal = pygame.sprite.Group()
         self.portal.add(Portailfin())
         self.player = player
+
 
         self.background = None
 
