@@ -37,19 +37,17 @@ class Player(pygame.sprite.Sprite):
         self.animation_position = 0
         self.animation_maximun = 3 #len(self.animation)-1
         self.image = move_image1
-        self.update(1)
+        self.update(1, 1)
         self.Gamelost = False
 
 
     # modifie le deplacement du joueur
-    def update(self,position):
+    def update(self,positionX,positionY):
 
-        if position != 0:
+       if positionX != 0 or positionY != 0 :
             self.animation_speed -= 1
-            self.rect.x += position
-
-            # gere l'axe y pour saut
-            # self.rect.y += position
+            self.rect.x += positionX
+            self.rect.y += positionY
             if self.animation_speed == 0:
                 self.image = self.animation_list[self.animation_position]
                 self.animation_speed = self.animation_speed_init
