@@ -105,15 +105,15 @@ def Menu_Start(): ##A GARDER
                     pygame.display.update()
                     time.sleep(1)
 
-                    menu_niveau()
+                    Menu_niveau()
 
                 if opt.collidepoint(positionSouris):
 
                     #Display.blit(Exit_en,(320,430))
                     pygame.display.update()
                     time.sleep(1)
-                    pygame.quit()
-                    sys.exit()
+
+                    Menu_options()
 
                 if quit.collidepoint(positionSouris):
 
@@ -121,7 +121,8 @@ def Menu_Start(): ##A GARDER
                     pygame.display.update()
                     time.sleep(1)
 
-                    GameLoop()
+                    pygame.quit()
+                    sys.exit()
 
         Display.blit(background,(0,0))
         titr = Display.blit(titre,(0,0))
@@ -132,7 +133,7 @@ def Menu_Start(): ##A GARDER
 
 
 # affiche menu pour choix niveau
-def menu_niveau():
+def Menu_niveau():
     global level_en_cours_numero
     MenuOptions = True
 
@@ -148,30 +149,24 @@ def menu_niveau():
 
                 if lvl1.collidepoint(posSouris):
 
-                    #Display.blit(lvl_1_en,(370,250))
                     pygame.display.update()
                     time.sleep(1)
                     level_en_cours_numero = 1
-                    #pygame.mixer.music.stop()
                     GameLoop()
 
                 if lvl2.collidepoint(posSouris):
 
-                    #Display.blit(lvl_2_en,(470,250))
                     pygame.display.update()
                     time.sleep(1)
                     level_en_cours_numero = 2
-                    #pygame.mixer.music.stop()
                     GameLoop()
 
 
                 if lvl3.collidepoint(posSouris):
 
-                    #Display.blit(lvl_3_en,(570,250))
                     pygame.display.update()
                     time.sleep(1)
                     level_en_cours_numero = 3
-                    #pygame.mixer.music.stop()
                     GameLoop()
 
         Display.blit(background,(0,0))
@@ -180,6 +175,41 @@ def menu_niveau():
         lvl2 = Display.blit(lvl_2,(370,320))
         lvl3 =  Display.blit(lvl_3,(690,320))
         pygame.display.flip()
+
+def Menu_options():
+    global level_en_cours_numero
+    menuOptions = True
+
+    pygame.key.set_repeat(400,30)
+    while menuOptions:
+        mpos = pygame.mouse.get_pos()
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+
+                if ExiO.collidepoint(mpos):
+
+                    pygame.display.update()
+                    time.sleep(1)
+                    pygame.quit()
+                    sys.exit()
+
+                if MenuO.collidepoint(mpos):
+
+                    pygame.display.update()
+                    time.sleep(1)
+                    Menu_Start()
+
+        Display.blit(background,(0,0))
+
+        #TryO = Display.blit(Gameover_tryagain,(340,200))
+        MenuO =  Display.blit(Gameover_menu,(362,335))
+        ExiO = Display.blit(quitter,(362,460))
+        pygame.display.flip()
+
 
 #==============================================================================#
 
