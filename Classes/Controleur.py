@@ -465,15 +465,15 @@ def GameLoop():
             player.update(posPerso)
 
 
-            collision_player_missile_mask =  pygame.sprite.spritecollide(player,level_en_cours.pro_list,False,pygame.sprite.collide_mask)
-            collision_player_missile = pygame.sprite.spritecollide(player,level_en_cours.pro_list,False)
+            #collision_player_missile_mask =  pygame.sprite.spritecollide(player,level_en_cours.pro_list,False,pygame.sprite.collide_mask)
+            #collision_player_missile = pygame.sprite.spritecollide(player,level_en_cours.pro_list,False)
             collision_player_fin = pygame.sprite.spritecollide(player,level_en_cours.portal,False)
 
 
-            if collision_player_missile:
-                if collision_player_missile_mask:
-                    GameOver = True
-                    son_decolage.stop()
+            #if collision_player_missile:
+            #    if collision_player_missile_mask:
+            #        GameOver = True
+            #        son_decolage.stop()
 
             if collision_player_fin:
                 time.sleep(1)
