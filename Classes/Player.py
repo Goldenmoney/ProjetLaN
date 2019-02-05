@@ -2,8 +2,8 @@ import pygame
 pygame.init()
 
 
-Display_Width = 1200
-Display_Height = 675
+Display_Width = 1024
+Display_Height = 768
 
 Display = pygame.display.set_mode((Display_Width,Display_Height))
 pro = pygame.image.load("img/missile.png").convert_alpha()
@@ -21,8 +21,6 @@ move_image2 = pygame.transform.scale(move_image2,(64,128))
 move_image3 = pygame.transform.scale(move_image3,(64,128))
 move_image4 = pygame.transform.scale(move_image4,(64,128))
 
-Display_Width = 1200
-Display_Height = 675
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):

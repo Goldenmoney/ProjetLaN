@@ -3,8 +3,8 @@ pygame.init()
 from Classes.Controleur import *
 
 
-Display_Width = 1200
-Display_Height = 675
+Display_Width = 1024
+Display_Height = 768
 
 Display = pygame.display.set_mode((Display_Width,Display_Height))
 
