@@ -21,7 +21,7 @@ credits = pygame.transform.scale(credits0, (300, 100))
 quitter0 = pygame.image.load("images/quitter.png").convert_alpha()
 quitter = pygame.transform.scale(quitter0, (300, 100))
 
-lvl1
+# lvl1
 
 
 #==============================================================================#
@@ -518,7 +518,7 @@ def GameLoop():
                         posPersoX = 0
                         posPersoY = -3.5
 
-                if event.type == KEYUP:
+            if event.type == KEYUP:
                     if event.key == K_LEFT:
                         posPersoX = 0
                         posPersoY = 0

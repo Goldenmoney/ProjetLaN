@@ -44,18 +44,16 @@ class Player(pygame.sprite.Sprite):
     # modifie le deplacement du joueur
     def update(self,positionX,positionY):
 
-       if positionX != 0 or positionY != 0 :
-            self.animation_speed -= 1
-            self.rect.x += positionX
-            self.rect.y += positionY
-            if self.animation_speed == 0:
-                self.image = self.animation_list[self.animation_position]
-                self.animation_speed = self.animation_speed_init
-                if self.animation_position == self.animation_maximun:
-                    self.animation_position = 0
-                else:
-                    self.animation_position += 1
+        if positionX != 0 or positionY != 0 :
+           self.animation_speed -= 1
+           self.rect.x += positionX
+           self.rect.y += positionY
+           if self.animation_speed == 0:
+               self.image = self.animation_list[self.animation_position]
+               self.animation_speed = self.animation_speed_init
+               if self.animation_position == self.animation_maximun:
+                   self.animation_position = 0
+               else:
+                   self.animation_position += 1
         Display.blit(self.image,(self.rect.x,self.rect.y))
         self.mask = pygame.mask.from_surface(self.image)
-
-
