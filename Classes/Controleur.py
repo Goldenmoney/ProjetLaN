@@ -21,6 +21,7 @@ credits = pygame.transform.scale(credits0, (300, 100))
 quitter0 = pygame.image.load("images/quitter.png").convert_alpha()
 quitter = pygame.transform.scale(quitter0, (300, 100))
 
+<<<<<<< HEAD
 """Ajout des images options"""
 lvl_10 = pygame.image.load("images/1.png").convert_alpha()
 lvl_1 = pygame.transform.scale(lvl_10, (300, 100))
@@ -28,6 +29,9 @@ lvl_20 = pygame.image.load("images/2.png").convert_alpha()
 lvl_2 = pygame.transform.scale(lvl_20, (300, 100))
 lvl_30 = pygame.image.load("images/3.png").convert_alpha()
 lvl_3 = pygame.transform.scale(lvl_30, (300, 100))
+=======
+# lvl1
+>>>>>>> cdb8a2c996494026c683105a5868e747c8d70063
 
 
 #==============================================================================#
@@ -369,7 +373,8 @@ def GameLoop():
     GameRun = True
     GameOver = False
 
-    posPerso = 0
+    posPersoX = 0
+    posPersoY = 0
     player = Player()
     level_list = []
     # append ajouter element a la fin
@@ -407,32 +412,39 @@ def GameLoop():
                 if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
-                if event.type == KEYDOWN:
+            if event.type == KEYDOWN:
                     if event.key == K_LEFT:
-                        posPerso = -3.5
-
+                        posPersoX = -3.5
+                        posPersoY = 0
 
                     if event.key == K_RIGHT:
-                        posPerso = 3.5
-                if event.type == KEYUP:
+                        posPersoX = 3.5
+                        posPersoY = 0
+
+                    if event.key == K_SPACE:
+                        posPersoX = 0
+                        posPersoY = -3.5
+
+            if event.type == KEYUP:
                     if event.key == K_LEFT:
-                        posPerso = 0
+                        posPersoX = 0
+                        posPersoY = 0
                     if event.key == K_RIGHT:
-                        posPerso = 0
+                        posPersoX = 0
+                        posPersoY = 0
+
+            player.update(posPersoX,posPersoY)
 
 
-            player.update(posPerso)
-
-
-            collision_player_missile_mask =  pygame.sprite.spritecollide(player,level_en_cours.pro_list,False,pygame.sprite.collide_mask)
-            collision_player_missile = pygame.sprite.spritecollide(player,level_en_cours.pro_list,False)
+            #collision_player_missile_mask =  pygame.sprite.spritecollide(player,level_en_cours.pro_list,False,pygame.sprite.collide_mask)
+            #collision_player_missile = pygame.sprite.spritecollide(player,level_en_cours.pro_list,False)
             collision_player_fin = pygame.sprite.spritecollide(player,level_en_cours.portal,False)
 
 
-            if collision_player_missile:
-                if collision_player_missile_mask:
-                    GameOver = True
-                    son_decolage.stop()
+            #if collision_player_missile:
+            #    if collision_player_missile_mask:
+            #        GameOver = True
+            #        son_decolage.stop()
 
             if collision_player_fin:
                 time.sleep(1)
