@@ -10,6 +10,8 @@ Display = pygame.display.set_mode((Display_Width,Display_Height))
 
 portail_fin = pygame.image.load("img/portailfin.png").convert_alpha()
 portail_fin = pygame.transform.scale(portail_fin,(128,128))
+
+
 class Portailfin(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)

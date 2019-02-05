@@ -1,14 +1,14 @@
 import pygame
 from pygame.locals import *
-import sys #module systeme
 pygame.init()
-import time
 from Classes.Level import *
-from Classes.PortailFin import *
 from Classes.Player import *
 from Classes.Lancerocket import *
 from Classes.Projectile import *
+import time
+import sys #module systeme
 
+<<<<<<< HEAD
 """Ajout des images menu""" ##A GARDER
 background = pygame.image.load("images/background.png").convert_alpha()
 titre = pygame.image.load("images/titre.png").convert_alpha()
@@ -22,12 +22,15 @@ quitter0 = pygame.image.load("images/quitter.png").convert_alpha()
 quitter = pygame.transform.scale(quitter0, (300, 100))
 
 """musique"""
+=======
+# musique
+>>>>>>> 95f93520ed89091e21892435d6ed3f643122a66e
 ##musique_jeux = pygame.mixer.music.load('music/musiqueenjeux.mp3')
 ##musique_menu = pygame.mixer.music.load('music/musiquemenu.mp3')
 ##musique_mort = pygame.mixer.music.load('music/musiquemort.mp3')
 ##musique_victoire = pygame.mixer.music.load('music/musiquevictoire.mp3')
 
-"""creation des variable de base"""
+# creation des variable de base
 pygame.display.set_caption("GamedDev")
 
 clock = pygame.time.Clock()
@@ -36,6 +39,7 @@ Display_Height = 768
 
 Display = pygame.display.set_mode((Display_Width,Display_Height))
 
+<<<<<<< HEAD
 # """menu image base"""
 # play = pygame.image.load("img/boutonplay.png").convert_alpha()
 # play_en = pygame.image.load("img/boutonplayenfoncer.png").convert_alpha()
@@ -43,8 +47,17 @@ Display = pygame.display.set_mode((Display_Width,Display_Height))
 # option_en =  pygame.image.load("img/boutonoptionenfoncer.png").convert_alpha()
 # Exit =  pygame.image.load("img/boutonexit.png").convert_alpha()
 # Exit_en = pygame.image.load("img/boutonexitenfoncer.png").convert_alpha()
+=======
+# menu image base
+play = pygame.image.load("img/boutonplay.png").convert_alpha()
+play_en = pygame.image.load("img/boutonplayenfoncer.png").convert_alpha()
+option =  pygame.image.load("img/boutonoption.png").convert_alpha()
+option_en =  pygame.image.load("img/boutonoptionenfoncer.png").convert_alpha()
+Exit =  pygame.image.load("img/boutonexit.png").convert_alpha()
+Exit_en = pygame.image.load("img/boutonexitenfoncer.png").convert_alpha()
+>>>>>>> 95f93520ed89091e21892435d6ed3f643122a66e
 
-"""choix des niveau menu image"""
+# choix des niveau menu image
 lvl_1 = pygame.image.load("img/1.png").convert_alpha()
 lvl_1_en = pygame.image.load("img/1en.png").convert_alpha()
 lvl_2 = pygame.image.load("img/2.png").convert_alpha()
@@ -69,7 +82,7 @@ lvl_alea = pygame.image.load("img/aleatoire.png").convert_alpha()
 lvl_alea_en = pygame.image.load("img/aleatoireen.png").convert_alpha()
 Titre_Choix_lvl = pygame.image.load("img/choixduniveau.png").convert_alpha()
 
-"""menu gameover"""
+# menu gameover
 Gameover_quit = pygame.image.load("img/exit.png").convert_alpha()
 Gameover_quit_en = pygame.image.load("img/exiten.png").convert_alpha()
 Gameover_menu = pygame.image.load("img/menu.png").convert_alpha()
@@ -77,52 +90,84 @@ Gameover_menu_en = pygame.image.load("img/menuen.png").convert_alpha()
 Gameover_tryagain = pygame.image.load("img/tryagain.png").convert_alpha()
 Gameover_tryagain_en = pygame.image.load("img/tryagainen.png").convert_alpha()
 
-"""menu victoire"""
+# menu victoire
 credit = pygame.image.load("img/credit.png").convert_alpha()
 credi_en = pygame.image.load("img/crediten.png").convert_alpha()
 lvl_suivant = pygame.image.load("img/levelsuivant.png").convert_alpha()
 lvl_suivant_en = pygame.image.load("img/levelsuivanten.png").convert_alpha()
 
-"""menu credit"""
+# menu credit
 Creditfinal = pygame.image.load("img/creditfinal.png").convert_alpha()
 
+
+# fond
 fond_menu = pygame.image.load("img/fondmenu.png").convert_alpha()
 fond_base = pygame.image.load("img/fond.png").convert_alpha()
+<<<<<<< HEAD
 titreaenlever = pygame.image.load("img/titre.png").convert_alpha()
+=======
+
+#
+titre = pygame.image.load("img/titre.png").convert_alpha()
+>>>>>>> 95f93520ed89091e21892435d6ed3f643122a66e
 Victoire = pygame.image.load("img/youwin.png").convert_alpha()
 
 global level_en_cours_numero
+
 FPS = 60
-def message_to_screen(msg,color,X,Y):
-    font = pygame.font.SysFont("monospace", 15)
-    screen_text = font.render(msg, True, color)
-    Display.blit(screen_text, [X,Y])
 
-pygame.key.set_repeat(4,30)
-
+<<<<<<< HEAD
 
 def Menu_Start(): ##A GARDER
     global level_en_cours_numero
     menuStart = True
     while menuStart:
         mpos = pygame.mouse.get_pos()
+=======
+# affiche menu pour jouer...
+def Menu_Base():
+    global level_en_cours_numero
+    MenuBase = True
+    pygame.mixer.music.stop()
+    pygame.mixer.music.load('music/musiquemenu.mp3')
+    pygame.mixer.music.play(-1)
+
+
+    pygame.key.set_repeat(400,30)
+
+    while MenuBase:
+        posSouris = pygame.mouse.get_pos()
+>>>>>>> 95f93520ed89091e21892435d6ed3f643122a66e
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
 
+<<<<<<< HEAD
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
                 if pla.collidepoint(mpos):
 
                     #Display.blit(play_en,(320,185)) # Image quand bouton enfoncé
+=======
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+
+                # collidepoint == verif si point est dans le rectangle
+                if jouer.collidepoint(posSouris):
+                    # Display.blit==afffiche l'image
+                    Display.blit(play_en,(320,185))
+>>>>>>> 95f93520ed89091e21892435d6ed3f643122a66e
                     pygame.display.update()
                     time.sleep(1)
 
                     menu_level()
 
+<<<<<<< HEAD
                 if opt.collidepoint(mpos):
+=======
+                if exit.collidepoint(posSouris):
+>>>>>>> 95f93520ed89091e21892435d6ed3f643122a66e
 
                     #Display.blit(Exit_en,(320,430))
                     pygame.display.update()
@@ -130,7 +175,11 @@ def Menu_Start(): ##A GARDER
                     pygame.quit()
                     sys.exit()
 
+<<<<<<< HEAD
                 if quit.collidepoint(mpos):
+=======
+                if opt.collidepoint(posSouris):
+>>>>>>> 95f93520ed89091e21892435d6ed3f643122a66e
 
                     #Display.blit(option_en,(320,310))
                     pygame.display.update()
@@ -146,6 +195,7 @@ def Menu_Start(): ##A GARDER
         pygame.display.flip()
 
 
+<<<<<<< HEAD
 
 # def Menu_Base():
 #     global level_en_cours_numero
@@ -200,14 +250,15 @@ def Menu_Start(): ##A GARDER
 #         Exi = Display.blit(Exit,(320,430))
 #         Optio =  Display.blit(option,(320,310))
 #         pygame.display.flip()
+=======
+        Display.blit(fond_menu,(0,0))
+        jouer = Display.blit(play,(320,185))
+        exit = Display.blit(Exit,(320,430))
+        opt =  Display.blit(option,(320,310))
+        pygame.display.flip()
+>>>>>>> 95f93520ed89091e21892435d6ed3f643122a66e
 
-
-
-def levelnum():
-    global level_en_cours_numero
-    return level_en_cours_numero
-
-
+# affiche menu quand on pert comme une merde
 def Menu_gameover():
     global level_en_cours_numero
     MenuGameover = True
@@ -223,10 +274,6 @@ def Menu_gameover():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
-
-
-
-
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
@@ -255,8 +302,6 @@ def Menu_gameover():
                     pygame.mixer.music.stop()
                     Menu_Start()
 
-
-
         Display.blit(fond_base,(0,0))
 
         TryO = Display.blit(Gameover_tryagain,(340,200))
@@ -264,18 +309,14 @@ def Menu_gameover():
         MenuO =  Display.blit(Gameover_menu,(360,300))
         pygame.display.flip()
 
-
-def levelnum():
-    return level_en_cours_numero;
-
-
+# affiche menu pour choix niveau
 def menu_level():
     global level_en_cours_numero
     MenuLevel = True
 
     pygame.key.set_repeat(400,30)
     while MenuLevel:
-        mpos = pygame.mouse.get_pos()
+        posSouris = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -283,7 +324,7 @@ def menu_level():
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
-                if lvl1.collidepoint(mpos):
+                if lvl1.collidepoint(posSouris):
 
                     Display.blit(lvl_1_en,(370,250))
                     pygame.display.update()
@@ -292,7 +333,7 @@ def menu_level():
                     pygame.mixer.music.stop()
                     GameLoop()
 
-                if lvl2.collidepoint(mpos):
+                if lvl2.collidepoint(posSouris):
 
                     Display.blit(lvl_2_en,(470,250))
                     pygame.display.update()
@@ -302,7 +343,7 @@ def menu_level():
                     GameLoop()
 
 
-                if lvl3.collidepoint(mpos):
+                if lvl3.collidepoint(posSouris):
 
                     Display.blit(lvl_3_en,(570,250))
                     pygame.display.update()
@@ -311,7 +352,7 @@ def menu_level():
                     pygame.mixer.music.stop()
                     GameLoop()
 
-                if lvl4.collidepoint(mpos):
+                if lvl4.collidepoint(posSouris):
 
                     Display.blit(lvl_4_en,(670,250))
                     pygame.display.update()
@@ -320,7 +361,7 @@ def menu_level():
                     pygame.mixer.music.stop()
                     GameLoop()
 
-                if lvl5.collidepoint(mpos):
+                if lvl5.collidepoint(posSouris):
 
                     Display.blit(lvl_5_en,(770,250))
                     pygame.display.update()
@@ -329,7 +370,7 @@ def menu_level():
                     pygame.mixer.music.stop()
                     GameLoop()
 
-                if lvl6.collidepoint(mpos):
+                if lvl6.collidepoint(posSouris):
 
                     Display.blit(lvl_6_en,(370,350))
                     pygame.display.update()
@@ -339,7 +380,7 @@ def menu_level():
                     GameLoop()
 
 
-                if lvl7.collidepoint(mpos):
+                if lvl7.collidepoint(posSouris):
 
                     Display.blit(lvl_7_en,(470,350))
                     pygame.display.update()
@@ -348,7 +389,7 @@ def menu_level():
                     pygame.mixer.music.stop()
                     GameLoop()
 
-                if lvl8.collidepoint(mpos):
+                if lvl8.collidepoint(posSouris):
 
                     Display.blit(lvl_8_en,(570,350))
                     pygame.display.update()
@@ -357,7 +398,7 @@ def menu_level():
                     pygame.mixer.music.stop()
                     GameLoop()
 
-                if lvl9.collidepoint(mpos):
+                if lvl9.collidepoint(posSouris):
 
                     Display.blit(lvl_9_en,(670,350))
                     pygame.display.update()
@@ -367,7 +408,7 @@ def menu_level():
                     GameLoop()
 
 
-                if lvl10.collidepoint(mpos):
+                if lvl10.collidepoint(posSouris):
                     Display.blit(lvl_10_en,(770,350))
                     pygame.display.update()
                     time.sleep(1)
@@ -376,7 +417,7 @@ def menu_level():
                     GameLoop()
 
 
-                if lvlalea.collidepoint(mpos):
+                if lvlalea.collidepoint(posSouris):
                     Display.blit(lvl_alea_en,(470,450))
                     pygame.display.update()
                     time.sleep(1)
@@ -399,11 +440,10 @@ def menu_level():
         lvlalea =  Display.blit(lvl_alea,(470,450))
         pygame.display.flip()
 
+# affiche Credit
 def Credit():
     global level_en_cours_numero
     Menucredit = True
-
-
 
     pygame.key.set_repeat(400,30)
     while Menucredit:
@@ -430,7 +470,7 @@ def Credit():
         MenuC =  Display.blit(Gameover_menu,(40,570))
         pygame.display.flip()
 
-
+# affiche Menu_Victoire
 def Menu_Victoire():
     global level_en_cours_numero
     MenuVictoire = True
@@ -441,7 +481,7 @@ def Menu_Victoire():
 
     pygame.key.set_repeat(400,30)
     while MenuVictoire:
-        mpos = pygame.mouse.get_pos()
+        posSouris = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -449,7 +489,7 @@ def Menu_Victoire():
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
-                if Suivant.collidepoint(mpos):
+                if Suivant.collidepoint(posSouris):
 
                     Display.blit(lvl_suivant_en,(650,300))
                     pygame.display.update()
@@ -459,7 +499,7 @@ def Menu_Victoire():
                         level_en_cours_numero = 10
                     pygame.mixer.music.stop()
                     GameLoop()
-                if CreditV.collidepoint(mpos):
+                if CreditV.collidepoint(posSouris):
 
                     Display.blit(credi_en,(900,570))
                     pygame.display.update()
@@ -467,7 +507,7 @@ def Menu_Victoire():
                     Credit()
 
 
-                if MenuV.collidepoint(mpos):
+                if MenuV.collidepoint(posSouris):
 
                     Display.blit(Gameover_menu_en,(370,300))
                     pygame.display.update()
@@ -486,13 +526,13 @@ def Menu_Victoire():
 def GameLoop():
     global level_en_cours_numero
 
-
     GameRun = True
     GameOver = False
 
-    pos = 0
+    posPerso = 0
     player = Player()
     level_list = []
+    # append ajouter element a la fin
     level_list.append(Level_1(player))
     level_list.append(Level_2(player))
     level_list.append(Level_3(player))
@@ -509,7 +549,7 @@ def GameLoop():
     pygame.mixer.music.load('music/musiqueenjeux.mp3')
     pygame.mixer.music.play(-1)
 
-
+    # grace a level_en_cours_numero(entier) on recupere la position dans la liste et donc le lvl dans la liste
     level_en_cours = level_list[level_en_cours_numero]
 
     player.level = level_en_cours
@@ -529,19 +569,19 @@ def GameLoop():
                     sys.exit()
                 if event.type == KEYDOWN:
                     if event.key == K_LEFT:
-                        pos = -3.5
+                        posPerso = -3.5
 
 
                     if event.key == K_RIGHT:
-                        pos = 3.5
+                        posPerso = 3.5
                 if event.type == KEYUP:
                     if event.key == K_LEFT:
-                        pos = 0
+                        posPerso = 0
                     if event.key == K_RIGHT:
-                        pos = 0
+                        posPerso = 0
 
 
-            player.update(pos)
+            player.update(posPerso)
 
 
             collision_player_missile_mask =  pygame.sprite.spritecollide(player,level_en_cours.pro_list,False,pygame.sprite.collide_mask)
@@ -563,9 +603,9 @@ def GameLoop():
             level_en_cours.draw(Display)
             sprite_bouge.draw(Display)
 
-
+            # rafraichi l'ecran
             pygame.display.update()
 
 
-
+            # gere les FPS
             clock.tick(FPS)

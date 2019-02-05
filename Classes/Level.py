@@ -17,6 +17,7 @@ pro = pygame.image.load("img/missile.png").convert_alpha()
 pro = pygame.transform.scale(pro,(20,40))
 fond =pygame.image.load("img/fond_jeux.png").convert()
 fond = pygame.transform.scale(fond,(Display_Width,Display_Height))
+
 class Level(object):
     def __init__(self, player):
 
@@ -43,16 +44,12 @@ class Level(object):
         self.lance_list.draw(screen)
         self.portal.draw(screen)
 
-
-
-
-
 class Level_1(Level):
     def __init__(self, player):
 
 
         Level.__init__(self, player)
-
+        # defini vitesse de chaque lance rocket
         level =[[100,3,70],
                 [200,6,170],
                 [300,4,270],
@@ -66,9 +63,9 @@ class Level_1(Level):
                 [1100,6,1070],]
 
         for misille in level:
-            pro = Projectil(misille[0],misille[1])
+            projectile = Projectil(misille[0],misille[1])
             lance = Lance_rocket(misille[2])
-            self.pro_list.add(pro)
+            self.pro_list.add(projectile)
             self.lance_list.add(lance)
 
 
