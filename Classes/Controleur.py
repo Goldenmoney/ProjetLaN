@@ -8,6 +8,9 @@ from Classes.Projectile import *
 import time
 import sys #module systeme
 
+Display_Width = 1024
+Display_Height = 768
+
 #============================= A GARDER =======================================#
 """Ajout des images menu"""
 background = pygame.image.load("images/background.png").convert_alpha()
@@ -52,8 +55,11 @@ Creditfinal = pygame.image.load("img/creditfinal.png").convert_alpha()
 
 
 # fond
+fond_menu0 = pygame.image.load("img/fondmenu.png").convert_alpha()
+fond_menu = pygame.transform.scale(fond_menu0, (Display_Width, Display_Height))
 fond_menu = pygame.image.load("img/fondmenu.png").convert_alpha()
-fond_base = pygame.image.load("img/fond.png").convert_alpha()
+fond_base0 = pygame.image.load("img/fond.png").convert_alpha()
+fond_base = pygame.transform.scale(fond_base0, (Display_Width, Display_Height))
 titreaenlever = pygame.image.load("img/titre.png").convert_alpha()
 Victoire = pygame.image.load("img/youwin.png").convert_alpha()
 
@@ -70,8 +76,7 @@ Victoire = pygame.image.load("img/youwin.png").convert_alpha()
 pygame.display.set_caption("CHICAGO ADVENTURE")
 
 clock = pygame.time.Clock()
-Display_Width = 1024
-Display_Height = 768
+
 
 Display = pygame.display.set_mode((Display_Width,Display_Height))
 
@@ -343,7 +348,7 @@ def Menu_Victoire():
                     GameLoop()
                 if CreditV.collidepoint(posSouris):
 
-                    Display.blit(credi_en,(900,570))
+                    Display.blit(credi_en,(700,570))
                     pygame.display.update()
                     time.sleep(1)
                     Credit()
@@ -361,7 +366,7 @@ def Menu_Victoire():
         Display.blit(Victoire,(0,0))
 
         Suivant = Display.blit(lvl_suivant,(650,300))
-        CreditV = Display.blit(credit,(900,570))
+        CreditV = Display.blit(credit,(700,570))
         MenuV =  Display.blit(Gameover_menu,(370,300))
         pygame.display.flip()
 
