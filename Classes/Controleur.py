@@ -9,6 +9,18 @@ from Classes.Player import *
 from Classes.Lancerocket import *
 from Classes.Projectile import *
 
+"""Ajout des images menu""" ##A GARDER
+background = pygame.image.load("images/background.png").convert_alpha()
+titre = pygame.image.load("images/titre.png").convert_alpha()
+jouer0 = pygame.image.load("images/jouer.png").convert_alpha()
+jouer = pygame.transform.scale(jouer0, (300, 100))
+options0 = pygame.image.load("images/options.png").convert_alpha()
+options = pygame.transform.scale(options0, (300, 100))
+credits0 = pygame.image.load("images/credits.png").convert_alpha()
+credits = pygame.transform.scale(credits0, (300, 100))
+quitter0 = pygame.image.load("images/quitter.png").convert_alpha()
+quitter = pygame.transform.scale(quitter0, (300, 100))
+
 """musique"""
 ##musique_jeux = pygame.mixer.music.load('music/musiqueenjeux.mp3')
 ##musique_menu = pygame.mixer.music.load('music/musiquemenu.mp3')
@@ -19,18 +31,18 @@ from Classes.Projectile import *
 pygame.display.set_caption("GamedDev")
 
 clock = pygame.time.Clock()
-Display_Width = 1200
-Display_Height = 675
+Display_Width = 1024
+Display_Height = 768
 
 Display = pygame.display.set_mode((Display_Width,Display_Height))
 
-"""menu image base"""
-play = pygame.image.load("img/boutonplay.png").convert_alpha()
-play_en = pygame.image.load("img/boutonplayenfoncer.png").convert_alpha()
-option =  pygame.image.load("img/boutonoption.png").convert_alpha()
-option_en =  pygame.image.load("img/boutonoptionenfoncer.png").convert_alpha()
-Exit =  pygame.image.load("img/boutonexit.png").convert_alpha()
-Exit_en = pygame.image.load("img/boutonexitenfoncer.png").convert_alpha()
+# """menu image base"""
+# play = pygame.image.load("img/boutonplay.png").convert_alpha()
+# play_en = pygame.image.load("img/boutonplayenfoncer.png").convert_alpha()
+# option =  pygame.image.load("img/boutonoption.png").convert_alpha()
+# option_en =  pygame.image.load("img/boutonoptionenfoncer.png").convert_alpha()
+# Exit =  pygame.image.load("img/boutonexit.png").convert_alpha()
+# Exit_en = pygame.image.load("img/boutonexitenfoncer.png").convert_alpha()
 
 """choix des niveau menu image"""
 lvl_1 = pygame.image.load("img/1.png").convert_alpha()
@@ -76,7 +88,7 @@ Creditfinal = pygame.image.load("img/creditfinal.png").convert_alpha()
 
 fond_menu = pygame.image.load("img/fondmenu.png").convert_alpha()
 fond_base = pygame.image.load("img/fond.png").convert_alpha()
-titre = pygame.image.load("img/titre.png").convert_alpha()
+titreaenlever = pygame.image.load("img/titre.png").convert_alpha()
 Victoire = pygame.image.load("img/youwin.png").convert_alpha()
 
 global level_en_cours_numero
@@ -88,17 +100,11 @@ def message_to_screen(msg,color,X,Y):
 
 pygame.key.set_repeat(4,30)
 
-def Menu_Base():
+
+def Menu_Start(): ##A GARDER
     global level_en_cours_numero
-    MenuBase = True
-    pygame.mixer.music.stop()
-    pygame.mixer.music.load('music/musiquemenu.mp3')
-    pygame.mixer.music.play(-1)
-
-
-    pygame.key.set_repeat(400,30)
-
-    while MenuBase:
+    menuStart = True
+    while menuStart:
         mpos = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -106,41 +112,94 @@ def Menu_Base():
                 sys.exit()
 
 
-
-
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
                 if pla.collidepoint(mpos):
 
-                    Display.blit(play_en,(320,185))
+                    #Display.blit(play_en,(320,185)) # Image quand bouton enfoncé
                     pygame.display.update()
                     time.sleep(1)
 
                     menu_level()
 
-                if Exi.collidepoint(mpos):
+                if opt.collidepoint(mpos):
 
-                    Display.blit(Exit_en,(320,430))
+                    #Display.blit(Exit_en,(320,430))
                     pygame.display.update()
                     time.sleep(1)
                     pygame.quit()
                     sys.exit()
 
-                if Optio.collidepoint(mpos):
+                if quit.collidepoint(mpos):
 
-                    Display.blit(option_en,(320,310))
+                    #Display.blit(option_en,(320,310))
                     pygame.display.update()
                     time.sleep(1)
 
                     GameLoop()
 
-
-
-        Display.blit(fond_menu,(0,0))
-        pla = Display.blit(play,(320,185))
-        Exi = Display.blit(Exit,(320,430))
-        Optio =  Display.blit(option,(320,310))
+        Display.blit(background,(0,0))
+        titr = Display.blit(titre,(0,0))
+        pla = Display.blit(jouer,(362,335))
+        opt = Display.blit(options,(362,460))
+        quit =  Display.blit(quitter,(362,580))
         pygame.display.flip()
+
+
+
+# def Menu_Base():
+#     global level_en_cours_numero
+#     MenuBase = True
+#     pygame.mixer.music.stop()
+#     pygame.mixer.music.load('music/musiquemenu.mp3')
+#     pygame.mixer.music.play(-1)
+#
+#
+#     pygame.key.set_repeat(400,30)
+#
+#     while MenuBase:
+#         mpos = pygame.mouse.get_pos()
+#         for event in pygame.event.get():
+#             if event.type == QUIT:
+#                 pygame.quit()
+#                 sys.exit()
+#
+#
+#
+#
+#             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+#
+#                 if pla.collidepoint(mpos):
+#
+#                     Display.blit(play_en,(320,185))
+#                     pygame.display.update()
+#                     time.sleep(1)
+#
+#                     menu_level()
+#
+#                 if Exi.collidepoint(mpos):
+#
+#                     Display.blit(Exit_en,(320,430))
+#                     pygame.display.update()
+#                     time.sleep(1)
+#                     pygame.quit()
+#                     sys.exit()
+#
+#                 if Optio.collidepoint(mpos):
+#
+#                     Display.blit(option_en,(320,310))
+#                     pygame.display.update()
+#                     time.sleep(1)
+#
+#                     GameLoop()
+#
+#
+#
+#         Display.blit(fond_menu,(0,0))
+#         pla = Display.blit(play,(320,185))
+#         Exi = Display.blit(Exit,(320,430))
+#         Optio =  Display.blit(option,(320,310))
+#         pygame.display.flip()
 
 
 
@@ -194,7 +253,7 @@ def Menu_gameover():
                     pygame.display.update()
                     time.sleep(1)
                     pygame.mixer.music.stop()
-                    Menu_Base()
+                    Menu_Start()
 
 
 
@@ -362,7 +421,7 @@ def Credit():
                     Display.blit(Gameover_menu_en,(40,570))
                     pygame.display.update()
                     time.sleep(1)
-                    Menu_Base()
+                    Menu_Start()
 
 
         Display.blit(fond_base,(0,0))
