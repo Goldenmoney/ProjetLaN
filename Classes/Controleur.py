@@ -7,6 +7,8 @@ from Classes.Lancerocket import *
 from Classes.Projectile import *
 import time
 import sys #module systeme
+from Classes.Piece import *
+from threading import Timer
 
 #============================= A GARDER =======================================#
 """Ajout des images menu"""
@@ -83,7 +85,7 @@ def Menu_Start(): ##A GARDER
     global level_en_cours_numero
     menuStart = True
     while menuStart:
-        mpos = pygame.mouse.get_pos()
+        positionSouris = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -92,7 +94,7 @@ def Menu_Start(): ##A GARDER
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
-                if pla.collidepoint(mpos):
+                if pla.collidepoint(positionSouris):
 
                     #Display.blit(play_en,(320,185)) # Image quand bouton enfoncé
                     pygame.display.update()
@@ -100,7 +102,7 @@ def Menu_Start(): ##A GARDER
 
                     menu_niveau()
 
-                if opt.collidepoint(mpos):
+                if opt.collidepoint(positionSouris):
 
                     #Display.blit(Exit_en,(320,430))
                     pygame.display.update()
@@ -108,7 +110,7 @@ def Menu_Start(): ##A GARDER
                     pygame.quit()
                     sys.exit()
 
-                if quit.collidepoint(mpos):
+                if quit.collidepoint(positionSouris):
 
                     #Display.blit(option_en,(320,310))
                     pygame.display.update()
@@ -365,12 +367,13 @@ def Menu_Victoire():
         MenuV =  Display.blit(Gameover_menu,(370,300))
         pygame.display.flip()
 
+
 def GameLoop():
     global level_en_cours_numero
 
     GameRun = True
     GameOver = False
-
+    i = 0
     posPersoX = 0
     posPersoY = 0
     player = Player()
@@ -398,13 +401,16 @@ def GameLoop():
     player.level = level_en_cours
     sprite_bouge = pygame.sprite.Group()
     sprite_bouge.add(player)
+    piece = Piece(Display)
+    piece.randomize()
+    piece.draw()
 
     while GameRun:
+            print(i)
             while GameOver == True:
                 time.sleep(1)
                 pygame.mixer.music.stop()
                 Menu_gameover()
-
 
             for event in pygame.event.get():
                 if event.type == QUIT:
@@ -433,7 +439,6 @@ def GameLoop():
 
             player.update(posPersoX,posPersoY)
 
-
             #collision_player_missile_mask =  pygame.sprite.spritecollide(player,level_en_cours.pro_list,False,pygame.sprite.collide_mask)
             #collision_player_missile = pygame.sprite.spritecollide(player,level_en_cours.pro_list,False)
             collision_player_fin = pygame.sprite.spritecollide(player,level_en_cours.portal,False)
@@ -444,18 +449,30 @@ def GameLoop():
             #        GameOver = True
             #        son_decolage.stop()
 
+
+
+
             if collision_player_fin:
                 time.sleep(1)
                 pygame.mixer.music.stop()
                 Menu_Victoire()
 
+
             level_en_cours.update()
             level_en_cours.draw(Display)
             sprite_bouge.draw(Display)
 
-            # rafraichi l'ecran
-            pygame.display.update()
+            if i!=1200:
+                piece.draw()
 
+            if i == 1200:
+                piece = Piece(Display)
+                piece.randomize()
+                piece.draw()
+                i = 0
+
+            pygame.display.update()
+            i += 1
 
             # gere les FPS
             clock.tick(FPS)
