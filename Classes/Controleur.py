@@ -376,8 +376,10 @@ def GameLoop():
     GameRun = True
     GameOver = False
 
-    posPersoX = 0
-    posPersoY = 0
+    vitesseX = 0
+    vitesseY = 0
+    gravite = 0.5
+    spacePressed = False
     player = Player()
     level_list = []
     # append ajouter element a la fin
@@ -416,27 +418,26 @@ def GameLoop():
                     pygame.quit()
                     sys.exit()
             if event.type == KEYDOWN:
-                    if event.key == K_LEFT:
-                        posPersoX = -3.5
-                        posPersoY = 0
+                if event.key == K_LEFT:
+                    vitesseX = -5
 
-                    if event.key == K_RIGHT:
-                        posPersoX = 3.5
-                        posPersoY = 0
+                if event.key == K_RIGHT:
+                    vitesseX = 5
 
-                    if event.key == K_SPACE:
-                        posPersoX = 0
-                        posPersoY = -3.5
+                if event.key == K_SPACE and player.auSol == True:
+                    spacePressed = True
+
 
             if event.type == KEYUP:
-                    if event.key == K_LEFT:
-                        posPersoX = 0
-                        posPersoY = 0
-                    if event.key == K_RIGHT:
-                        posPersoX = 0
-                        posPersoY = 0
+                if event.key == K_LEFT:
+                    vitesseX = 0
+                if event.key == K_RIGHT:
+                    vitesseX = 0
+                if event.key == K_SPACE and spacePressed == True:
+                        player.saut(-10)
+                        spacePressed = False
 
-            player.update(posPersoX,posPersoY)
+            player.update(vitesseX,vitesseY)
 
 
             #collision_player_missile_mask =  pygame.sprite.spritecollide(player,level_en_cours.pro_list,False,pygame.sprite.collide_mask)
