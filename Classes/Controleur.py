@@ -198,7 +198,7 @@ def Menu_options():
         Display.blit(background,(0,0))
 
         CredO = Display.blit(credits,(362,335))
-        #MenuO =  Display.blit(AMODIFIER,(362,335))
+        #MenuO =  Display.blit(A MODIFIER,(362,335))
         ExiO = Display.blit(quitter,(362,460))
         pygame.display.flip()
 
@@ -230,6 +230,7 @@ def Credit():
 
 
         Display.blit(background,(0,0))
+        #RAJOUTER LES CREDITS DE CORENTIN
 
         pygame.display.flip()
 
@@ -283,7 +284,7 @@ def Menu_Victoire():
 
         Suivant = Display.blit(lvl_suivant,(650,300))
         CreditV = Display.blit(credit,(700,570))
-        MenuV =  Display.blit(Gameover_menu,(370,300))
+        #MenuV =  Display.blit(A MODIFIER,(370,300))
         pygame.display.flip()
 
 
