@@ -231,14 +231,6 @@ def Menu_Victoire():
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
-                # if Suivant.collidepoint(posSouris):
-                #     pygame.display.update()
-                #     time.sleep(1)
-                #     level_en_cours_numero = level_en_cours_numero + 1
-                #     if level_en_cours_numero == 11:
-                #         level_en_cours_numero = 10
-                #     GameLoop()
-
                 if MenuV.collidepoint(posSouris):
                     pygame.display.update()
                     time.sleep(1)
@@ -260,10 +252,6 @@ def timeout():
 
 def GameLoop():
     global level_en_cours_numero
-
-    if event.type == QUIT:
-        pygame.quit()
-        sys.exit()
 
     GameRun = True
     GameOver = False
