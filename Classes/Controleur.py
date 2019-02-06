@@ -193,9 +193,10 @@ def Menu_options():
                     sys.exit()
 
         Display.blit(background,(0,0))
+        Display.blit(titreoptions,(0,0))
         CredO = Display.blit(credits,(362,335))
-        #MenuO =  Display.blit(A MODIFIER,(362,335))
-        ExiO = Display.blit(quitter,(362,460))
+        MenuO =  Display.blit(menu,(362,460))
+        ExiO = Display.blit(quitter,(362,580))
         pygame.display.flip()
 
 # affiche credits
@@ -214,22 +215,14 @@ def Credit():
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
-                # if MenuC.collidepoint(mpos):
-                #     Display.blit(Gameover_menu_en,(40,570))
-                #     pygame.display.update()
-                #     time.sleep(1)
-                #     Menu_Start()
-
-                    Display.blit(Gameover_menu_en,(40,570))
                     pygame.display.update()
                     time.sleep(1)
-                    Menu_Start()
+                    Menu_options()
 
 
-        Display.blit(fond_base,(0,0))
+        Display.blit(background,(0,0))
 
-        MenuC =  Display.blit(Gameover_menu,(40,570))
-        font=pygame.font.Font(None, 60)
+        font = pygame.font.SysFont('verdanaprocondblack', 50)
         text4 = font.render("Developpement : Elias",1,(255,255,255))
         Display.blit(text4, (100, 80))
         text1 = font.render("\"Chef\" de projet : Corentin",1,(255,255,255))
