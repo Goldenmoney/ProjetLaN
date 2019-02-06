@@ -331,13 +331,20 @@ def GameLoop():
     piece.randomize()
     piece.draw()
 
+TIMEFINI = False
 
+def timeout():
+    global TIMEFINI
+    TIMEFINI = True
 
 def GameLoop():
     global level_en_cours_numero
 
     GameRun = True
     GameOver = False
+
+    t = Timer(30.0, timeout)
+    t.start()
 
     vitesseX = 0
     vitesseY = 0
@@ -411,19 +418,28 @@ def GameLoop():
             #    if collision_player_missile_mask:
             #        GameOver = True
             #        son_decolage.stop()
+            global TIMEFINI
 
-            if collision_player_fin:
+            if TIMEFINI:
+                time.sleep(1)
+                GameOver = True
+                pygame.mixer.music.stop()
+                TIMEFINI=False
+                Menu_Victoire()
+
+            elif collision_player_fin:
                 time.sleep(1)
                 pygame.mixer.music.stop()
                 Menu_Victoire()
 
-            level_en_cours.update()
-            level_en_cours.draw(Display)
-            sprite_bouge.draw(Display)
+            else :
+                level_en_cours.update()
+                level_en_cours.draw(Display)
+                sprite_bouge.draw(Display)
 
-            # rafraichi l'ecran
-            pygame.display.update()
+                # rafraichi l'ecran
+                pygame.display.update()
 
 
-            # gere les FPS
-            clock.tick(FPS)
+                # gere les FPS
+                clock.tick(FPS)
