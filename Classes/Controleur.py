@@ -292,44 +292,6 @@ def Menu_Victoire():
         #MenuV =  Display.blit(A MODIFIER,(370,300))
         pygame.display.flip()
 
-
-def GameLoop():
-    global level_en_cours_numero
-
-    GameRun = True
-    GameOver = False
-    i = 0
-    posPersoX = 0
-    posPersoY = 0
-    player = Player()
-    level_list = []
-    # append ajouter element a la fin
-    level_list.append(Level_1(player))
-    level_list.append(Level_2(player))
-    level_list.append(Level_3(player))
-    level_list.append(Level_4(player))
-    level_list.append(Level_5(player))
-    level_list.append(Level_6(player))
-    level_list.append(Level_7(player))
-    level_list.append(Level_8(player))
-    level_list.append(Level_9(player))
-    level_list.append(Level_10(player))
-    level_list.append(Level_alea(player))
-
-    pygame.mixer.music.stop()
-    pygame.mixer.music.load('music/musiqueenjeux.mp3')
-    pygame.mixer.music.play(-1)
-
-    # grace a level_en_cours_numero(entier) on recupere la position dans la liste et donc le lvl dans la liste
-    level_en_cours = level_list[level_en_cours_numero]
-
-    player.level = level_en_cours
-    sprite_bouge = pygame.sprite.Group()
-    sprite_bouge.add(player)
-    piece = Piece(Display)
-    piece.randomize()
-    piece.draw()
-
 TIMEFINI = False
 
 def timeout():
