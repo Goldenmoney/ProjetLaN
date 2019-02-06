@@ -267,6 +267,7 @@ def Menu_Victoire():
         MenuV =  Display.blit(menu,(362,335))
         pygame.display.flip()
 
+<<<<<<< HEAD
 
 def GameLoop():
     global level_en_cours_numero
@@ -301,6 +302,8 @@ def GameLoop():
     piece.randomize()
     piece.draw()
 
+=======
+>>>>>>> d9120171363093c9603faa1b94f3dd34a46edca2
 TIMEFINI = False
 
 def timeout():
