@@ -118,20 +118,20 @@ def Menu_niveau():
                 if lvl1.collidepoint(posSouris):
                     pygame.display.update()
                     time.sleep(1)
-                    level_en_cours_numero = 1
+                    level_en_cours_numero = 0
                     GameLoop()
 
                 if lvl2.collidepoint(posSouris):
                     pygame.display.update()
                     time.sleep(1)
-                    level_en_cours_numero = 2
+                    level_en_cours_numero = 1
                     GameLoop()
 
 
                 if lvl3.collidepoint(posSouris):
                     pygame.display.update()
                     time.sleep(1)
-                    level_en_cours_numero = 3
+                    level_en_cours_numero = 2
                     GameLoop()
 
         Display.blit(background,(0,0))
@@ -260,6 +260,7 @@ def GameLoop():
 
     GameRun = True
     GameOver = False
+    score = 0
 
     t = Timer(30.0, timeout)
     #attention pas synchro avec affichage tps restant
@@ -333,12 +334,11 @@ def GameLoop():
             #collision_player_missile_mask =  pygame.sprite.spritecollide(player,level_en_cours.pro_list,False,pygame.sprite.collide_mask)
             #collision_player_missile = pygame.sprite.spritecollide(player,level_en_cours.pro_list,False)
             collision_player_fin = pygame.sprite.spritecollide(player,level_en_cours.portal,False)
+            collision_portable = pygame.sprite.spritecollide(player,level_en_cours.portables_list,True)
 
+            if collision_portable:
+                score += 1
 
-            #if collision_player_missile:
-            #    if collision_player_missile_mask:
-            #        GameOver = True
-            #        son_decolage.stop()
             global TIMEFINI
 
             if TIMEFINI:
@@ -362,6 +362,9 @@ def GameLoop():
                 timerScreen = font.render("Timer : "+str(TIMEAFFICH)+" s",1,(255,255,255))
                 Display.blit(timerScreen, (20, 20))
                 #attention pas synchro avec timer
+
+                scoreScreen = font.render("Score : " + str(score) + " pts",1,(255,255,255))
+                Display.blit(scoreScreen, (500, 20))
 
                 # rafraichi l'ecran
                 pygame.display.update()
