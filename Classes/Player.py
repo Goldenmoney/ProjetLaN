@@ -6,9 +6,6 @@ Display_Width = 1024
 Display_Height = 768
 
 Display = pygame.display.set_mode((Display_Width,Display_Height))
-pro = pygame.image.load("img/missile.png").convert_alpha()
-
-pro = pygame.transform.scale(pro,(20,40))
 
 gravite = 0.5
 
