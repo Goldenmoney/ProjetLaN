@@ -214,11 +214,6 @@ def Credit():
                 #     time.sleep(1)
                 #     Menu_Start()
 
-<<<<<<< HEAD
-
-        Display.blit(background,(0,0))
-        #RAJOUTER LES CREDITS DE CORENTIN
-=======
                     Display.blit(Gameover_menu_en,(40,570))
                     pygame.display.update()
                     time.sleep(1)
@@ -226,7 +221,6 @@ def Credit():
 
 
         Display.blit(fond_base,(0,0))
-        # Display.blit(Creditfinal,(0,0))
 
         MenuC =  Display.blit(Gameover_menu,(40,570))
         font=pygame.font.Font(None, 60)
@@ -242,7 +236,6 @@ def Credit():
         Display.blit(text5, (100, 400))
         text6 = font.render("Merci d'avoir joué",1,(255,255,255))
         Display.blit(text6, (550, 580))
->>>>>>> 7b2195bd17bfda14074f1f560f3753eb36c44c52
         pygame.display.flip()
 
 #==============================================================================#
