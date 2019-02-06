@@ -7,7 +7,6 @@ Display_Height = 768
 
 Display = pygame.display.set_mode((Display_Width,Display_Height))
 
-
 gravite = 0.5
 
 """image pour mouvement perso"""

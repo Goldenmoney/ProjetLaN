@@ -46,26 +46,6 @@ lvl_3 = pygame.transform.scale(lvl_30, (300, 100))
 #==============================================================================#
 #==============================================================================#
 
-# A SUPPRIMER A L'AVENIR
-# menu victoire
-credit = pygame.image.load("img/credit.png").convert_alpha()
-credi_en = pygame.image.load("img/crediten.png").convert_alpha()
-lvl_suivant = pygame.image.load("img/levelsuivant.png").convert_alpha()
-lvl_suivant_en = pygame.image.load("img/levelsuivanten.png").convert_alpha()
-
-# menu credit
-Creditfinal = pygame.image.load("img/creditfinal.png").convert_alpha()
-
-
-# fond
-fond_menu0 = pygame.image.load("img/fondmenu.png").convert_alpha()
-fond_menu = pygame.transform.scale(fond_menu0, (Display_Width, Display_Height))
-fond_menu = pygame.image.load("img/fondmenu.png").convert_alpha()
-fond_base0 = pygame.image.load("img/fond.png").convert_alpha()
-fond_base = pygame.transform.scale(fond_base0, (Display_Width, Display_Height))
-titreaenlever = pygame.image.load("img/titre.png").convert_alpha()
-Victoire = pygame.image.load("img/youwin.png").convert_alpha()
-
 """musique"""
 ##musique_jeux = pygame.mixer.music.load('music/musiqueenjeux.mp3')
 
@@ -248,13 +228,13 @@ def Menu_Victoire():
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
-                if Suivant.collidepoint(posSouris):
-                    pygame.display.update()
-                    time.sleep(1)
-                    level_en_cours_numero = level_en_cours_numero + 1
-                    if level_en_cours_numero == 11:
-                        level_en_cours_numero = 10
-                    GameLoop()
+                # if Suivant.collidepoint(posSouris):
+                #     pygame.display.update()
+                #     time.sleep(1)
+                #     level_en_cours_numero = level_en_cours_numero + 1
+                #     if level_en_cours_numero == 11:
+                #         level_en_cours_numero = 10
+                #     GameLoop()
 
                 if MenuV.collidepoint(posSouris):
                     pygame.display.update()
@@ -263,47 +243,10 @@ def Menu_Victoire():
 
         Display.blit(background,(0,0))
 
-        Suivant = Display.blit(lvl_suivant,(362,460))
+        #Suivant = Display.blit(A MODIFIER,(362,460))
         MenuV =  Display.blit(menu,(362,335))
         pygame.display.flip()
 
-<<<<<<< HEAD
-
-def GameLoop():
-    global level_en_cours_numero
-
-    GameRun = True
-    GameOver = False
-    i = 0
-    posPersoX = 0
-    posPersoY = 0
-    player = Player()
-    level_list = []
-    # append ajouter element a la fin
-    level_list.append(Level_1(player))
-    level_list.append(Level_2(player))
-    level_list.append(Level_3(player))
-    level_list.append(Level_4(player))
-    level_list.append(Level_5(player))
-    level_list.append(Level_6(player))
-    level_list.append(Level_7(player))
-    level_list.append(Level_8(player))
-    level_list.append(Level_9(player))
-    level_list.append(Level_10(player))
-    level_list.append(Level_alea(player))
-
-    # grace a level_en_cours_numero(entier) on recupere la position dans la liste et donc le lvl dans la liste
-    level_en_cours = level_list[level_en_cours_numero]
-
-    player.level = level_en_cours
-    sprite_bouge = pygame.sprite.Group()
-    sprite_bouge.add(player)
-    piece = Piece(Display)
-    piece.randomize()
-    piece.draw()
-
-=======
->>>>>>> d9120171363093c9603faa1b94f3dd34a46edca2
 TIMEFINI = False
 
 def timeout():
@@ -346,7 +289,6 @@ def GameLoop():
                 pygame.mixer.music.stop()
                 Menu_gameover()
 
-
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
@@ -360,7 +302,6 @@ def GameLoop():
 
                 if event.key == K_SPACE and player.auSol == True:
                     spacePressed = True
-
 
             if event.type == KEYUP:
                 if event.key == K_LEFT:
