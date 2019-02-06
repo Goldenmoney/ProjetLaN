@@ -25,10 +25,15 @@ options0 = pygame.image.load("images/options.png").convert_alpha()
 options = pygame.transform.scale(options0, (300, 100))
 credits0 = pygame.image.load("images/credits.png").convert_alpha()
 credits = pygame.transform.scale(credits0, (300, 100))
+menu0 = pygame.image.load("images/menu.png").convert_alpha()
+menu = pygame.transform.scale(menu0, (300, 100))
+rejouer0 = pygame.image.load("images/rejouer.png").convert_alpha()
+rejouer = pygame.transform.scale(rejouer0, (300, 100))
+titreoptions = pygame.image.load("images/titreoptions.png").convert_alpha()
 quitter0 = pygame.image.load("images/quitter.png").convert_alpha()
 quitter = pygame.transform.scale(quitter0, (300, 100))
-
-"""Ajout des images options"""
+pause0 = pygame.image.load("images/pause.png").convert_alpha()
+pause = pygame.transform.scale(pause0, (100, 100))
 choixlvl = pygame.image.load("images/choixlvl.png").convert_alpha()
 lvl_10 = pygame.image.load("images/1.png").convert_alpha()
 lvl_1 = pygame.transform.scale(lvl_10, (300, 100))
@@ -36,6 +41,7 @@ lvl_20 = pygame.image.load("images/2.png").convert_alpha()
 lvl_2 = pygame.transform.scale(lvl_20, (300, 100))
 lvl_30 = pygame.image.load("images/3.png").convert_alpha()
 lvl_3 = pygame.transform.scale(lvl_30, (300, 100))
+
 
 #==============================================================================#
 #==============================================================================#
