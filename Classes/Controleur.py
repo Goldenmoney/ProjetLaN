@@ -186,17 +186,10 @@ def Menu_options():
                     time.sleep(1)
                     Menu_Start()
 
-                if ExiO.collidepoint(mpos):
-                    pygame.display.update()
-                    time.sleep(1)
-                    pygame.quit()
-                    sys.exit()
-
         Display.blit(background,(0,0))
         Display.blit(titreoptions,(0,0))
         CredO = Display.blit(credits,(362,335))
         MenuO =  Display.blit(menu,(362,460))
-        ExiO = Display.blit(quitter,(362,580))
         pygame.display.flip()
 
 # affiche credits
@@ -214,7 +207,6 @@ def Credit():
 
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-
                     pygame.display.update()
                     time.sleep(1)
                     Menu_options()
@@ -246,10 +238,6 @@ def Menu_Victoire():
     global level_en_cours_numero
     MenuVictoire = True
 
-    pygame.mixer.music.stop()
-    pygame.mixer.music.load('music/musiquevictoire.mp3')
-    pygame.mixer.music.play(-1)
-
     pygame.key.set_repeat(400,30)
     while MenuVictoire:
         posSouris = pygame.mouse.get_pos()
@@ -261,35 +249,22 @@ def Menu_Victoire():
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
                 if Suivant.collidepoint(posSouris):
-                    Display.blit(lvl_suivant_en,(650,300))
                     pygame.display.update()
                     time.sleep(1)
                     level_en_cours_numero = level_en_cours_numero + 1
                     if level_en_cours_numero == 11:
                         level_en_cours_numero = 10
-                    pygame.mixer.music.stop()
                     GameLoop()
 
-                if CreditV.collidepoint(posSouris):
-                    Display.blit(credi_en,(700,570))
-                    pygame.display.update()
-                    time.sleep(1)
-                    Credit()
-
-
                 if MenuV.collidepoint(posSouris):
-                    Display.blit(Gameover_menu_en,(370,300))
                     pygame.display.update()
                     time.sleep(1)
-                    pygame.mixer.music.stop()
                     Menu_Start()
 
-        Display.blit(fond_base,(0,0))
-        Display.blit(Victoire,(0,0))
+        Display.blit(background,(0,0))
 
-        Suivant = Display.blit(lvl_suivant,(650,300))
-        CreditV = Display.blit(credit,(700,570))
-        #MenuV =  Display.blit(A MODIFIER,(370,300))
+        Suivant = Display.blit(lvl_suivant,(362,460))
+        MenuV =  Display.blit(menu,(362,335))
         pygame.display.flip()
 
 
@@ -315,10 +290,6 @@ def GameLoop():
     level_list.append(Level_9(player))
     level_list.append(Level_10(player))
     level_list.append(Level_alea(player))
-
-    pygame.mixer.music.stop()
-    pygame.mixer.music.load('music/musiqueenjeux.mp3')
-    pygame.mixer.music.play(-1)
 
     # grace a level_en_cours_numero(entier) on recupere la position dans la liste et donc le lvl dans la liste
     level_en_cours = level_list[level_en_cours_numero]
@@ -354,14 +325,6 @@ def GameLoop():
     level_list.append(Level_1(player))
     level_list.append(Level_2(player))
     level_list.append(Level_3(player))
-    level_list.append(Level_4(player))
-    level_list.append(Level_5(player))
-    level_list.append(Level_6(player))
-    level_list.append(Level_7(player))
-    level_list.append(Level_8(player))
-    level_list.append(Level_9(player))
-    level_list.append(Level_10(player))
-    level_list.append(Level_alea(player))
 
     pygame.mixer.music.stop()
     pygame.mixer.music.load('music/musiqueenjeux.mp3')
