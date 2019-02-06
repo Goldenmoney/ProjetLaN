@@ -312,9 +312,22 @@ def Credit():
 
 
         Display.blit(fond_base,(0,0))
-        Display.blit(Creditfinal,(0,0))
+        # Display.blit(Creditfinal,(0,0))
 
         MenuC =  Display.blit(Gameover_menu,(40,570))
+        font=pygame.font.Font(None, 60)
+        text4 = font.render("Developpement : Elias",1,(255,255,255))
+        Display.blit(text4, (100, 80))
+        text1 = font.render("\"Chef\" de projet : Corentin",1,(255,255,255))
+        Display.blit(text1, (100, 160))
+        text2 = font.render("Developpement : Benjamin",1,(255,255,255))
+        Display.blit(text2, (100, 240))
+        text3 = font.render("Graphisme : Lucas",1,(255,255,255))
+        Display.blit(text3, (100, 320))
+        text5 = font.render("Developpement : Jules",1,(255,255,255))
+        Display.blit(text5, (100, 400))
+        text6 = font.render("Merci d'avoir joué",1,(255,255,255))
+        Display.blit(text6, (550, 580))
         pygame.display.flip()
 
 # affiche Menu_Victoire
