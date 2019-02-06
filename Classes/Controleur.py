@@ -302,6 +302,7 @@ def GameLoop():
 
                 if event.key == K_SPACE and player.auSol == True:
                     spacePressed = True
+                    vitesseY = -1
 
             if event.type == KEYUP:
                 if event.key == K_LEFT:
@@ -309,8 +310,9 @@ def GameLoop():
                 if event.key == K_RIGHT:
                     vitesseX = 0
                 if event.key == K_SPACE and spacePressed == True:
-                        player.saut(-10)
-                        spacePressed = False
+                    player.saut(-10)
+                    spacePressed = False
+                    vitesseY = 1
 
             player.update(vitesseX,vitesseY)
 
