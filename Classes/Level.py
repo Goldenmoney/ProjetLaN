@@ -12,9 +12,7 @@ Display_Width = 1024
 Display_Height = 768
 
 Display = pygame.display.set_mode((Display_Width,Display_Height))
-pro = pygame.image.load("img/missile.png").convert_alpha()
 
-pro = pygame.transform.scale(pro,(20,40))
 fond =pygame.image.load("img/fond_jeux.png").convert()
 fond = pygame.transform.scale(fond,(Display_Width,Display_Height))
 
