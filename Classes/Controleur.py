@@ -248,6 +248,8 @@ def Menu_Victoire():
         pygame.display.flip()
 
 TIMEFINI = False
+INT = 0
+TIMEAFFICH = 90
 
 def timeout():
     global TIMEFINI
@@ -260,6 +262,7 @@ def GameLoop():
     GameOver = False
 
     t = Timer(30.0, timeout)
+    #attention pas synchro avec affichage tps restant
     t.start()
 
     vitesseX = 0
@@ -284,6 +287,16 @@ def GameLoop():
     sprite_bouge.add(player)
 
     while GameRun:
+################################################################################
+            global INT
+            global TIMEAFFICH
+            INT = INT+1
+
+            if INT == 59 :
+                INT = 0
+                TIMEAFFICH = TIMEAFFICH-1
+################################################################################
+
             while GameOver == True:
                 time.sleep(1)
                 pygame.mixer.music.stop()
@@ -344,6 +357,11 @@ def GameLoop():
                 level_en_cours.update()
                 level_en_cours.draw(Display)
                 sprite_bouge.draw(Display)
+
+                font = pygame.font.SysFont('verdanaprocondblack', 50)
+                timerScreen = font.render("Timer : "+str(TIMEAFFICH)+" s",1,(255,255,255))
+                Display.blit(timerScreen, (20, 20))
+                #attention pas synchro avec timer
 
                 # rafraichi l'ecran
                 pygame.display.update()

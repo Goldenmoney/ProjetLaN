@@ -18,8 +18,8 @@ move_image5 = pygame.image.load("move/guy5.png").convert_alpha()
 move_image6 = pygame.image.load("move/guy6.png").convert_alpha()
 
 
-imageWidth = 64
-imageHeight = 128
+imageWidth = 78
+imageHeight = 110
 move_image1 = pygame.transform.scale(move_image1,(imageWidth,imageHeight))
 move_image2 = pygame.transform.scale(move_image2,(imageWidth,imageHeight))
 move_image3 = pygame.transform.scale(move_image3,(imageWidth,imageHeight))
