@@ -1,9 +1,9 @@
 import pygame
 pygame.init()
 from Classes.Controleur import *
-from Classes.PortailFin import *
 from Classes.Platform import *
 from Classes.Portable import *
+from Classes.Police import *
 from Classes.Bonus import *
 
 import random
@@ -24,47 +24,57 @@ fond = pygame.transform.scale(fond,(Display_Width,Display_Height))
 
 class Level(object):
     def __init__(self, player):
-        self.pro_list = pygame.sprite.Group()
-        self.lance_list = pygame.sprite.Group()
-        self.portal = pygame.sprite.Group()
-        self.portal.add(Portailfin())
+        # self.portal = pygame.sprite.Group()
+        # self.portal.add(Portailfin())
         self.portables_list = pygame.sprite.Group()
+        self.police_list = pygame.sprite.Group()
         self.bonus_list = pygame.sprite.Group()
-        self.platform_list = pygame.sprite.Group()
+        self.plats = pygame.sprite.Group()
         for i in range(0,8):
-            self.platform_list.add(Platform(i*208-63*(i+1),680))
-        self.trampoline_list = pygame.sprite.Group()
+            self.plats.add(Platform(i*208-63*(i+1),680))
         self.player = player
         self.background = None
 
-    def update(self):
-        for i in self.pro_list:
-            i.Fall()
-        self.pro_list.update()
-        self.lance_list.update()
-
     def draw(self, screen):
         Display.blit(fond,(0,0))
-        self.pro_list.draw(screen)
-        self.lance_list.draw(screen)
-        self.portal.draw(screen)
+        # self.portal.draw(screen)
         self.portables_list.draw(screen)
+        self.police_list.draw(screen)
         self.bonus_list.draw(screen)
-        self.platform_list.draw(screen)
-        self.trampoline_list.draw(screen)
+        self.plats.draw(screen)
 
     def show_port(self, level_portables):
         self.portables_list.empty()
         for port in level_portables:
+            # Changer 2eme valeur pour taux d'apparition
             rand = random.randint(0, 1)
-            if rand == 1: # ENELEVER LE or rend == 0
+            if rand == 1: # ajouter/enlever or rand == 0 (pour tests)
                 portable = Portable(port[0], port[1])
                 self.portables_list.add(portable)
+
+    def show_police(self, level_police):
+        self.police_list.empty()
+        for pol in level_police:
+            # Changer 2eme valeur pour taux d'apparition
+            rand = random.randint(0, 1)
+            if rand == 1: # ajouter/enlever or rand == 0 (pour tests)
+                police = Police(pol[0], pol[1])
+                self.police_list.add(police)
+
+    def show_bonus(self, level_bonus):
+        self.bonus_list.empty()
+        for bon in level_bonus:
+            # Changer 2eme valeur pour taux d'apparition
+            rand = random.randint(0, 3) # REMETTRE A 3
+            if rand == 0: # ajouter/enlever or rand == 0 (pour tests)
+                bonus = Bonus(bon[0], bon[1])
+                self.bonus_list.add(bonus)
 
 class Level_1(Level):
     def __init__(self, player):
         Level.__init__(self, player)
 
+        # PORTABLES
         self.level_portables = [[50,150],
                                 [100,150],
                                 [150,150],
@@ -81,13 +91,13 @@ class Level_1(Level):
                                 [150,450],
                                 [200,450],
 
-                                [200,650],
-                                [250,650],
-                                [300,650],
+                                [200,600],
+                                [250,600],
+                                [300,600],
 
-                                [550,650],
-                                [600,650],
-                                [650,650],
+                                [550,600],
+                                [600,600],
+                                [650,600],
 
                                 [550,500],
                                 [600,500],
@@ -118,18 +128,19 @@ class Level_1(Level):
         for tramp in trampolineList:
             self.trampoline_list.add(Platform(tramp[0],tramp[1],"trampoline"))
 
-        #if affichBonus :
-        level_bonus = [[400,400],[300,300]]
+        self.level_police = [[100,170],[600,620],[900,320],[400,360]]
+        self.show_police(self.level_police)
 
-        for port in level_bonus :
-            bonus = Bonus(port[0],port[1])
-            self.bonus_list.add(bonus)
+        # BONUS
+        self.level_bonus = [[950,400],[300,300],[500,600],[250,600]]
+        self.show_bonus(self.level_bonus)
 
 class Level_2(Level):
     def __init__(self, player):
         Level.__init__(self, player)
 
         self.level_portables = []
+        self.level_police = []
         #A AJOUTER
 
 class Level_3(Level):
@@ -137,6 +148,7 @@ class Level_3(Level):
         Level.__init__(self, player)
 
         self.level_portables = []
+        self.level_police = []
         #A AJOUTER
 
 class Level_alea(Level):

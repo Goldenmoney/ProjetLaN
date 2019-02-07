@@ -4,8 +4,6 @@ from pygame.locals import *
 pygame.init()
 from Classes.Level import *
 from Classes.Player import *
-from Classes.Lancerocket import *
-from Classes.Platform import *
 import time
 import sys #module systeme
 from Classes.Piece import *
@@ -25,6 +23,8 @@ options0 = pygame.image.load("images/options.png").convert_alpha()
 options = pygame.transform.scale(options0, (300, 100))
 credits0 = pygame.image.load("images/credits.png").convert_alpha()
 credits = pygame.transform.scale(credits0, (300, 100))
+reinit0 = pygame.image.load("images/reinit.png").convert_alpha()
+reinit = pygame.transform.scale(reinit0, (300, 100))
 menu0 = pygame.image.load("images/menu.png").convert_alpha()
 menu = pygame.transform.scale(menu0, (300, 100))
 rejouer0 = pygame.image.load("images/rejouer.png").convert_alpha()
@@ -39,10 +39,18 @@ lvl_10 = pygame.image.load("images/1.png").convert_alpha()
 lvl_1 = pygame.transform.scale(lvl_10, (300, 100))
 lvl_20 = pygame.image.load("images/2.png").convert_alpha()
 lvl_2 = pygame.transform.scale(lvl_20, (300, 100))
+lvl_2_block0 = pygame.image.load("images/2block.png").convert_alpha()
+lvl_2_block = pygame.transform.scale(lvl_2_block0, (300, 100))
 lvl_30 = pygame.image.load("images/3.png").convert_alpha()
 lvl_3 = pygame.transform.scale(lvl_30, (300, 100))
+lvl_3_block0 = pygame.image.load("images/3block.png").convert_alpha()
+lvl_3_block = pygame.transform.scale(lvl_3_block0, (300, 100))
 empty0 = pygame.image.load("images/empty.png").convert_alpha()
 empty = pygame.transform.scale(empty0, (400, 100))
+retour0 = pygame.image.load("images/retour.png").convert_alpha()
+retour = pygame.transform.scale(retour0, (300, 100))
+rejouer0 = pygame.image.load("images/rejouer.png").convert_alpha()
+rejouer = pygame.transform.scale(rejouer0, (300, 100))
 
 # POUR TESTS
 grille = pygame.image.load("images/grille.png").convert_alpha()
@@ -67,7 +75,6 @@ FPS = 60
 # affiche menu principal
 def Menu_Start():
     global level_en_cours_numero
-    global score
     menuStart = True
     pygame.mixer.music.stop()
 
@@ -127,45 +134,85 @@ def Menu_niveau():
                     level_en_cours_numero = 0
                     GameLoop()
 
-                if lvl2.collidepoint(posSouris):
+                f_high_lvl1 = open("high/lvl1.txt", "r")
+                if int(f_high_lvl1.read()) >= 25:
+                    if lvl2.collidepoint(posSouris):
+                        pygame.display.update()
+                        time.sleep(1)
+                        level_en_cours_numero = 1
+                        GameLoop()
+                f_high_lvl1.close()
+
+                f_high_lvl2 = open("high/lvl2.txt", "r")
+                if int(f_high_lvl2.read()) >= 25:
+                    if lvl3.collidepoint(posSouris):
+                        pygame.display.update()
+                        time.sleep(1)
+                        level_en_cours_numero = 2
+                        GameLoop()
+                f_high_lvl2.close()
+
+                if retourO.collidepoint(posSouris):
                     pygame.display.update()
                     time.sleep(1)
-                    level_en_cours_numero = 1
-                    GameLoop()
-
-
-                if lvl3.collidepoint(posSouris):
-                    pygame.display.update()
-                    time.sleep(1)
-                    level_en_cours_numero = 2
-                    GameLoop()
+                    Menu_Start()
 
         Display.blit(background,(0,0))
         Display.blit(choixlvl,(0,0))
+        retourO = Display.blit(retour,(50,600))
+
+        dessous = pygame.Surface((300,200))
+        dessous.fill( (0,0,0) )
+        dessous.set_alpha(128)
+        Display.blit(dessous,(50,400))
+        Display.blit(dessous,(370,400))
+        Display.blit(dessous,(690,400))
+
+
         lvl1 = Display.blit(lvl_1,(50,320))
         font = pygame.font.SysFont('verdanaprocondblack', 50)
         f_high_lvl1 = open("high/lvl1.txt", "r")
-        high_lvl1 = font.render("Meilleur : " + f_high_lvl1.read(),1,(255,255,255))
+        high_lvl1 = font.render("Record : " + f_high_lvl1.read(),1,(255,255,255))
         Display.blit(high_lvl1, (50, 450))
         f_high_lvl1.close()
 
-        lvl2 = Display.blit(lvl_2,(370,320))
+        f_high_lvl1 = open("high/lvl1.txt", "r")
+        if int(f_high_lvl1.read()) >= 25:
+            lvl2 = Display.blit(lvl_2,(370,320))
+            f_high_lvl2 = open("high/lvl2.txt", "r")
+            high_lvl2 = font.render("Record : " + f_high_lvl2.read(),1,(255,255,255))
+            Display.blit(high_lvl2, (370, 450))
+            f_high_lvl2.close()
+        else:
+            lvl2 = Display.blit(lvl_2_block,(370,320))
+            lock = font.render("Requis : 25",1,(255,255,255))
+            Display.blit(lock, (370, 450))
+            lock = font.render("sur le niveau 1",1,(255,255,255))
+            Display.blit(lock, (370, 510))
+        f_high_lvl1.close()
+
         f_high_lvl2 = open("high/lvl2.txt", "r")
-        high_lvl2 = font.render("Meilleur : " + f_high_lvl2.read(),1,(255,255,255))
-        Display.blit(high_lvl2, (370, 450))
+        if int(f_high_lvl2.read()) >= 25:
+            lvl3 = Display.blit(lvl_3,(690,320))
+            f_high_lvl3 = open("high/lvl3.txt", "r")
+            high_lvl3 = font.render("Record : " + f_high_lvl3.read(),1,(255,255,255))
+            Display.blit(high_lvl3, (690, 450))
+            f_high_lvl3.close()
+        else:
+            lvl3 = Display.blit(lvl_3_block,(690,320))
+            lock = font.render("Requis : 25",1,(255,255,255))
+            Display.blit(lock, (690, 450))
+            lock = font.render("sur le niveau 2",1,(255,255,255))
+            Display.blit(lock, (690, 510))
         f_high_lvl2.close()
 
-        lvl3 =  Display.blit(lvl_3,(690,320))
-        f_high_lvl3 = open("high/lvl3.txt", "r")
-        high_lvl3 = font.render("Meilleur : " + f_high_lvl3.read(),1,(255,255,255))
-        Display.blit(high_lvl3, (690, 450))
-        f_high_lvl3.close()
         pygame.display.flip()
 
 # affichage menu options
 def Menu_options():
     global level_en_cours_numero
     menuOptions = True
+    msg_reinit_bool = False
 
     pygame.key.set_repeat(400,30)
     while menuOptions:
@@ -182,6 +229,18 @@ def Menu_options():
                     time.sleep(1)
                     Credit()
 
+                if ReinitO.collidepoint(mpos):
+                    f_high_lvl = open("high/lvl1.txt", "w")
+                    f_high_lvl.write('0')
+                    f_high_lvl.close()
+                    f_high_lvl = open("high/lvl2.txt", "w")
+                    f_high_lvl.write('0')
+                    f_high_lvl.close()
+                    f_high_lvl = open("high/lvl3.txt", "w")
+                    f_high_lvl.write('0')
+                    f_high_lvl.close()
+                    msg_reinit_bool = True
+
                 if MenuO.collidepoint(mpos):
                     pygame.display.update()
                     time.sleep(1)
@@ -190,7 +249,12 @@ def Menu_options():
         Display.blit(background,(0,0))
         Display.blit(titreoptions,(0,0))
         CredO = Display.blit(credits,(362,335))
-        MenuO =  Display.blit(menu,(362,460))
+        ReinitO = Display.blit(reinit,(362,460))
+        MenuO =  Display.blit(menu,(362,580))
+        if msg_reinit_bool == True:
+            font = pygame.font.SysFont('verdanaprocondblack', 50)
+            msg_reinit = font.render("Scores réinitialisés",1,(255,255,255))
+            Display.blit(msg_reinit, (10, 200))
         pygame.display.flip()
 
 # affiche credits
@@ -214,6 +278,10 @@ def Credit():
 
 
         Display.blit(background,(0,0))
+        dessous = pygame.Surface((1024,768))
+        dessous.fill( (0,0,0) )
+        dessous.set_alpha(128)
+        Display.blit(dessous,(0,0))
 
         font = pygame.font.SysFont('verdanaprocondblack', 50)
         text4 = font.render("Developpement : Elias",1,(255,255,255))
@@ -250,7 +318,12 @@ def Menu_Victoire():
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
-                if MenuV.collidepoint(posSouris):
+                if rejouerV.collidepoint(posSouris):
+                    pygame.display.update()
+                    time.sleep(1)
+                    GameLoop()
+
+                if menuV.collidepoint(posSouris):
                     pygame.display.update()
                     time.sleep(1)
                     Menu_Start()
@@ -266,7 +339,13 @@ def Menu_Victoire():
         str_lvl = str(str_lvl)
         file = "high/lvl" + str_lvl + ".txt"
         f_high_lvl1 = open(file, "r")
-        if int(f_high_lvl1.read()) <= score:
+        nb = int(f_high_lvl1.read())
+        if nb <= score:
+            if nb < 25 and score >= 25:
+                print("ok")
+                font = pygame.font.SysFont('verdanaprocondblack', 50)
+                highest = font.render("Niveau suivant débloqué",1,(255,255,255))
+                Display.blit(hsighest, (360, 700))
             font = pygame.font.SysFont('verdanaprocondblack', 50)
             highest = font.render("Nouveau record !",1,(255,255,255))
             Display.blit(highest, (360, 100))
@@ -275,7 +354,8 @@ def Menu_Victoire():
 
         f_high_lvl1.close()
 
-        MenuV =  Display.blit(menu,(362,335))
+        rejouerV = Display.blit(rejouer, (362, 335))
+        menuV = Display.blit(menu, (362, 460))
 
         pygame.display.flip()
 
@@ -285,25 +365,29 @@ def Menu_Victoire():
 TIMEFINI = False
 INT = 0
 TIMEAFFICH = 90
+six_secondes = 0
 dix_secondes = 0
+trente_secondes = 0
 
 def timeout():
     global TIMEFINI
     TIMEFINI = True
     global TIMEAFFICH
     TIMEAFFICH = 90
-    t = Timer(30.0, timeout)
+    t = Timer(90.0, timeout)
 
 
 def GameLoop():
     global level_en_cours_numero
     global score
+    global bonus_actif
 
     GameRun = True
     GameOver = False
     score = 0
+    bonus_actif = False
 
-    t = Timer(30.0, timeout)
+    t = Timer(90.0, timeout)
     #attention pas synchro avec affichage tps restant
     t.start()
 
@@ -329,25 +413,57 @@ def GameLoop():
     sprite_bouge.add(player)
 
     while GameRun:
+################################################################################
         global INT
+        global six_secondes
         global dix_secondes
+        global trente_secondes
         global TIMEAFFICH
         INT = INT+1
+        six_secondes += 1
         dix_secondes += 1
+        trente_secondes += 1
 
         if INT == 59 :
             INT = 0
             TIMEAFFICH = TIMEAFFICH-1
 
+        # TOUTES LES 10s
         if dix_secondes == 600:
-            print('Changement position portables')
             dix_secondes = 0
             level_en_cours.show_port(level_en_cours.level_portables)
-
         collision_portable = pygame.sprite.spritecollide(player,level_en_cours.portables_list,True)
 
         if collision_portable:
             score += 1
+
+        if six_secondes == 360:
+            six_secondes = 0
+            level_en_cours.show_police(level_en_cours.level_police)
+        collision_police = pygame.sprite.spritecollide(player,level_en_cours.police_list,True)
+
+        if collision_police:
+            score -= 5
+
+        # TOUTES LES 30s
+        if trente_secondes == 1800:
+            trente_secondes = 0
+            level_en_cours.show_bonus(level_en_cours.level_bonus)
+        collision_bonus = pygame.sprite.spritecollide(player,level_en_cours.bonus_list,True)
+
+        if collision_bonus:
+            bonus_actif = True
+            temps_bonus = 0
+
+        if bonus_actif == True:
+            temps_bonus += 1
+            player.setGravite(0.1)
+
+            if temps_bonus == 600:
+                bonus_actif = False
+                player.setGravite(0.5)
+
+################################################################################
 
         while GameOver == True:
             time.sleep(1)
@@ -380,10 +496,11 @@ def GameLoop():
                 spacePressed = False
                 vitesseY = 1
 
+        collision_player_platform = pygame.sprite.spritecollide(player,level_en_cours.plats,False)
+        #collision_player_trampoline = pygame.sprite.spritecollide(player,level_en_cours.tramps,False)
 
-        collision_player_platform = pygame.sprite.spritecollide(player,level_en_cours.platform_list,False)
-        collision_player_trampoline = pygame.sprite.spritecollide(player,level_en_cours.trampoline_list,False)
-
+        #if collision_player_trampoline:
+        #    player.saut(-15)
         if collision_player_platform:
             auSol = False
             for plat in level_en_cours.platform_list:
@@ -407,17 +524,7 @@ def GameLoop():
                         player.saut(0)
             player.setAuSol(auSol)
 
-
-        if collision_player_trampoline:
-            player.setAuSol(True)
-            player.saut(-15)
-
         player.update(vitesseX,vitesseY)
-
-
-        #collision_player_missile_mask =  pygame.sprite.spritecollide(player,level_en_cours.pro_list,False,pygame.sprite.collide_mask)
-        #collision_player_missile = pygame.sprite.spritecollide(player,level_en_cours.pro_list,False)
-        collision_player_fin = pygame.sprite.spritecollide(player,level_en_cours.portal,False)
 
         global TIMEFINI
 
@@ -428,23 +535,27 @@ def GameLoop():
             TIMEFINI=False
             Menu_Victoire()
 
-        elif collision_player_fin:
-            time.sleep(1)
-            pygame.mixer.music.stop()
-            TIMEAFFICH = 90
-            Menu_Victoire()
+        # elif collision_player_fin:
+        #     time.sleep(1)
+        #     pygame.mixer.music.stop()
+        #     TIMEAFFICH = 90
+        #     Menu_Victoire()
 
         else :
-            level_en_cours.update()
             level_en_cours.draw(Display)
             sprite_bouge.draw(Display)
+
+            dessous = pygame.Surface((1024,110))
+            dessous.fill( (0,0,0) )
+            dessous.set_alpha(128)
+            Display.blit(dessous,(0,0))
 
             Display.blit(empty,(20,10))
             Display.blit(empty,(500,10))
             Display.blit(pause,(850,10))
 
-            font = pygame.font.SysFont('verdanaprocondblack', 50)
-            if TIMEAFFICH>85 :
+            font = pygame.font.SysFont('verdana', 50)
+            if TIMEAFFICH>30 :
                 timerScreen = font.render("Timer : "+str(TIMEAFFICH)+" s",1,(255,255,255))
             else :
                 timerScreen = font.render("Timer : "+str(TIMEAFFICH)+" s",1,(255,0,0))
@@ -454,6 +565,10 @@ def GameLoop():
             scoreScreen = font.render("Score : " + str(score) + " pts",1,(255,255,255))
             Display.blit(scoreScreen, (530, 20))
             Display.blit(grille, (0, 0)) # POUR TESTS
+            if bonus_actif == True:
+                font = pygame.font.SysFont('verdanaprocondblack', 50)
+                actif = font.render("BONUS ACTIF",1,(255,255,255))
+                Display.blit(actif, (150, 50))
 
             # rafraichi l'ecran
             pygame.display.flip()
