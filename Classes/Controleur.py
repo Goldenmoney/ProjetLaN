@@ -4,7 +4,12 @@ from pygame.locals import *
 pygame.init()
 from Classes.Level import *
 from Classes.Player import *
+<<<<<<< HEAD
 from Classes.Projectile import *
+=======
+from Classes.Lancerocket import *
+from Classes.Platform import *
+>>>>>>> f0636dacd0f1a69cf40a74d1958fe0dc95a4c69a
 import time
 import sys #module systeme
 from Classes.Piece import *
@@ -142,8 +147,23 @@ def Menu_niveau():
         Display.blit(background,(0,0))
         Display.blit(choixlvl,(0,0))
         lvl1 = Display.blit(lvl_1,(50,320))
+        font = pygame.font.SysFont('verdanaprocondblack', 50)
+        f_high_lvl1 = open("high/lvl1.txt", "r")
+        high_lvl1 = font.render("Meilleur : " + f_high_lvl1.read(),1,(255,255,255))
+        Display.blit(high_lvl1, (50, 450))
+        f_high_lvl1.close()
+
         lvl2 = Display.blit(lvl_2,(370,320))
+        f_high_lvl2 = open("high/lvl2.txt", "r")
+        high_lvl2 = font.render("Meilleur : " + f_high_lvl2.read(),1,(255,255,255))
+        Display.blit(high_lvl2, (370, 450))
+        f_high_lvl2.close()
+
         lvl3 =  Display.blit(lvl_3,(690,320))
+        f_high_lvl3 = open("high/lvl3.txt", "r")
+        high_lvl3 = font.render("Meilleur : " + f_high_lvl3.read(),1,(255,255,255))
+        Display.blit(high_lvl3, (690, 450))
+        f_high_lvl3.close()
         pygame.display.flip()
 
 # affichage menu options
@@ -245,7 +265,22 @@ def Menu_Victoire():
         scoreFinal = font.render("Score : " + str(score) + " pts",1,(255,255,255))
         Display.blit(scoreFinal, (360, 20))
 
+#high score check
+        str_lvl = level_en_cours_numero + 1
+        str_lvl = str(str_lvl)
+        file = "high/lvl" + str_lvl + ".txt"
+        f_high_lvl1 = open(file, "r")
+        if int(f_high_lvl1.read()) <= score:
+            font = pygame.font.SysFont('verdanaprocondblack', 50)
+            highest = font.render("Nouveau record !",1,(255,255,255))
+            Display.blit(highest, (360, 100))
+            f_high_lvl1 = open(file, "w")
+            f_high_lvl1.write(str(score))
+
+        f_high_lvl1.close()
+
         MenuV =  Display.blit(menu,(362,335))
+
         pygame.display.flip()
 
 #==============================================================================#
@@ -329,6 +364,7 @@ def GameLoop():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
+
         if event.type == KEYDOWN:
             if event.key == K_LEFT:
                 vitesseX = -5
@@ -336,7 +372,7 @@ def GameLoop():
             if event.key == K_RIGHT:
                 vitesseX = 5
 
-            if event.key == K_SPACE and player.auSol == True:
+            if event.key == K_SPACE:
                 spacePressed = True
                 vitesseY = -1
 
@@ -349,6 +385,14 @@ def GameLoop():
                 player.saut(-10)
                 spacePressed = False
                 vitesseY = 1
+
+        collision_player_platform = pygame.sprite.spritecollide(player,level_en_cours.plats,False)
+        #collision_player_trampoline = pygame.sprite.spritecollide(player,level_en_cours.tramps,False)
+
+        #if collision_player_trampoline:
+        #    player.saut(-15)
+        if collision_player_platform:
+            player.setAuSol(True)
 
         player.update(vitesseX,vitesseY)
 
