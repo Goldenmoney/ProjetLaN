@@ -7,8 +7,7 @@ Display_Height = 768
 
 Display = pygame.display.set_mode((Display_Width,Display_Height))
 
-bonus = pygame.image.load("img/Rocket.png").convert_alpha()
-bonus = pygame.transform.scale(bonus,(30,60))
+bonus = pygame.image.load("images/bonus.png").convert_alpha()
 
 class Bonus(pygame.sprite.Sprite):
     # x location, y location

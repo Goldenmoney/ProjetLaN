@@ -4,8 +4,6 @@ from pygame.locals import *
 pygame.init()
 from Classes.Level import *
 from Classes.Player import *
-from Classes.Lancerocket import *
-from Classes.Platform import *
 import time
 import sys #module systeme
 from Classes.Piece import *
@@ -307,6 +305,7 @@ TIMEFINI = False
 INT = 0
 TIMEAFFICH = 90
 dix_secondes = 0
+trente_secondes = 0
 
 def timeout():
     global TIMEFINI
@@ -353,20 +352,30 @@ def GameLoop():
 ################################################################################
         global INT
         global dix_secondes
+        global trente_secondes
         global TIMEAFFICH
         INT = INT+1
         dix_secondes += 1
+        trente_secondes += 1
 
         if INT == 59 :
             INT = 0
             TIMEAFFICH = TIMEAFFICH-1
 
+        # TOUTES LES 10s
         if dix_secondes == 600:
-            print('Changement position portables')
             dix_secondes = 0
             level_en_cours.show_port(level_en_cours.level_portables)
-
         collision_portable = pygame.sprite.spritecollide(player,level_en_cours.portables_list,True)
+
+        # TOUTES LES 30s
+        if trente_secondes == 1800:
+            trente_secondes = 0
+            level_en_cours.show_bonus(level_en_cours.level_bonus)
+        collision_bonus = pygame.sprite.spritecollide(player,level_en_cours.bonus_list,True)
+
+        #if collision_bonus:
+
 
         if collision_portable:
             score += 1
@@ -389,7 +398,7 @@ def GameLoop():
             if event.key == K_RIGHT:
                 vitesseX = 5
 
-            if event.key == K_SPACE:
+            if event.key == K_SPACE or event.key == K_UP:
                 spacePressed = True
                 vitesseY = -1
 
@@ -398,7 +407,7 @@ def GameLoop():
                 vitesseX = 0
             if event.key == K_RIGHT:
                 vitesseX = 0
-            if event.key == K_SPACE and spacePressed == True:
+            if (event.key == K_SPACE or event.key == K_UP) and spacePressed == True:
                 player.saut(-10)
                 spacePressed = False
                 vitesseY = 1
