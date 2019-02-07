@@ -339,7 +339,13 @@ def Menu_Victoire():
         str_lvl = str(str_lvl)
         file = "high/lvl" + str_lvl + ".txt"
         f_high_lvl1 = open(file, "r")
-        if int(f_high_lvl1.read()) <= score:
+        nb = int(f_high_lvl1.read())
+        if nb <= score:
+            if nb < 25 and score >= 25:
+                print("ok")
+                font = pygame.font.SysFont('verdanaprocondblack', 50)
+                highest = font.render("Niveau suivant débloqué",1,(255,255,255))
+                Display.blit(hsighest, (360, 700))
             font = pygame.font.SysFont('verdanaprocondblack', 50)
             highest = font.render("Nouveau record !",1,(255,255,255))
             Display.blit(highest, (360, 100))
