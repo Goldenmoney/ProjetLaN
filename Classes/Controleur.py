@@ -483,7 +483,7 @@ def GameLoop():
 
         #collision_player_missile_mask =  pygame.sprite.spritecollide(player,level_en_cours.pro_list,False,pygame.sprite.collide_mask)
         #collision_player_missile = pygame.sprite.spritecollide(player,level_en_cours.pro_list,False)
-        collision_player_fin = pygame.sprite.spritecollide(player,level_en_cours.portal,False)
+        #collision_player_fin = pygame.sprite.spritecollide(player,level_en_cours.portal,False)
 
         global TIMEFINI
 
@@ -494,11 +494,11 @@ def GameLoop():
             TIMEFINI=False
             Menu_Victoire()
 
-        elif collision_player_fin:
-            time.sleep(1)
-            pygame.mixer.music.stop()
-            TIMEAFFICH = 90
-            Menu_Victoire()
+        # elif collision_player_fin:
+        #     time.sleep(1)
+        #     pygame.mixer.music.stop()
+        #     TIMEAFFICH = 90
+        #     Menu_Victoire()
 
         else :
             level_en_cours.draw(Display)
