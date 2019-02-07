@@ -7,7 +7,7 @@ Display_Height = 768
 
 Display = pygame.display.set_mode((Display_Width,Display_Height))
 
-gravite = 0.5
+# gravite = 0.5
 
 """image pour mouvement perso"""
 move_image1 = pygame.image.load("move/guy1.png").convert_alpha()
@@ -35,6 +35,7 @@ move_image4_r = pygame.transform.flip(move_image4, True, False)
 class Player(pygame.sprite.Sprite):
     def __init__(self):
 ##        super().__init__()
+        self.gravite = 0.5
         self.auSol = False
         self.rect = move_image1.get_rect()
         self.rect.y = 50
@@ -61,7 +62,7 @@ class Player(pygame.sprite.Sprite):
         #change image par image
         self.animation_speed -= 1
 
-        self.gravite()
+        self.is_gravite()
         self.rect.x += self.vitesseX
         self.rect.y += self.vitesseY
         if self.animation_speed == 0:
@@ -102,8 +103,11 @@ class Player(pygame.sprite.Sprite):
             self.update(self.vitesseX,self.vitesseY)
 
     # gere la gravité
-    def gravite(self):
+    def is_gravite(self):
         if self.auSol == False:
-            self.vitesseY += gravite
+            self.vitesseY += self.gravite
         else:
             self.vitesseY = 0
+
+    def setGravite(self, grav):
+        self.gravite = grav
