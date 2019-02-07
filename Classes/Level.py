@@ -29,6 +29,9 @@ class Level(object):
         self.portal.add(Portailfin())
         self.portables_list = pygame.sprite.Group()
         self.bonus_list = pygame.sprite.Group()
+        self.plats = pygame.sprite.Group()
+        for i in range(0,8):
+            self.plats.add(Platform(i*208-63*(i+1),680))
         self.player = player
         self.background = None
 
@@ -45,6 +48,7 @@ class Level(object):
         self.portal.draw(screen)
         self.portables_list.draw(screen)
         self.bonus_list.draw(screen)
+        self.plats.draw(screen)
 
     def show_port(self, level_portables):
         self.portables_list.empty()

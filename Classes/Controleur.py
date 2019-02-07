@@ -330,6 +330,7 @@ def GameLoop():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
+
         if event.type == KEYDOWN:
             if event.key == K_LEFT:
                 vitesseX = -5
@@ -337,21 +338,29 @@ def GameLoop():
             if event.key == K_RIGHT:
                 vitesseX = 5
 
-            if event.key == K_SPACE and player.auSol == True:
+            if event.key == K_SPACE:
                 spacePressed = True
                 vitesseY = -1
 
-        if event.type == KEYUP:
-            if event.key == K_LEFT:
-                vitesseX = 0
-            if event.key == K_RIGHT:
-                vitesseX = 0
-            if event.key == K_SPACE and spacePressed == True:
-                player.saut(-10)
-                spacePressed = False
-                vitesseY = 1
+            if event.type == KEYUP:
+                if event.key == K_LEFT:
+                    vitesseX = 0
+                if event.key == K_RIGHT:
+                    vitesseX = 0
+                if event.key == K_SPACE and spacePressed == True:
+                    player.saut(-10)
+                    spacePressed = False
+                    vitesseY = 1
 
-        player.update(vitesseX,vitesseY)
+            collision_player_platform = pygame.sprite.spritecollide(player,level_en_cours.plats,False)
+            collision_player_trampoline = pygame.sprite.spritecollide(player,level_en_cours.tramps,False)
+
+            if collision_player_trampoline:
+                player.saut(-15)
+            if collision_player_platform:
+                player.setAuSol(True)
+
+            player.update(vitesseX,vitesseY)
 
 
         #collision_player_missile_mask =  pygame.sprite.spritecollide(player,level_en_cours.pro_list,False,pygame.sprite.collide_mask)
