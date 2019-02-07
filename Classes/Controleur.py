@@ -161,6 +161,14 @@ def Menu_niveau():
         Display.blit(choixlvl,(0,0))
         retourO = Display.blit(retour,(50,600))
 
+        dessous = pygame.Surface((300,200))
+        dessous.fill( (0,0,0) )
+        dessous.set_alpha(128)
+        Display.blit(dessous,(50,400))
+        Display.blit(dessous,(370,400))
+        Display.blit(dessous,(690,400))
+
+
         lvl1 = Display.blit(lvl_1,(50,320))
         font = pygame.font.SysFont('verdanaprocondblack', 50)
         f_high_lvl1 = open("high/lvl1.txt", "r")
@@ -270,6 +278,10 @@ def Credit():
 
 
         Display.blit(background,(0,0))
+        dessous = pygame.Surface((1024,768))
+        dessous.fill( (0,0,0) )
+        dessous.set_alpha(128)
+        Display.blit(dessous,(0,0))
 
         font = pygame.font.SysFont('verdanaprocondblack', 50)
         text4 = font.render("Developpement : Elias",1,(255,255,255))
@@ -506,6 +518,11 @@ def GameLoop():
         else :
             level_en_cours.draw(Display)
             sprite_bouge.draw(Display)
+
+            dessous = pygame.Surface((1024,110))
+            dessous.fill( (0,0,0) )
+            dessous.set_alpha(128)
+            Display.blit(dessous,(0,0))
 
             Display.blit(empty,(20,10))
             Display.blit(empty,(500,10))
