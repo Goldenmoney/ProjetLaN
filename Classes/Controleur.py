@@ -422,7 +422,6 @@ def GameLoop():
             Menu_Victoire()
 
         else :
-            level_en_cours.update()
             level_en_cours.draw(Display)
             sprite_bouge.draw(Display)
 
