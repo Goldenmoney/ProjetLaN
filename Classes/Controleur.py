@@ -259,6 +259,10 @@ dix_secondes = 0
 def timeout():
     global TIMEFINI
     TIMEFINI = True
+    global TIMEAFFICH
+    TIMEAFFICH = 90
+    t = Timer(30.0, timeout)
+
 
 def GameLoop():
     global level_en_cours_numero
@@ -365,6 +369,7 @@ def GameLoop():
         elif collision_player_fin:
             time.sleep(1)
             pygame.mixer.music.stop()
+            TIMEAFFICH = 90
             Menu_Victoire()
 
         else :
@@ -377,7 +382,10 @@ def GameLoop():
             Display.blit(pause,(850,10))
 
             font = pygame.font.SysFont('verdanaprocondblack', 50)
-            timerScreen = font.render("Timer : "+str(TIMEAFFICH)+" s",1,(255,255,255))
+            if TIMEAFFICH>85 :
+                timerScreen = font.render("Timer : "+str(TIMEAFFICH)+" s",1,(255,255,255))
+            else :
+                timerScreen = font.render("Timer : "+str(TIMEAFFICH)+" s",1,(255,0,0))
             Display.blit(timerScreen, (50, 20))
             #attention pas synchro avec timer
 
