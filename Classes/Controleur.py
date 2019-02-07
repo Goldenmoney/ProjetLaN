@@ -37,8 +37,12 @@ lvl_10 = pygame.image.load("images/1.png").convert_alpha()
 lvl_1 = pygame.transform.scale(lvl_10, (300, 100))
 lvl_20 = pygame.image.load("images/2.png").convert_alpha()
 lvl_2 = pygame.transform.scale(lvl_20, (300, 100))
+lvl_2_block0 = pygame.image.load("images/2block.png").convert_alpha()
+lvl_2_block = pygame.transform.scale(lvl_2_block0, (300, 100))
 lvl_30 = pygame.image.load("images/3.png").convert_alpha()
 lvl_3 = pygame.transform.scale(lvl_30, (300, 100))
+lvl_3_block0 = pygame.image.load("images/3block.png").convert_alpha()
+lvl_3_block = pygame.transform.scale(lvl_3_block0, (300, 100))
 empty0 = pygame.image.load("images/empty.png").convert_alpha()
 empty = pygame.transform.scale(empty0, (400, 100))
 
@@ -125,39 +129,63 @@ def Menu_niveau():
                     level_en_cours_numero = 0
                     GameLoop()
 
-                if lvl2.collidepoint(posSouris):
-                    pygame.display.update()
-                    time.sleep(1)
-                    level_en_cours_numero = 1
-                    GameLoop()
+                f_high_lvl1 = open("high/lvl1.txt", "r")
+                if int(f_high_lvl1.read()) >= 25:
+                    if lvl2.collidepoint(posSouris):
+                        pygame.display.update()
+                        time.sleep(1)
+                        level_en_cours_numero = 1
+                        GameLoop()
+                f_high_lvl1.close()
 
-
-                if lvl3.collidepoint(posSouris):
-                    pygame.display.update()
-                    time.sleep(1)
-                    level_en_cours_numero = 2
-                    GameLoop()
+                f_high_lvl2 = open("high/lvl2.txt", "r")
+                if int(f_high_lvl2.read()) >= 25:
+                    if lvl3.collidepoint(posSouris):
+                        pygame.display.update()
+                        time.sleep(1)
+                        level_en_cours_numero = 2
+                        GameLoop()
+                f_high_lvl2.close()
 
         Display.blit(background,(0,0))
         Display.blit(choixlvl,(0,0))
         lvl1 = Display.blit(lvl_1,(50,320))
         font = pygame.font.SysFont('verdanaprocondblack', 50)
         f_high_lvl1 = open("high/lvl1.txt", "r")
-        high_lvl1 = font.render("Meilleur : " + f_high_lvl1.read(),1,(255,255,255))
+        high_lvl1 = font.render("Record : " + f_high_lvl1.read(),1,(255,255,255))
         Display.blit(high_lvl1, (50, 450))
         f_high_lvl1.close()
 
-        lvl2 = Display.blit(lvl_2,(370,320))
+        f_high_lvl1 = open("high/lvl1.txt", "r")
+        if int(f_high_lvl1.read()) >= 25:
+            lvl2 = Display.blit(lvl_2,(370,320))
+            f_high_lvl2 = open("high/lvl2.txt", "r")
+            high_lvl2 = font.render("Record : " + f_high_lvl2.read(),1,(255,255,255))
+            Display.blit(high_lvl2, (370, 450))
+            f_high_lvl2.close()
+        else:
+            lvl2 = Display.blit(lvl_2_block,(370,320))
+            lock = font.render("Requis : 25",1,(255,255,255))
+            Display.blit(lock, (370, 450))
+            lock = font.render("sur le niveau 1",1,(255,255,255))
+            Display.blit(lock, (370, 510))
+        f_high_lvl1.close()
+
         f_high_lvl2 = open("high/lvl2.txt", "r")
-        high_lvl2 = font.render("Meilleur : " + f_high_lvl2.read(),1,(255,255,255))
-        Display.blit(high_lvl2, (370, 450))
+        if int(f_high_lvl2.read()) >= 25:
+            lvl3 =  Display.blit(lvl_3,(690,320))
+            f_high_lvl3 = open("high/lvl3.txt", "r")
+            high_lvl3 = font.render("Record : " + f_high_lvl3.read(),1,(255,255,255))
+            Display.blit(high_lvl3, (690, 450))
+            f_high_lvl3.close()
+        else:
+            lvl3 =  Display.blit(lvl_3_block,(690,320))
+            lock = font.render("Requis : 25",1,(255,255,255))
+            Display.blit(lock, (690, 450))
+            lock = font.render("sur le niveau 2",1,(255,255,255))
+            Display.blit(lock, (690, 510))
         f_high_lvl2.close()
 
-        lvl3 =  Display.blit(lvl_3,(690,320))
-        f_high_lvl3 = open("high/lvl3.txt", "r")
-        high_lvl3 = font.render("Meilleur : " + f_high_lvl3.read(),1,(255,255,255))
-        Display.blit(high_lvl3, (690, 450))
-        f_high_lvl3.close()
         pygame.display.flip()
 
 # affichage menu options
