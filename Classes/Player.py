@@ -37,7 +37,7 @@ class Player(pygame.sprite.Sprite):
 ##        super().__init__()
         self.auSol = False
         self.rect = move_image1.get_rect()
-        self.rect.y = 50
+        self.rect.y = 500
         self.rect.x = 0
         self.vitesseX = 0
         self.vitesseY = 0
@@ -62,8 +62,14 @@ class Player(pygame.sprite.Sprite):
         self.animation_speed -= 1
 
         self.gravite()
-        self.rect.x += self.vitesseX
+        if self.rect.x < 950 and vitesseX == 5: #blocage à droite
+            self.rect.x += self.vitesseX
+        elif self.rect.x > -5 and vitesseX == -5: #blocage à gauche
+            self.rect.x += self.vitesseX
+
         self.rect.y += self.vitesseY
+
+        print(self.rect.y)
         if self.animation_speed == 0:
             if vitesseX == 5: #le personnage avance
                 self.image = self.animation_list[self.animation_position]
