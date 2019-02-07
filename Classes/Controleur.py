@@ -258,6 +258,10 @@ TIMEAFFICH = 90
 def timeout():
     global TIMEFINI
     TIMEFINI = True
+    global TIMEAFFICH
+    TIMEAFFICH = 90
+    t = Timer(30.0, timeout)
+
 
 def GameLoop():
     global level_en_cours_numero
@@ -359,6 +363,7 @@ def GameLoop():
         elif collision_player_fin:
             time.sleep(1)
             pygame.mixer.music.stop()
+            TIMEAFFICH = 90
             Menu_Victoire()
 
         else :
