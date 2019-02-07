@@ -55,14 +55,23 @@ class Level(object):
         self.portables_list.empty()
         for port in level_portables:
             rand = random.randint(0, 1)
-            if rand == 1: # ENELEVER LE or rend == 0
+            if rand == 1 or rand == 0: # ENELEVER LE or rend == 0
                 portable = Portable(port[0], port[1])
                 self.portables_list.add(portable)
+
+    def show_bonus(self, level_bonus):
+        self.bonus_list.empty()
+        for bon in level_bonus:
+            rand = random.randint(0, 1)
+            if rand == 1 or rand == 0: # ENELEVER LE or rend == 0
+                bonus = Bonus(bon[0], bon[1])
+                self.bonus_list.add(bonus)
 
 class Level_1(Level):
     def __init__(self, player):
         Level.__init__(self, player)
 
+        # PORTABLES
         self.level_portables = [[50,150],
                                 [100,150],
                                 [150,150],
@@ -79,13 +88,13 @@ class Level_1(Level):
                                 [150,450],
                                 [200,450],
 
-                                [200,650],
-                                [250,650],
-                                [300,650],
+                                [200,600],
+                                [250,600],
+                                [300,600],
 
-                                [550,650],
-                                [600,650],
-                                [650,650],
+                                [550,600],
+                                [600,600],
+                                [650,600],
 
                                 [550,500],
                                 [600,500],
@@ -109,12 +118,9 @@ class Level_1(Level):
 
         self.show_port(self.level_portables)
 
-        #if affichBonus :
-        level_bonus = [[400,400],[300,300]]
-
-        for port in level_bonus :
-            bonus = Bonus(port[0],port[1])
-            self.bonus_list.add(bonus)
+        # BONUS
+        self.level_bonus = [[950,400],[300,300]]
+        self.show_bonus(self.level_bonus)
 
 class Level_2(Level):
     def __init__(self, player):
