@@ -278,6 +278,10 @@ def Credit():
 
 
         Display.blit(background,(0,0))
+        dessous = pygame.Surface((1024,768))
+        dessous.fill( (0,0,0) )
+        dessous.set_alpha(128)
+        Display.blit(dessous,(0,0))
 
         font = pygame.font.SysFont('verdanaprocondblack', 50)
         text4 = font.render("Developpement : Elias",1,(255,255,255))
