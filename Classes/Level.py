@@ -2,6 +2,7 @@ import pygame
 pygame.init()
 from Classes.Controleur import *
 from Classes.PortailFin import *
+from Classes.Platform import *
 from Classes.Portable import *
 from Classes.Bonus import *
 

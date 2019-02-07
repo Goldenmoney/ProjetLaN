@@ -5,7 +5,7 @@ pygame.init()
 from Classes.Level import *
 from Classes.Player import *
 from Classes.Lancerocket import *
-from Classes.Projectile import *
+from Classes.Platform import *
 import time
 import sys #module systeme
 from Classes.Piece import *
