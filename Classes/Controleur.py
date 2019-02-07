@@ -347,6 +347,7 @@ def Menu_Victoire():
 TIMEFINI = False
 INT = 0
 TIMEAFFICH = 90
+six_secondes = 0
 dix_secondes = 0
 trente_secondes = 0
 
@@ -396,10 +397,12 @@ def GameLoop():
     while GameRun:
 ################################################################################
         global INT
+        global six_secondes
         global dix_secondes
         global trente_secondes
         global TIMEAFFICH
         INT = INT+1
+        six_secondes += 1
         dix_secondes += 1
         trente_secondes += 1
 
@@ -415,6 +418,14 @@ def GameLoop():
 
         if collision_portable:
             score += 1
+
+        if six_secondes == 360:
+            six_secondes = 0
+            level_en_cours.show_police(level_en_cours.level_police)
+        collision_police = pygame.sprite.spritecollide(player,level_en_cours.police_list,True)
+
+        if collision_police:
+            score -= 5
 
         # TOUTES LES 30s
         if trente_secondes == 1800:
