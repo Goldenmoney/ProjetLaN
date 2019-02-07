@@ -355,7 +355,7 @@ def timeout():
     TIMEFINI = True
     global TIMEAFFICH
     TIMEAFFICH = 90
-    t = Timer(30.0, timeout)
+    t = Timer(90.0, timeout)
 
 
 def GameLoop():
@@ -368,7 +368,7 @@ def GameLoop():
     score = 0
     bonus_actif = False
 
-    t = Timer(30.0, timeout)
+    t = Timer(90.0, timeout)
     #attention pas synchro avec affichage tps restant
     t.start()
 
@@ -479,7 +479,13 @@ def GameLoop():
         player.update(vitesseX,vitesseY)
 
 
+<<<<<<< HEAD
         collision_player_fin = pygame.sprite.spritecollide(player,level_en_cours.portal,False)
+=======
+        #collision_player_missile_mask =  pygame.sprite.spritecollide(player,level_en_cours.pro_list,False,pygame.sprite.collide_mask)
+        #collision_player_missile = pygame.sprite.spritecollide(player,level_en_cours.pro_list,False)
+        #collision_player_fin = pygame.sprite.spritecollide(player,level_en_cours.portal,False)
+>>>>>>> 658601aedd7c699dc84d261897aea0f4122dd079
 
         global TIMEFINI
 
@@ -490,11 +496,11 @@ def GameLoop():
             TIMEFINI=False
             Menu_Victoire()
 
-        elif collision_player_fin:
-            time.sleep(1)
-            pygame.mixer.music.stop()
-            TIMEAFFICH = 90
-            Menu_Victoire()
+        # elif collision_player_fin:
+        #     time.sleep(1)
+        #     pygame.mixer.music.stop()
+        #     TIMEAFFICH = 90
+        #     Menu_Victoire()
 
         else :
             level_en_cours.draw(Display)
@@ -505,7 +511,7 @@ def GameLoop():
             Display.blit(pause,(850,10))
 
             font = pygame.font.SysFont('verdanaprocondblack', 50)
-            if TIMEAFFICH>85 :
+            if TIMEAFFICH>30 :
                 timerScreen = font.render("Timer : "+str(TIMEAFFICH)+" s",1,(255,255,255))
             else :
                 timerScreen = font.render("Timer : "+str(TIMEAFFICH)+" s",1,(255,0,0))

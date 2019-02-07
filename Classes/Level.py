@@ -24,8 +24,8 @@ fond = pygame.transform.scale(fond,(Display_Width,Display_Height))
 
 class Level(object):
     def __init__(self, player):
-        self.portal = pygame.sprite.Group()
-        self.portal.add(Portailfin())
+        # self.portal = pygame.sprite.Group()
+        # self.portal.add(Portailfin())
         self.portables_list = pygame.sprite.Group()
         self.bonus_list = pygame.sprite.Group()
         self.plats = pygame.sprite.Group()
@@ -36,7 +36,7 @@ class Level(object):
 
     def draw(self, screen):
         Display.blit(fond,(0,0))
-        self.portal.draw(screen)
+        # self.portal.draw(screen)
         self.portables_list.draw(screen)
         self.bonus_list.draw(screen)
         self.plats.draw(screen)
