@@ -54,16 +54,18 @@ class Level(object):
     def show_port(self, level_portables):
         self.portables_list.empty()
         for port in level_portables:
+            # Changer 2eme valeur pour taux d'apparition
             rand = random.randint(0, 1)
-            if rand == 1 or rand == 0: # ENELEVER LE or rend == 0
+            if rand == 1: # ajouter/enlever or rend == 0 (pour tests)
                 portable = Portable(port[0], port[1])
                 self.portables_list.add(portable)
 
     def show_bonus(self, level_bonus):
         self.bonus_list.empty()
         for bon in level_bonus:
-            rand = random.randint(0, 1)
-            if rand == 1 or rand == 0: # ENELEVER LE or rend == 0
+            # Changer 2eme valeur pour taux d'apparition
+            rand = random.randint(0, 4)
+            if rand == 1: # ajouter/enlever or rend == 0 (pour tests)
                 bonus = Bonus(bon[0], bon[1])
                 self.bonus_list.add(bonus)
 
