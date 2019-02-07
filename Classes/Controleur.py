@@ -4,8 +4,12 @@ from pygame.locals import *
 pygame.init()
 from Classes.Level import *
 from Classes.Player import *
+<<<<<<< HEAD
+from Classes.Projectile import *
+=======
 from Classes.Lancerocket import *
 from Classes.Platform import *
+>>>>>>> f0636dacd0f1a69cf40a74d1958fe0dc95a4c69a
 import time
 import sys #module systeme
 from Classes.Piece import *
