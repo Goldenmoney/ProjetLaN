@@ -3,11 +3,10 @@ pygame.init()
 from Classes.Controleur import *
 from Classes.PortailFin import *
 from Classes.Portable import *
-<<<<<<< HEAD
 from Classes.Bonus import *
-=======
+
 import random
->>>>>>> 40c1507cd4224cfd2b3d547e86380b0688b4d465
+
 # from Classes.Projectile import *
 # from Classes.Lancerocket import *
 
