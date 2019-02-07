@@ -68,7 +68,10 @@ class Player(pygame.sprite.Sprite):
         elif self.rect.x > -5 and vitesseX == -5: #blocage à gauche
             self.rect.x += self.vitesseX
 
+        if self.rect.y < 0:
+            self.vitesseY = 1
         self.rect.y += self.vitesseY
+        
         if self.animation_speed == 0:
             if vitesseX == 5: #le personnage avance
                 self.image = self.animation_list[self.animation_position]
