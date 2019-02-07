@@ -3,7 +3,10 @@ pygame.init()
 from Classes.Controleur import *
 from Classes.PortailFin import *
 from Classes.Portable import *
+from Classes.Bonus import *
+
 import random
+
 # from Classes.Projectile import *
 # from Classes.Lancerocket import *
 
@@ -25,6 +28,7 @@ class Level(object):
         self.portal = pygame.sprite.Group()
         self.portal.add(Portailfin())
         self.portables_list = pygame.sprite.Group()
+        self.bonus_list = pygame.sprite.Group()
         self.player = player
         self.background = None
 
@@ -40,6 +44,7 @@ class Level(object):
         self.lance_list.draw(screen)
         self.portal.draw(screen)
         self.portables_list.draw(screen)
+        self.bonus_list.draw(screen)
 
     def show_port(self, level_portables):
         self.portables_list.empty()
@@ -71,6 +76,13 @@ class Level_1(Level):
                                 ]
 
         self.show_port(self.level_portables)
+
+        #if affichBonus :
+        level_bonus = [[400,400],[300,300]]
+
+        for port in level_bonus :
+            bonus = Bonus(port[0],port[1])
+            self.bonus_list.add(bonus)
 
 class Level_2(Level):
     def __init__(self, player):
