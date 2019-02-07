@@ -68,8 +68,6 @@ class Player(pygame.sprite.Sprite):
             self.rect.x += self.vitesseX
 
         self.rect.y += self.vitesseY
-
-        print(self.rect.y)
         if self.animation_speed == 0:
             if vitesseX == 5: #le personnage avance
                 self.image = self.animation_list[self.animation_position]

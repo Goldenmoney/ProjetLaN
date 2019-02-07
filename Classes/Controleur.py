@@ -479,13 +479,9 @@ def GameLoop():
         player.update(vitesseX,vitesseY)
 
 
-<<<<<<< HEAD
-        collision_player_fin = pygame.sprite.spritecollide(player,level_en_cours.portal,False)
-=======
         #collision_player_missile_mask =  pygame.sprite.spritecollide(player,level_en_cours.pro_list,False,pygame.sprite.collide_mask)
         #collision_player_missile = pygame.sprite.spritecollide(player,level_en_cours.pro_list,False)
         #collision_player_fin = pygame.sprite.spritecollide(player,level_en_cours.portal,False)
->>>>>>> 658601aedd7c699dc84d261897aea0f4122dd079
 
         global TIMEFINI
 
