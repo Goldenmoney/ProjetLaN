@@ -2,7 +2,7 @@ import pygame
 pygame.init()
 from Classes.Controleur import *
 from Classes.PortailFin import *
-# from Classes.Projectile import *
+from Classes.Platform import *
 # from Classes.Lancerocket import *
 
 
@@ -23,6 +23,9 @@ class Level(object):
         self.lance_list = pygame.sprite.Group()
         self.portal = pygame.sprite.Group()
         self.portal.add(Portailfin())
+        self.plats = pygame.sprite.Group()
+        for i in range(0,8):
+            self.plats.add(Platform(i*208-63*(i+1),680))
         self.player = player
 
 
@@ -42,6 +45,8 @@ class Level(object):
         self.pro_list.draw(screen)
         self.lance_list.draw(screen)
         self.portal.draw(screen)
+        self.plats.draw(screen)
+        self.tramps.draw(screen)
 
 class Level_1(Level):
     def __init__(self, player):
@@ -60,6 +65,8 @@ class Level_1(Level):
         #         [900,5,870],
         #         [1000,4,970],
         #         [1100,6,1070],]
+        self.tramps = pygame.sprite.Group()
+        self.tramps.add(Platform(510,590,"trampoline"))
 
 #        for misille in level:
 #            projectile = Projectil(misille[0],misille[1])

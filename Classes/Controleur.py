@@ -5,7 +5,7 @@ pygame.init()
 from Classes.Level import *
 from Classes.Player import *
 from Classes.Lancerocket import *
-from Classes.Projectile import *
+from Classes.Platform import *
 import time
 import sys #module systeme
 from Classes.Piece import *
@@ -313,7 +313,7 @@ def GameLoop():
                 if event.key == K_RIGHT:
                     vitesseX = 5
 
-                if event.key == K_SPACE and player.auSol == True:
+                if event.key == K_SPACE:
                     spacePressed = True
                     vitesseY = -1
 
@@ -327,18 +327,19 @@ def GameLoop():
                     spacePressed = False
                     vitesseY = 1
 
+            collision_player_platform = pygame.sprite.spritecollide(player,level_en_cours.plats,False)
+            collision_player_trampoline = pygame.sprite.spritecollide(player,level_en_cours.tramps,False)
+
+            if collision_player_trampoline:
+                player.saut(-15)
+            if collision_player_platform:
+                player.setAuSol(True)
+
             player.update(vitesseX,vitesseY)
 
 
-            #collision_player_missile_mask =  pygame.sprite.spritecollide(player,level_en_cours.pro_list,False,pygame.sprite.collide_mask)
-            #collision_player_missile = pygame.sprite.spritecollide(player,level_en_cours.pro_list,False)
             collision_player_fin = pygame.sprite.spritecollide(player,level_en_cours.portal,False)
 
-
-            #if collision_player_missile:
-            #    if collision_player_missile_mask:
-            #        GameOver = True
-            #        son_decolage.stop()
             global TIMEFINI
 
             if TIMEFINI:

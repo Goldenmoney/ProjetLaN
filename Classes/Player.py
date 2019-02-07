@@ -35,7 +35,7 @@ move_image4_r = pygame.transform.flip(move_image4, True, False)
 class Player(pygame.sprite.Sprite):
     def __init__(self):
 ##        super().__init__()
-        self.auSol = True
+        self.auSol = False
         self.rect = move_image1.get_rect()
         self.rect.y = 50
         self.rect.x = 0
@@ -58,19 +58,12 @@ class Player(pygame.sprite.Sprite):
     def update(self,vitesseX,vitesseY):
         self.vitesseX = vitesseX
 
-        #savoir si le joueur est au plus bas ou pas
-        if self.rect.y >= 580:
-            self.rect.y = 580
-            self.auSol = True
-        else:
-            self.auSol = False
-
         #change image par image
         self.animation_speed -= 1
 
+        self.gravite()
         self.rect.x += self.vitesseX
         self.rect.y += self.vitesseY
-        self.gravite()
         if self.animation_speed == 0:
             if vitesseX == 5: #le personnage avance
                 self.image = self.animation_list[self.animation_position]
@@ -98,11 +91,19 @@ class Player(pygame.sprite.Sprite):
         Display.blit(self.image,(self.rect.x,self.rect.y))
         self.mask = pygame.mask.from_surface(self.image)
 
+    def setAuSol(self,auSol):
+        self.auSol = auSol
+
     # gere le saut
     def saut(self,vitesseY):
-        self.vitesseY = vitesseY
+        if self.auSol == True:
+            self.auSol = False
+            self.vitesseY = vitesseY
+            self.update(self.vitesseX,self.vitesseY)
 
     # gere la gravité
     def gravite(self):
-        if self.vitesseY < 30 and self.auSol == False:
+        if self.auSol == False:
             self.vitesseY += gravite
+        else:
+            self.vitesseY = 0
