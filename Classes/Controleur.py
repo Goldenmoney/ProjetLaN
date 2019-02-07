@@ -371,11 +371,10 @@ def GameLoop():
             Display.blit(pause,(850,10))
 
             font = pygame.font.SysFont('verdanaprocondblack', 50)
-                if TIMEAFFICH>85 :
-                    timerScreen = font.render("Timer : "+str(TIMEAFFICH)+" s",1,(255,255,255))
-                else :
-                    timerScreen = font.render("Timer : "+str(TIMEAFFICH)+" s",1,(255,0,0))
-
+            if TIMEAFFICH>85 :
+                timerScreen = font.render("Timer : "+str(TIMEAFFICH)+" s",1,(255,255,255))
+            else :
+                timerScreen = font.render("Timer : "+str(TIMEAFFICH)+" s",1,(255,0,0))
             Display.blit(timerScreen, (50, 20))
             #attention pas synchro avec timer
 
