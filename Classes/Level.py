@@ -54,7 +54,7 @@ class Level(object):
         self.bonus_list.empty()
         for bon in level_bonus:
             # Changer 2eme valeur pour taux d'apparition
-            rand = random.randint(0, 0)
+            rand = random.randint(0, 4)
             if rand == 0: # ajouter/enlever or rand == 0 (pour tests)
                 bonus = Bonus(bon[0], bon[1])
                 self.bonus_list.add(bonus)

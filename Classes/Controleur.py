@@ -431,11 +431,9 @@ def GameLoop():
             font = pygame.font.SysFont('verdanaprocondblack', 50)
             actif = font.render("BONUS ACTIF",1,(255,255,255))
             Display.blit(actif, (360, 100))
-            print(temps_bonus)
 
-            if temps_bonus == 150:
+            if temps_bonus == 600:
                 bonus_actif = False
-                print('Bonus non actif')
 
 ################################################################################
 
@@ -481,8 +479,6 @@ def GameLoop():
         player.update(vitesseX,vitesseY)
 
 
-        #collision_player_missile_mask =  pygame.sprite.spritecollide(player,level_en_cours.pro_list,False,pygame.sprite.collide_mask)
-        #collision_player_missile = pygame.sprite.spritecollide(player,level_en_cours.pro_list,False)
         collision_player_fin = pygame.sprite.spritecollide(player,level_en_cours.portal,False)
 
         global TIMEFINI
