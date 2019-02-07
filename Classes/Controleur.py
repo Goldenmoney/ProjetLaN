@@ -5,7 +5,7 @@ pygame.init()
 from Classes.Level import *
 from Classes.Player import *
 from Classes.Lancerocket import *
-from Classes.Platform import *
+from Classes.Projectile import *
 import time
 import sys #module systeme
 from Classes.Piece import *
@@ -41,7 +41,11 @@ lvl_20 = pygame.image.load("images/2.png").convert_alpha()
 lvl_2 = pygame.transform.scale(lvl_20, (300, 100))
 lvl_30 = pygame.image.load("images/3.png").convert_alpha()
 lvl_3 = pygame.transform.scale(lvl_30, (300, 100))
+empty0 = pygame.image.load("images/empty.png").convert_alpha()
+empty = pygame.transform.scale(empty0, (400, 100))
 
+# POUR TESTS
+grille = pygame.image.load("images/grille.png").convert_alpha()
 
 #==============================================================================#
 #==============================================================================#
@@ -63,7 +67,9 @@ FPS = 60
 # affiche menu principal
 def Menu_Start():
     global level_en_cours_numero
+    global score
     menuStart = True
+    pygame.mixer.music.stop()
 
     while menuStart:
         positionSouris = pygame.mouse.get_pos()
@@ -118,20 +124,20 @@ def Menu_niveau():
                 if lvl1.collidepoint(posSouris):
                     pygame.display.update()
                     time.sleep(1)
-                    level_en_cours_numero = 1
+                    level_en_cours_numero = 0
                     GameLoop()
 
                 if lvl2.collidepoint(posSouris):
                     pygame.display.update()
                     time.sleep(1)
-                    level_en_cours_numero = 2
+                    level_en_cours_numero = 1
                     GameLoop()
 
 
                 if lvl3.collidepoint(posSouris):
                     pygame.display.update()
                     time.sleep(1)
-                    level_en_cours_numero = 3
+                    level_en_cours_numero = 2
                     GameLoop()
 
         Display.blit(background,(0,0))
@@ -209,14 +215,15 @@ def Credit():
         Display.blit(text6, (550, 580))
         pygame.display.flip()
 
-#==============================================================================#
-#==============================================================================#
-
-# A SUPPRIMER A L'AVENIR
 # affiche Menu_Victoire
 def Menu_Victoire():
     global level_en_cours_numero
     MenuVictoire = True
+
+
+    pygame.mixer.music.stop()
+    pygame.mixer.music.load('music/musiquevictoire.mp3')
+    pygame.mixer.music.play(-1)
 
     pygame.key.set_repeat(400,30)
     while MenuVictoire:
@@ -228,14 +235,6 @@ def Menu_Victoire():
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
-                # if Suivant.collidepoint(posSouris):
-                #     pygame.display.update()
-                #     time.sleep(1)
-                #     level_en_cours_numero = level_en_cours_numero + 1
-                #     if level_en_cours_numero == 11:
-                #         level_en_cours_numero = 10
-                #     GameLoop()
-
                 if MenuV.collidepoint(posSouris):
                     pygame.display.update()
                     time.sleep(1)
@@ -243,23 +242,36 @@ def Menu_Victoire():
 
         Display.blit(background,(0,0))
 
-        #Suivant = Display.blit(A MODIFIER,(362,460))
+        font = pygame.font.SysFont('verdanaprocondblack', 50)
+        scoreFinal = font.render("Score : " + str(score) + " pts",1,(255,255,255))
+        Display.blit(scoreFinal, (360, 20))
+
         MenuV =  Display.blit(menu,(362,335))
         pygame.display.flip()
+
+#==============================================================================#
+#==============================================================================#
 
 TIMEFINI = False
 INT = 0
 TIMEAFFICH = 90
+dix_secondes = 0
 
 def timeout():
     global TIMEFINI
     TIMEFINI = True
+    global TIMEAFFICH
+    TIMEAFFICH = 90
+    t = Timer(30.0, timeout)
+
 
 def GameLoop():
     global level_en_cours_numero
+    global score
 
     GameRun = True
     GameOver = False
+    score = 0
 
     t = Timer(30.0, timeout)
     #attention pas synchro avec affichage tps restant
@@ -288,85 +300,103 @@ def GameLoop():
 
     while GameRun:
 ################################################################################
-            global INT
-            global TIMEAFFICH
-            INT = INT+1
+        global INT
+        global dix_secondes
+        global TIMEAFFICH
+        INT = INT+1
+        dix_secondes += 1
 
-            if INT == 59 :
-                INT = 0
-                TIMEAFFICH = TIMEAFFICH-1
+        if INT == 59 :
+            INT = 0
+            TIMEAFFICH = TIMEAFFICH-1
+
+        if dix_secondes == 600:
+            print('Changement position portables')
+            dix_secondes = 0
+            level_en_cours.show_port(level_en_cours.level_portables)
+
+        collision_portable = pygame.sprite.spritecollide(player,level_en_cours.portables_list,True)
+
+        if collision_portable:
+            score += 1
 ################################################################################
 
-            while GameOver == True:
-                time.sleep(1)
-                pygame.mixer.music.stop()
-                Menu_gameover()
+        while GameOver == True:
+            time.sleep(1)
+            pygame.mixer.music.stop()
+            Menu_gameover()
 
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
-            if event.type == KEYDOWN:
-                if event.key == K_LEFT:
-                    vitesseX = -5
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+        if event.type == KEYDOWN:
+            if event.key == K_LEFT:
+                vitesseX = -5
 
-                if event.key == K_RIGHT:
-                    vitesseX = 5
+            if event.key == K_RIGHT:
+                vitesseX = 5
 
-                if event.key == K_SPACE:
-                    spacePressed = True
-                    vitesseY = -1
+            if event.key == K_SPACE and player.auSol == True:
+                spacePressed = True
+                vitesseY = -1
 
-            if event.type == KEYUP:
-                if event.key == K_LEFT:
-                    vitesseX = 0
-                if event.key == K_RIGHT:
-                    vitesseX = 0
-                if event.key == K_SPACE and spacePressed == True:
-                    player.saut(-10)
-                    spacePressed = False
-                    vitesseY = 1
+        if event.type == KEYUP:
+            if event.key == K_LEFT:
+                vitesseX = 0
+            if event.key == K_RIGHT:
+                vitesseX = 0
+            if event.key == K_SPACE and spacePressed == True:
+                player.saut(-10)
+                spacePressed = False
+                vitesseY = 1
 
-            collision_player_platform = pygame.sprite.spritecollide(player,level_en_cours.plats,False)
-            collision_player_trampoline = pygame.sprite.spritecollide(player,level_en_cours.tramps,False)
-
-            if collision_player_trampoline:
-                player.saut(-15)
-            if collision_player_platform:
-                player.setAuSol(True)
-
-            player.update(vitesseX,vitesseY)
+        player.update(vitesseX,vitesseY)
 
 
-            collision_player_fin = pygame.sprite.spritecollide(player,level_en_cours.portal,False)
+        #collision_player_missile_mask =  pygame.sprite.spritecollide(player,level_en_cours.pro_list,False,pygame.sprite.collide_mask)
+        #collision_player_missile = pygame.sprite.spritecollide(player,level_en_cours.pro_list,False)
+        collision_player_fin = pygame.sprite.spritecollide(player,level_en_cours.portal,False)
 
-            global TIMEFINI
+        global TIMEFINI
 
-            if TIMEFINI:
-                time.sleep(1)
-                GameOver = True
-                pygame.mixer.music.stop()
-                TIMEFINI=False
-                Menu_Victoire()
+        if TIMEFINI:
+            time.sleep(1)
+            GameOver = True
+            pygame.mixer.music.stop()
+            TIMEFINI=False
+            Menu_Victoire()
 
-            elif collision_player_fin:
-                time.sleep(1)
-                pygame.mixer.music.stop()
-                Menu_Victoire()
+        elif collision_player_fin:
+            time.sleep(1)
+            pygame.mixer.music.stop()
+            TIMEAFFICH = 90
+            Menu_Victoire()
 
-            else :
-                level_en_cours.update()
-                level_en_cours.draw(Display)
-                sprite_bouge.draw(Display)
+        else :
+            level_en_cours.update()
+            level_en_cours.draw(Display)
+            sprite_bouge.draw(Display)
 
-                font = pygame.font.SysFont('verdanaprocondblack', 50)
+            Display.blit(empty,(20,10))
+            Display.blit(empty,(500,10))
+            Display.blit(pause,(850,10))
+
+            font = pygame.font.SysFont('verdanaprocondblack', 50)
+            if TIMEAFFICH>85 :
                 timerScreen = font.render("Timer : "+str(TIMEAFFICH)+" s",1,(255,255,255))
-                Display.blit(timerScreen, (20, 20))
-                #attention pas synchro avec timer
+            else :
+                timerScreen = font.render("Timer : "+str(TIMEAFFICH)+" s",1,(255,0,0))
+            Display.blit(timerScreen, (50, 20))
+            #attention pas synchro avec timer
 
-                # rafraichi l'ecran
-                pygame.display.update()
+            scoreScreen = font.render("Score : " + str(score) + " pts",1,(255,255,255))
+            Display.blit(scoreScreen, (530, 20))
+            Display.blit(grille, (0, 0)) # POUR TESTS
 
+            # rafraichi l'ecran
+            pygame.display.flip()
+            pygame.display.update()
 
-                # gere les FPS
-                clock.tick(FPS)
+            # gere les FPS
+            clock.tick(FPS)
