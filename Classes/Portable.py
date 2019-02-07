@@ -8,7 +8,7 @@ Display_Height = 768
 Display = pygame.display.set_mode((Display_Width,Display_Height))
 
 portable = pygame.image.load("images/portable.png").convert_alpha()
-portable = pygame.transform.scale(portable,(30,60))
+portable = pygame.transform.scale(portable,(30,50))
 
 class Portable(pygame.sprite.Sprite):
     # x location, y location

@@ -50,7 +50,7 @@ class Level(object):
         self.portables_list.empty()
         for port in level_portables:
             rand = random.randint(0, 1)
-            if rand == 1:
+            if rand == 1: # ENELEVER LE or rend == 0
                 portable = Portable(port[0], port[1])
                 self.portables_list.add(portable)
 
@@ -58,22 +58,49 @@ class Level_1(Level):
     def __init__(self, player):
         Level.__init__(self, player)
 
-        self.level_portables = [[40,140],
-                                [80,140],
-                                [120,140],
+        self.level_portables = [[50,150],
+                                [100,150],
+                                [150,150],
 
-                                [40,250],
-                                [120,250],
+                                [300,200],
+                                [350,200],
 
-                                [140,200],
-                                [180,200],
-                                [220,200],
+                                [50,300],
+                                [100,300],
+                                [150,300],
 
-                                [40,400],
-                                [60,400],
-                                [80,400],
-                                [100,400],
-                                ]
+                                [50,450],
+                                [100,450],
+                                [150,450],
+                                [200,450],
+
+                                [200,650],
+                                [250,650],
+                                [300,650],
+
+                                [550,650],
+                                [600,650],
+                                [650,650],
+
+                                [550,500],
+                                [600,500],
+                                [650,500],
+
+                                [950,150],
+                                [900,150],
+                                [850,150],
+
+                                [950,300],
+                                [900,300],
+                                [850,300],
+
+                                [650,150],
+                                [650,250],
+                                [650,350],
+
+                                [900,700],
+                                [900,600],
+                                [900,500]]
 
         self.show_port(self.level_portables)
 
