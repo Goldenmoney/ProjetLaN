@@ -44,7 +44,8 @@ lvl_3 = pygame.transform.scale(lvl_30, (300, 100))
 empty0 = pygame.image.load("images/empty.png").convert_alpha()
 empty = pygame.transform.scale(empty0, (400, 100))
 
-
+# POUR TESTS
+grille = pygame.image.load("images/grille.png").convert_alpha()
 
 #==============================================================================#
 #==============================================================================#
@@ -339,7 +340,7 @@ def GameLoop():
             INT = 0
             TIMEAFFICH = TIMEAFFICH-1
 
-        if dix_secondes == 100:
+        if dix_secondes == 600:
             print('Changement position portables')
             dix_secondes = 0
             level_en_cours.show_port(level_en_cours.level_portables)
@@ -421,6 +422,7 @@ def GameLoop():
 
             scoreScreen = font.render("Score : " + str(score) + " pts",1,(255,255,255))
             Display.blit(scoreScreen, (530, 20))
+            Display.blit(grille, (0, 0)) # POUR TESTS
 
             # rafraichi l'ecran
             pygame.display.flip()
