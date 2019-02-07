@@ -4,12 +4,8 @@ from pygame.locals import *
 pygame.init()
 from Classes.Level import *
 from Classes.Player import *
-<<<<<<< HEAD
-from Classes.Projectile import *
-=======
 from Classes.Lancerocket import *
 from Classes.Platform import *
->>>>>>> f0636dacd0f1a69cf40a74d1958fe0dc95a4c69a
 import time
 import sys #module systeme
 from Classes.Piece import *
@@ -333,7 +329,6 @@ def GameLoop():
     sprite_bouge.add(player)
 
     while GameRun:
-################################################################################
         global INT
         global dix_secondes
         global TIMEAFFICH
@@ -353,7 +348,6 @@ def GameLoop():
 
         if collision_portable:
             score += 1
-################################################################################
 
         while GameOver == True:
             time.sleep(1)
@@ -386,13 +380,37 @@ def GameLoop():
                 spacePressed = False
                 vitesseY = 1
 
-        collision_player_platform = pygame.sprite.spritecollide(player,level_en_cours.plats,False)
-        #collision_player_trampoline = pygame.sprite.spritecollide(player,level_en_cours.tramps,False)
 
-        #if collision_player_trampoline:
-        #    player.saut(-15)
+        collision_player_platform = pygame.sprite.spritecollide(player,level_en_cours.platform_list,False)
+        collision_player_trampoline = pygame.sprite.spritecollide(player,level_en_cours.trampoline_list,False)
+
         if collision_player_platform:
+            auSol = False
+            for plat in level_en_cours.platform_list:
+                ecartGauche = player.rect.x + player.rect.width - plat.rect.x
+                ecartDroite = plat.rect.x + plat.rect.width - player.rect.x
+                ecartHaut = player.rect.y + player.rect.height - plat.rect.y
+                ecartBas = plat.rect.y + plat.rect.height - player.rect.y
+                if ecartGauche > 50 and ecartGauche < 55:
+                    if ecartHaut > 35 and ecartBas > 15:
+                        if vitesseX == 5:
+                            vitesseX = 0
+                if ecartDroite > 25 and ecartDroite < 30:
+                    if ecartHaut > 35 and ecartBas > 15:
+                        if vitesseX == -5:
+                            vitesseX = 0
+                if ecartHaut > 20 and ecartHaut < 35:
+                    if ecartDroite > 30 and ecartGauche > 55:
+                        auSol = True
+                if ecartBas > -20 and ecartBas < 15:
+                    if ecartDroite > 30 and ecartGauche > 55:
+                        player.saut(0)
+            player.setAuSol(auSol)
+
+
+        if collision_player_trampoline:
             player.setAuSol(True)
+            player.saut(-15)
 
         player.update(vitesseX,vitesseY)
 

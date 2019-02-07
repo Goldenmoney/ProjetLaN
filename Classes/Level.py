@@ -30,9 +30,10 @@ class Level(object):
         self.portal.add(Portailfin())
         self.portables_list = pygame.sprite.Group()
         self.bonus_list = pygame.sprite.Group()
-        self.plats = pygame.sprite.Group()
+        self.platform_list = pygame.sprite.Group()
         for i in range(0,8):
-            self.plats.add(Platform(i*208-63*(i+1),680))
+            self.platform_list.add(Platform(i*208-63*(i+1),680))
+        self.trampoline_list = pygame.sprite.Group()
         self.player = player
         self.background = None
 
@@ -49,7 +50,8 @@ class Level(object):
         self.portal.draw(screen)
         self.portables_list.draw(screen)
         self.bonus_list.draw(screen)
-        self.plats.draw(screen)
+        self.platform_list.draw(screen)
+        self.trampoline_list.draw(screen)
 
     def show_port(self, level_portables):
         self.portables_list.empty()
@@ -108,6 +110,13 @@ class Level_1(Level):
                                 [900,500]]
 
         self.show_port(self.level_portables)
+
+        trampolineList = []
+
+        self.platform_list.add(Platform(300,550))
+
+        for tramp in trampolineList:
+            self.trampoline_list.add(Platform(tramp[0],tramp[1],"trampoline"))
 
         #if affichBonus :
         level_bonus = [[400,400],[300,300]]

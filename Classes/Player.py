@@ -37,7 +37,7 @@ class Player(pygame.sprite.Sprite):
 ##        super().__init__()
         self.auSol = False
         self.rect = move_image1.get_rect()
-        self.rect.y = 50
+        self.rect.y = 450
         self.rect.x = 0
         self.vitesseX = 0
         self.vitesseY = 0
