@@ -66,7 +66,9 @@ FPS = 60
 # affiche menu principal
 def Menu_Start():
     global level_en_cours_numero
+    global score
     menuStart = True
+    pygame.mixer.music.stop()
 
     while menuStart:
         positionSouris = pygame.mouse.get_pos()
@@ -212,14 +214,15 @@ def Credit():
         Display.blit(text6, (550, 580))
         pygame.display.flip()
 
-#==============================================================================#
-#==============================================================================#
-
-# A SUPPRIMER A L'AVENIR
 # affiche Menu_Victoire
 def Menu_Victoire():
     global level_en_cours_numero
     MenuVictoire = True
+
+
+    pygame.mixer.music.stop()
+    pygame.mixer.music.load('music/musiquevictoire.mp3')
+    pygame.mixer.music.play(-1)
 
     pygame.key.set_repeat(400,30)
     while MenuVictoire:
@@ -238,9 +241,15 @@ def Menu_Victoire():
 
         Display.blit(background,(0,0))
 
-        #Suivant = Display.blit(A MODIFIER,(362,460))
+        font = pygame.font.SysFont('verdanaprocondblack', 50)
+        scoreFinal = font.render("Score : " + str(score) + " pts",1,(255,255,255))
+        Display.blit(scoreFinal, (360, 20))
+
         MenuV =  Display.blit(menu,(362,335))
         pygame.display.flip()
+
+#==============================================================================#
+#==============================================================================#
 
 TIMEFINI = False
 INT = 0
@@ -252,6 +261,7 @@ def timeout():
 
 def GameLoop():
     global level_en_cours_numero
+    global score
 
     GameRun = True
     GameOver = False
@@ -330,6 +340,9 @@ def GameLoop():
         #collision_player_missile = pygame.sprite.spritecollide(player,level_en_cours.pro_list,False)
         collision_player_fin = pygame.sprite.spritecollide(player,level_en_cours.portal,False)
         collision_portable = pygame.sprite.spritecollide(player,level_en_cours.portables_list,True)
+
+        # for rand in level_en_cours.portables_list:
+        #         collision_portable = pygame.sprite.spritecollide(player,rand,True)
 
         if collision_portable:
             score += 1
