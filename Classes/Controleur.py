@@ -43,6 +43,8 @@ empty0 = pygame.image.load("images/empty.png").convert_alpha()
 empty = pygame.transform.scale(empty0, (400, 100))
 rejouer0 = pygame.image.load("images/rejouer.png").convert_alpha()
 rejouer = pygame.transform.scale(rejouer0, (300, 100))
+retour0 = pygame.image.load("images/retour.png").convert_alpha()
+retour = pygame.transform.scale(retour0, (300, 100))
 
 # POUR TESTS
 grille = pygame.image.load("images/grille.png").convert_alpha()
@@ -140,8 +142,16 @@ def Menu_niveau():
                     level_en_cours_numero = 2
                     GameLoop()
 
+                if retourO.collidepoint(posSouris):
+                    pygame.display.update()
+                    time.sleep(1)
+                    Menu_Start()
+
         Display.blit(background,(0,0))
         Display.blit(choixlvl,(0,0))
+        retourO = Display.blit(retour,(50,600))
+
+
         lvl1 = Display.blit(lvl_1,(50,320))
         font = pygame.font.SysFont('verdanaprocondblack', 50)
         f_high_lvl1 = open("high/lvl1.txt", "r")
@@ -155,7 +165,7 @@ def Menu_niveau():
         Display.blit(high_lvl2, (370, 450))
         f_high_lvl2.close()
 
-        lvl3 =  Display.blit(lvl_3,(690,320))
+        lvl3 = Display.blit(lvl_3,(690,320))
         f_high_lvl3 = open("high/lvl3.txt", "r")
         high_lvl3 = font.render("Meilleur : " + f_high_lvl3.read(),1,(255,255,255))
         Display.blit(high_lvl3, (690, 450))
