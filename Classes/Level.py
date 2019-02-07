@@ -3,6 +3,7 @@ pygame.init()
 from Classes.Controleur import *
 from Classes.PortailFin import *
 from Classes.Portable import *
+import random
 # from Classes.Projectile import *
 # from Classes.Lancerocket import *
 
@@ -19,7 +20,6 @@ fond = pygame.transform.scale(fond,(Display_Width,Display_Height))
 
 class Level(object):
     def __init__(self, player):
-
         self.pro_list = pygame.sprite.Group()
         self.lance_list = pygame.sprite.Group()
         self.portal = pygame.sprite.Group()
@@ -36,21 +36,26 @@ class Level(object):
 
     def draw(self, screen):
         Display.blit(fond,(0,0))
-
         self.pro_list.draw(screen)
         self.lance_list.draw(screen)
         self.portal.draw(screen)
         self.portables_list.draw(screen)
 
+    def show_port(self, level_portables):
+        self.portables_list.empty()
+        for port in level_portables:
+            rand = random.randint(0, 1)
+            if rand == 1:
+                portable = Portable(port[0], port[1])
+                self.portables_list.add(portable)
+
 class Level_1(Level):
     def __init__(self, player):
         Level.__init__(self, player)
 
-        level_portables = [[500,600],[100,600],[300,600],[400,500]]
+        self.level_portables = [[500,600],[100,600],[300,600],[400,500]]
 
-        for port in level_portables:
-            portable = Portable(port[0], port[1])
-            self.portables_list.add(portable)
+        self.show_port(self.level_portables)
 
 class Level_2(Level):
     def __init__(self, player):

@@ -254,6 +254,7 @@ def Menu_Victoire():
 TIMEFINI = False
 INT = 0
 TIMEAFFICH = 90
+dix_secondes = 0
 
 def timeout():
     global TIMEFINI
@@ -295,12 +296,24 @@ def GameLoop():
     while GameRun:
 ################################################################################
         global INT
+        global dix_secondes
         global TIMEAFFICH
         INT = INT+1
+        dix_secondes += 1
 
         if INT == 59 :
             INT = 0
             TIMEAFFICH = TIMEAFFICH-1
+
+        if dix_secondes == 100:
+            print('Changement position portables')
+            dix_secondes = 0
+            level_en_cours.show_port(level_en_cours.level_portables)
+
+        collision_portable = pygame.sprite.spritecollide(player,level_en_cours.portables_list,True)
+
+        if collision_portable:
+            score += 1
 ################################################################################
 
         while GameOver == True:
@@ -339,13 +352,6 @@ def GameLoop():
         #collision_player_missile_mask =  pygame.sprite.spritecollide(player,level_en_cours.pro_list,False,pygame.sprite.collide_mask)
         #collision_player_missile = pygame.sprite.spritecollide(player,level_en_cours.pro_list,False)
         collision_player_fin = pygame.sprite.spritecollide(player,level_en_cours.portal,False)
-        collision_portable = pygame.sprite.spritecollide(player,level_en_cours.portables_list,True)
-
-        # for rand in level_en_cours.portables_list:
-        #         collision_portable = pygame.sprite.spritecollide(player,rand,True)
-
-        if collision_portable:
-            score += 1
 
         global TIMEFINI
 
