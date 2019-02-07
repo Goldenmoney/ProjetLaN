@@ -7,7 +7,7 @@ Display_Height = 768
 
 Display = pygame.display.set_mode((Display_Width,Display_Height))
 
-police = pygame.image.load("images/policc.png").convert_alpha()
+police = pygame.image.load("images/police.png").convert_alpha()
 
 class Police(pygame.sprite.Sprite):
     # x location, y location
