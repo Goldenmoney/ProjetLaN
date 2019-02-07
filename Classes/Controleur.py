@@ -428,9 +428,6 @@ def GameLoop():
 
         if bonus_actif == True:
             temps_bonus += 1
-            font = pygame.font.SysFont('verdanaprocondblack', 50)
-            actif = font.render("BONUS ACTIF",1,(255,255,255))
-            Display.blit(actif, (360, 100))
             player.setGravite(0.1)
 
             if temps_bonus == 600:
@@ -503,7 +500,7 @@ def GameLoop():
             Display.blit(empty,(500,10))
             Display.blit(pause,(850,10))
 
-            font = pygame.font.SysFont('verdanaprocondblack', 50)
+            font = pygame.font.SysFont('verdana', 50)
             if TIMEAFFICH>30 :
                 timerScreen = font.render("Timer : "+str(TIMEAFFICH)+" s",1,(255,255,255))
             else :
@@ -514,6 +511,10 @@ def GameLoop():
             scoreScreen = font.render("Score : " + str(score) + " pts",1,(255,255,255))
             Display.blit(scoreScreen, (530, 20))
             Display.blit(grille, (0, 0)) # POUR TESTS
+            if bonus_actif == True:
+                font = pygame.font.SysFont('verdanaprocondblack', 50)
+                actif = font.render("BONUS ACTIF",1,(255,255,255))
+                Display.blit(actif, (150, 50))
 
             # rafraichi l'ecran
             pygame.display.flip()
