@@ -41,6 +41,8 @@ lvl_30 = pygame.image.load("images/3.png").convert_alpha()
 lvl_3 = pygame.transform.scale(lvl_30, (300, 100))
 empty0 = pygame.image.load("images/empty.png").convert_alpha()
 empty = pygame.transform.scale(empty0, (400, 100))
+rejouer0 = pygame.image.load("images/rejouer.png").convert_alpha()
+rejouer = pygame.transform.scale(rejouer0, (300, 100))
 
 # POUR TESTS
 grille = pygame.image.load("images/grille.png").convert_alpha()
@@ -248,10 +250,15 @@ def Menu_Victoire():
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
-                if MenuV.collidepoint(posSouris):
+                if menuV.collidepoint(posSouris):
                     pygame.display.update()
                     time.sleep(1)
                     Menu_Start()
+
+                if rejouerV.collidepoint(posSouris):
+                    pygame.display.update()
+                    time.sleep(1)
+                    GameLoop()
 
         Display.blit(background,(0,0))
 
@@ -273,7 +280,8 @@ def Menu_Victoire():
 
         f_high_lvl1.close()
 
-        MenuV =  Display.blit(menu,(362,335))
+        rejouerV = Display.blit(rejouer, (362, 335))
+        menuV = Display.blit(menu, (362, 460))
 
         pygame.display.flip()
 
