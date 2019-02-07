@@ -413,6 +413,9 @@ def GameLoop():
             level_en_cours.show_port(level_en_cours.level_portables)
         collision_portable = pygame.sprite.spritecollide(player,level_en_cours.portables_list,True)
 
+        if collision_portable:
+            score += 1
+
         # TOUTES LES 30s
         if trente_secondes == 1800:
             trente_secondes = 0
@@ -421,20 +424,19 @@ def GameLoop():
 
         if collision_bonus:
             bonus_actif = True
+            temps_bonus = 0
 
         if bonus_actif == True:
-            temps_bonus = 0
             temps_bonus += 1
             font = pygame.font.SysFont('verdanaprocondblack', 50)
             actif = font.render("BONUS ACTIF",1,(255,255,255))
             Display.blit(actif, (360, 100))
-            print('Bonus actif')
-            if temps_bonus == 600:
-                temps_bonus = False
+            print(temps_bonus)
+
+            if temps_bonus == 150:
+                bonus_actif = False
                 print('Bonus non actif')
 
-        if collision_portable:
-            score += 1
 ################################################################################
 
         while GameOver == True:
