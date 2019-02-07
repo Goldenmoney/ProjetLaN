@@ -23,6 +23,8 @@ options0 = pygame.image.load("images/options.png").convert_alpha()
 options = pygame.transform.scale(options0, (300, 100))
 credits0 = pygame.image.load("images/credits.png").convert_alpha()
 credits = pygame.transform.scale(credits0, (300, 100))
+reinit0 = pygame.image.load("images/reinit.png").convert_alpha()
+reinit = pygame.transform.scale(reinit0, (300, 100))
 menu0 = pygame.image.load("images/menu.png").convert_alpha()
 menu = pygame.transform.scale(menu0, (300, 100))
 rejouer0 = pygame.image.load("images/rejouer.png").convert_alpha()
@@ -208,6 +210,17 @@ def Menu_options():
                     time.sleep(1)
                     Credit()
 
+                if ReinitO.collidepoint(mpos):
+                    f_high_lvl = open("high/lvl1.txt", "w")
+                    f_high_lvl.write('0')
+                    f_high_lvl.close()
+                    f_high_lvl = open("high/lvl2.txt", "w")
+                    f_high_lvl.write('0')
+                    f_high_lvl.close()
+                    f_high_lvl = open("high/lvl3.txt", "w")
+                    f_high_lvl.write('0')
+                    f_high_lvl.close()
+
                 if MenuO.collidepoint(mpos):
                     pygame.display.update()
                     time.sleep(1)
@@ -216,7 +229,8 @@ def Menu_options():
         Display.blit(background,(0,0))
         Display.blit(titreoptions,(0,0))
         CredO = Display.blit(credits,(362,335))
-        MenuO =  Display.blit(menu,(362,460))
+        ReinitO = Display.blit(reinit,(362,460))
+        MenuO =  Display.blit(menu,(362,580))
         pygame.display.flip()
 
 # affiche credits
