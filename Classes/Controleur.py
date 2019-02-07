@@ -47,6 +47,10 @@ lvl_3_block0 = pygame.image.load("images/3block.png").convert_alpha()
 lvl_3_block = pygame.transform.scale(lvl_3_block0, (300, 100))
 empty0 = pygame.image.load("images/empty.png").convert_alpha()
 empty = pygame.transform.scale(empty0, (400, 100))
+retour0 = pygame.image.load("images/retour.png").convert_alpha()
+retour = pygame.transform.scale(retour0, (300, 100))
+rejouer0 = pygame.image.load("images/rejouer.png").convert_alpha()
+rejouer = pygame.transform.scale(rejouer0, (300, 100))
 
 # POUR TESTS
 grille = pygame.image.load("images/grille.png").convert_alpha()
@@ -71,7 +75,6 @@ FPS = 60
 # affiche menu principal
 def Menu_Start():
     global level_en_cours_numero
-    global score
     menuStart = True
     pygame.mixer.music.stop()
 
@@ -149,8 +152,15 @@ def Menu_niveau():
                         GameLoop()
                 f_high_lvl2.close()
 
+                if retourO.collidepoint(posSouris):
+                    pygame.display.update()
+                    time.sleep(1)
+                    Menu_Start()
+
         Display.blit(background,(0,0))
         Display.blit(choixlvl,(0,0))
+        retourO = Display.blit(retour,(50,600))
+
         lvl1 = Display.blit(lvl_1,(50,320))
         font = pygame.font.SysFont('verdanaprocondblack', 50)
         f_high_lvl1 = open("high/lvl1.txt", "r")
@@ -175,13 +185,13 @@ def Menu_niveau():
 
         f_high_lvl2 = open("high/lvl2.txt", "r")
         if int(f_high_lvl2.read()) >= 25:
-            lvl3 =  Display.blit(lvl_3,(690,320))
+            lvl3 = Display.blit(lvl_3,(690,320))
             f_high_lvl3 = open("high/lvl3.txt", "r")
             high_lvl3 = font.render("Record : " + f_high_lvl3.read(),1,(255,255,255))
             Display.blit(high_lvl3, (690, 450))
             f_high_lvl3.close()
         else:
-            lvl3 =  Display.blit(lvl_3_block,(690,320))
+            lvl3 = Display.blit(lvl_3_block,(690,320))
             lock = font.render("Requis : 25",1,(255,255,255))
             Display.blit(lock, (690, 450))
             lock = font.render("sur le niveau 2",1,(255,255,255))
@@ -194,6 +204,7 @@ def Menu_niveau():
 def Menu_options():
     global level_en_cours_numero
     menuOptions = True
+    msg_reinit_bool = False
 
     pygame.key.set_repeat(400,30)
     while menuOptions:
@@ -220,6 +231,7 @@ def Menu_options():
                     f_high_lvl = open("high/lvl3.txt", "w")
                     f_high_lvl.write('0')
                     f_high_lvl.close()
+                    msg_reinit_bool = True
 
                 if MenuO.collidepoint(mpos):
                     pygame.display.update()
@@ -231,6 +243,10 @@ def Menu_options():
         CredO = Display.blit(credits,(362,335))
         ReinitO = Display.blit(reinit,(362,460))
         MenuO =  Display.blit(menu,(362,580))
+        if msg_reinit_bool == True:
+            font = pygame.font.SysFont('verdanaprocondblack', 50)
+            msg_reinit = font.render("Scores réinitialisés",1,(255,255,255))
+            Display.blit(msg_reinit, (10, 200))
         pygame.display.flip()
 
 # affiche credits
@@ -290,7 +306,12 @@ def Menu_Victoire():
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
-                if MenuV.collidepoint(posSouris):
+                if rejouerV.collidepoint(posSouris):
+                    pygame.display.update()
+                    time.sleep(1)
+                    GameLoop()
+
+                if menuV.collidepoint(posSouris):
                     pygame.display.update()
                     time.sleep(1)
                     Menu_Start()
@@ -315,7 +336,8 @@ def Menu_Victoire():
 
         f_high_lvl1.close()
 
-        MenuV =  Display.blit(menu,(362,335))
+        rejouerV = Display.blit(rejouer, (362, 335))
+        menuV = Display.blit(menu, (362, 460))
 
         pygame.display.flip()
 
@@ -339,10 +361,12 @@ def timeout():
 def GameLoop():
     global level_en_cours_numero
     global score
+    global bonus_actif
 
     GameRun = True
     GameOver = False
     score = 0
+    bonus_actif = False
 
     t = Timer(30.0, timeout)
     #attention pas synchro avec affichage tps restant
@@ -395,8 +419,19 @@ def GameLoop():
             level_en_cours.show_bonus(level_en_cours.level_bonus)
         collision_bonus = pygame.sprite.spritecollide(player,level_en_cours.bonus_list,True)
 
-        #if collision_bonus:
+        if collision_bonus:
+            bonus_actif = True
 
+        if bonus_actif == True:
+            temps_bonus = 0
+            temps_bonus += 1
+            font = pygame.font.SysFont('verdanaprocondblack', 50)
+            actif = font.render("BONUS ACTIF",1,(255,255,255))
+            Display.blit(actif, (360, 100))
+            print('Bonus actif')
+            if temps_bonus == 600:
+                temps_bonus = False
+                print('Bonus non actif')
 
         if collision_portable:
             score += 1
