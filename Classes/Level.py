@@ -53,7 +53,22 @@ class Level_1(Level):
     def __init__(self, player):
         Level.__init__(self, player)
 
-        self.level_portables = [[500,600],[100,600],[300,600],[400,500]]
+        self.level_portables = [[40,140],
+                                [80,140],
+                                [120,140],
+
+                                [40,250],
+                                [120,250],
+
+                                [140,200],
+                                [180,200],
+                                [220,200],
+
+                                [40,400],
+                                [60,400],
+                                [80,400],
+                                [100,400],
+                                ]
 
         self.show_port(self.level_portables)
 
