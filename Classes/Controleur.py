@@ -23,6 +23,8 @@ options0 = pygame.image.load("images/options.png").convert_alpha()
 options = pygame.transform.scale(options0, (300, 100))
 credits0 = pygame.image.load("images/credits.png").convert_alpha()
 credits = pygame.transform.scale(credits0, (300, 100))
+reinit0 = pygame.image.load("images/reinit.png").convert_alpha()
+reinit = pygame.transform.scale(reinit0, (300, 100))
 menu0 = pygame.image.load("images/menu.png").convert_alpha()
 menu = pygame.transform.scale(menu0, (300, 100))
 rejouer0 = pygame.image.load("images/rejouer.png").convert_alpha()
@@ -37,14 +39,14 @@ lvl_10 = pygame.image.load("images/1.png").convert_alpha()
 lvl_1 = pygame.transform.scale(lvl_10, (300, 100))
 lvl_20 = pygame.image.load("images/2.png").convert_alpha()
 lvl_2 = pygame.transform.scale(lvl_20, (300, 100))
+lvl_2_block0 = pygame.image.load("images/2block.png").convert_alpha()
+lvl_2_block = pygame.transform.scale(lvl_2_block0, (300, 100))
 lvl_30 = pygame.image.load("images/3.png").convert_alpha()
 lvl_3 = pygame.transform.scale(lvl_30, (300, 100))
+lvl_3_block0 = pygame.image.load("images/3block.png").convert_alpha()
+lvl_3_block = pygame.transform.scale(lvl_3_block0, (300, 100))
 empty0 = pygame.image.load("images/empty.png").convert_alpha()
 empty = pygame.transform.scale(empty0, (400, 100))
-rejouer0 = pygame.image.load("images/rejouer.png").convert_alpha()
-rejouer = pygame.transform.scale(rejouer0, (300, 100))
-retour0 = pygame.image.load("images/retour.png").convert_alpha()
-retour = pygame.transform.scale(retour0, (300, 100))
 
 # POUR TESTS
 grille = pygame.image.load("images/grille.png").convert_alpha()
@@ -129,47 +131,63 @@ def Menu_niveau():
                     level_en_cours_numero = 0
                     GameLoop()
 
-                if lvl2.collidepoint(posSouris):
-                    pygame.display.update()
-                    time.sleep(1)
-                    level_en_cours_numero = 1
-                    GameLoop()
+                f_high_lvl1 = open("high/lvl1.txt", "r")
+                if int(f_high_lvl1.read()) >= 25:
+                    if lvl2.collidepoint(posSouris):
+                        pygame.display.update()
+                        time.sleep(1)
+                        level_en_cours_numero = 1
+                        GameLoop()
+                f_high_lvl1.close()
 
-
-                if lvl3.collidepoint(posSouris):
-                    pygame.display.update()
-                    time.sleep(1)
-                    level_en_cours_numero = 2
-                    GameLoop()
-
-                if retourO.collidepoint(posSouris):
-                    pygame.display.update()
-                    time.sleep(1)
-                    Menu_Start()
+                f_high_lvl2 = open("high/lvl2.txt", "r")
+                if int(f_high_lvl2.read()) >= 25:
+                    if lvl3.collidepoint(posSouris):
+                        pygame.display.update()
+                        time.sleep(1)
+                        level_en_cours_numero = 2
+                        GameLoop()
+                f_high_lvl2.close()
 
         Display.blit(background,(0,0))
         Display.blit(choixlvl,(0,0))
-        retourO = Display.blit(retour,(50,600))
-
-
         lvl1 = Display.blit(lvl_1,(50,320))
         font = pygame.font.SysFont('verdanaprocondblack', 50)
         f_high_lvl1 = open("high/lvl1.txt", "r")
-        high_lvl1 = font.render("Meilleur : " + f_high_lvl1.read(),1,(255,255,255))
+        high_lvl1 = font.render("Record : " + f_high_lvl1.read(),1,(255,255,255))
         Display.blit(high_lvl1, (50, 450))
         f_high_lvl1.close()
 
-        lvl2 = Display.blit(lvl_2,(370,320))
+        f_high_lvl1 = open("high/lvl1.txt", "r")
+        if int(f_high_lvl1.read()) >= 25:
+            lvl2 = Display.blit(lvl_2,(370,320))
+            f_high_lvl2 = open("high/lvl2.txt", "r")
+            high_lvl2 = font.render("Record : " + f_high_lvl2.read(),1,(255,255,255))
+            Display.blit(high_lvl2, (370, 450))
+            f_high_lvl2.close()
+        else:
+            lvl2 = Display.blit(lvl_2_block,(370,320))
+            lock = font.render("Requis : 25",1,(255,255,255))
+            Display.blit(lock, (370, 450))
+            lock = font.render("sur le niveau 1",1,(255,255,255))
+            Display.blit(lock, (370, 510))
+        f_high_lvl1.close()
+
         f_high_lvl2 = open("high/lvl2.txt", "r")
-        high_lvl2 = font.render("Meilleur : " + f_high_lvl2.read(),1,(255,255,255))
-        Display.blit(high_lvl2, (370, 450))
+        if int(f_high_lvl2.read()) >= 25:
+            lvl3 =  Display.blit(lvl_3,(690,320))
+            f_high_lvl3 = open("high/lvl3.txt", "r")
+            high_lvl3 = font.render("Record : " + f_high_lvl3.read(),1,(255,255,255))
+            Display.blit(high_lvl3, (690, 450))
+            f_high_lvl3.close()
+        else:
+            lvl3 =  Display.blit(lvl_3_block,(690,320))
+            lock = font.render("Requis : 25",1,(255,255,255))
+            Display.blit(lock, (690, 450))
+            lock = font.render("sur le niveau 2",1,(255,255,255))
+            Display.blit(lock, (690, 510))
         f_high_lvl2.close()
 
-        lvl3 = Display.blit(lvl_3,(690,320))
-        f_high_lvl3 = open("high/lvl3.txt", "r")
-        high_lvl3 = font.render("Meilleur : " + f_high_lvl3.read(),1,(255,255,255))
-        Display.blit(high_lvl3, (690, 450))
-        f_high_lvl3.close()
         pygame.display.flip()
 
 # affichage menu options
@@ -192,6 +210,17 @@ def Menu_options():
                     time.sleep(1)
                     Credit()
 
+                if ReinitO.collidepoint(mpos):
+                    f_high_lvl = open("high/lvl1.txt", "w")
+                    f_high_lvl.write('0')
+                    f_high_lvl.close()
+                    f_high_lvl = open("high/lvl2.txt", "w")
+                    f_high_lvl.write('0')
+                    f_high_lvl.close()
+                    f_high_lvl = open("high/lvl3.txt", "w")
+                    f_high_lvl.write('0')
+                    f_high_lvl.close()
+
                 if MenuO.collidepoint(mpos):
                     pygame.display.update()
                     time.sleep(1)
@@ -200,7 +229,8 @@ def Menu_options():
         Display.blit(background,(0,0))
         Display.blit(titreoptions,(0,0))
         CredO = Display.blit(credits,(362,335))
-        MenuO =  Display.blit(menu,(362,460))
+        ReinitO = Display.blit(reinit,(362,460))
+        MenuO =  Display.blit(menu,(362,580))
         pygame.display.flip()
 
 # affiche credits
@@ -260,15 +290,10 @@ def Menu_Victoire():
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
-                if menuV.collidepoint(posSouris):
+                if MenuV.collidepoint(posSouris):
                     pygame.display.update()
                     time.sleep(1)
                     Menu_Start()
-
-                if rejouerV.collidepoint(posSouris):
-                    pygame.display.update()
-                    time.sleep(1)
-                    GameLoop()
 
         Display.blit(background,(0,0))
 
@@ -290,8 +315,7 @@ def Menu_Victoire():
 
         f_high_lvl1.close()
 
-        rejouerV = Display.blit(rejouer, (362, 335))
-        menuV = Display.blit(menu, (362, 460))
+        MenuV =  Display.blit(menu,(362,335))
 
         pygame.display.flip()
 
