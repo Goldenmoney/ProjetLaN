@@ -62,7 +62,7 @@ class Player(pygame.sprite.Sprite):
         #change image par image
         self.animation_speed -= 1
 
-        self.gravite()
+        self.is_gravite()
         if self.rect.x < 950 and vitesseX == 5: #blocage à droite
             self.rect.x += self.vitesseX
         elif self.rect.x > -5 and vitesseX == -5: #blocage à gauche
