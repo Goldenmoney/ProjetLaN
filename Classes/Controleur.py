@@ -4,7 +4,6 @@ from pygame.locals import *
 pygame.init()
 from Classes.Level import *
 from Classes.Player import *
-from Classes.Lancerocket import *
 from Classes.Projectile import *
 import time
 import sys #module systeme

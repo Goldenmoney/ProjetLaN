@@ -114,11 +114,15 @@ class Level_1(Level):
 class Level_2(Level):
     def __init__(self, player):
         Level.__init__(self, player)
+
+        self.level_portables = []
         #A AJOUTER
 
 class Level_3(Level):
     def __init__(self, player):
         Level.__init__(self, player)
+
+        self.level_portables = []
         #A AJOUTER
 
 class Level_alea(Level):
