@@ -1,9 +1,9 @@
 import pygame
 pygame.init()
 from Classes.Controleur import *
-from Classes.PortailFin import *
 from Classes.Platform import *
 from Classes.Portable import *
+from Classes.Police import *
 from Classes.Bonus import *
 
 import random
@@ -27,6 +27,7 @@ class Level(object):
         # self.portal = pygame.sprite.Group()
         # self.portal.add(Portailfin())
         self.portables_list = pygame.sprite.Group()
+        self.police_list = pygame.sprite.Group()
         self.bonus_list = pygame.sprite.Group()
         self.plats = pygame.sprite.Group()
         for i in range(0,8):
@@ -38,6 +39,7 @@ class Level(object):
         Display.blit(fond,(0,0))
         # self.portal.draw(screen)
         self.portables_list.draw(screen)
+        self.police_list.draw(screen)
         self.bonus_list.draw(screen)
         self.plats.draw(screen)
 
@@ -50,11 +52,20 @@ class Level(object):
                 portable = Portable(port[0], port[1])
                 self.portables_list.add(portable)
 
+    def show_police(self, level_police):
+        self.police_list.empty()
+        for pol in level_police:
+            # Changer 2eme valeur pour taux d'apparition
+            rand = random.randint(0, 1)
+            if rand == 1: # ajouter/enlever or rand == 0 (pour tests)
+                police = Police(pol[0], pol[1])
+                self.police_list.add(police)
+
     def show_bonus(self, level_bonus):
         self.bonus_list.empty()
         for bon in level_bonus:
             # Changer 2eme valeur pour taux d'apparition
-            rand = random.randint(0, 4) # REMETTRE A 4
+            rand = random.randint(0, 3) # REMETTRE A 3
             if rand == 0: # ajouter/enlever or rand == 0 (pour tests)
                 bonus = Bonus(bon[0], bon[1])
                 self.bonus_list.add(bonus)
@@ -110,8 +121,11 @@ class Level_1(Level):
 
         self.show_port(self.level_portables)
 
+        self.level_police = [[100,170],[600,620],[900,320],[400,360]]
+        self.show_police(self.level_police)
+
         # BONUS
-        self.level_bonus = [[950,400],[300,300],[500,600]]
+        self.level_bonus = [[950,400],[300,300],[500,600],[250,600]]
         self.show_bonus(self.level_bonus)
 
 class Level_2(Level):
@@ -119,6 +133,7 @@ class Level_2(Level):
         Level.__init__(self, player)
 
         self.level_portables = []
+        self.level_police = []
         #A AJOUTER
 
 class Level_3(Level):
@@ -126,6 +141,7 @@ class Level_3(Level):
         Level.__init__(self, player)
 
         self.level_portables = []
+        self.level_police = []
         #A AJOUTER
 
 class Level_alea(Level):
