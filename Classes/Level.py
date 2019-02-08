@@ -167,7 +167,7 @@ class Level_2(Level):
                                 [950,600],]
 
         self.show_port(self.level_portables)
-        self.level_police = [[130,600],[380,600],[630,600],[780,600],]
+        self.level_police = [[150,650],[400,650],[650,650],[800,650],]
         self.show_police(self.level_police)
         self.level_bonus = [[450,600]]
         self.show_bonus(self.level_bonus)
