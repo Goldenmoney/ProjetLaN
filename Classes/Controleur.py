@@ -363,7 +363,7 @@ def Menu_Victoire():
 
 TIMEFINI = False
 INT = 0
-TIMEAFFICH = 90
+TIMEAFFICH = 180
 six_secondes = 0
 dix_secondes = 0
 trente_secondes = 0
@@ -372,8 +372,8 @@ def timeout():
     global TIMEFINI
     TIMEFINI = True
     global TIMEAFFICH
-    TIMEAFFICH = 90
-    t = Timer(90.0, timeout)
+    TIMEAFFICH = 180
+    t = Timer(180.0, timeout)
 
 
 def GameLoop():
@@ -386,7 +386,7 @@ def GameLoop():
     score = 0
     bonus_actif = False
 
-    t = Timer(90.0, timeout)
+    t = Timer(180.0, timeout)
     #attention pas synchro avec affichage tps restant
     t.start()
 
@@ -559,7 +559,7 @@ def GameLoop():
             if bonus_actif == True:
                 font = pygame.font.SysFont('verdanaprocondblack', 50)
                 actif = font.render("BONUS ACTIF",1,(255,255,255))
-                Display.blit(actif, (150, 50))
+                Display.blit(actif, (600, 150))
 
             # rafraichi l'ecran
             pygame.display.flip()
