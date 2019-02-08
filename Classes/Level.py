@@ -121,16 +121,16 @@ class Level_1(Level):
 
         self.show_port(self.level_portables)
 
-        platformList = [[0,500],
-                        [0,200],
+        platformList = [[-140,500],[0,500],
+                        [-140,200],[0,200],
                         [250,300],
                         [260,590],
-                        [780,380]]
+                        [780,380],[920,380],]
 
         for plat in platformList:
             self.platform_list.add(Platform(plat[0],plat[1]))
 
-        trampolineList = [[480,500]]
+        trampolineList = [[550,500]]
 
         for tramp in trampolineList:
             self.platform_list.add(Platform(tramp[0],tramp[1],"trampoline"))
@@ -148,6 +148,7 @@ class Level_2(Level):
 
         self.level_portables = []
         self.level_police = []
+        self.level_bonus = []
         #A AJOUTER
 
 class Level_3(Level):
@@ -156,6 +157,7 @@ class Level_3(Level):
 
         self.level_portables = []
         self.level_police = []
+        self.level_bonus = []
         #A AJOUTER
 
 class Level_alea(Level):
