@@ -146,9 +146,31 @@ class Level_2(Level):
     def __init__(self, player):
         Level.__init__(self, player)
 
-        self.level_portables = []
-        self.level_police = []
-        self.level_bonus = []
+        self.level_portables = [[50,600],
+                                [100,600],
+                                [150,600],
+                                [200,600],
+                                [250,600],
+                                [300,600],
+                                [350,600],
+                                [400,600],
+                                [450,600],
+                                [500,600],
+                                [550,600],
+                                [600,600],
+                                [650,600],
+                                [700,600],
+                                [750,600],
+                                [800,600],
+                                [850,600],
+                                [900,600],
+                                [950,600],]
+
+        self.show_port(self.level_portables)
+        self.level_police = [[130,600],[380,600],[630,600],[780,600],]
+        self.show_police(self.level_police)
+        self.level_bonus = [[450,600]]
+        self.show_bonus(self.level_bonus)
         #A AJOUTER
 
 class Level_3(Level):
