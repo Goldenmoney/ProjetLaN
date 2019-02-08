@@ -502,22 +502,22 @@ def GameLoop():
                 ecartDroite = plat.rect.x + plat.rect.width - player.rect.x
                 ecartHaut = player.rect.y + player.rect.height - plat.rect.y
                 ecartBas = plat.rect.y + plat.rect.height - player.rect.y
-                if ecartGauche > 50 and ecartGauche < 55:
+                if ecartGauche >= 50 and ecartGauche <= 55:
                     if ecartHaut > 35 and ecartBas > 30:
                         if vitesseX == 5:
                             vitesseX = 0
-                if ecartDroite > 25 and ecartDroite < 30:
+                if ecartDroite >= 25 and ecartDroite <= 30:
                     if ecartHaut > 35 and ecartBas > 30:
                         if vitesseX == -5:
                             vitesseX = 0
-                if ecartHaut > 20 and ecartHaut < 35:
+                if ecartHaut >= 20 and ecartHaut <= 35:
                     if ecartDroite > 30 and ecartGauche > 55:
                         if plat.type == "platform":
                             auSol = True
                         else:
                             player.setAuSol(True)
                             player.saut(-15)
-                if ecartBas > 0 and ecartBas < 30:
+                if ecartBas >= 0 and ecartBas <= 30:
                     if ecartDroite > 30 and ecartGauche > 55:
                         player.setAuSol(True)
                         player.saut(0)
