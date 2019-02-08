@@ -342,10 +342,9 @@ def Menu_Victoire():
         nb = int(f_high_lvl1.read())
         if nb <= score:
             if nb < 25 and score >= 25:
-                print("ok")
                 font = pygame.font.SysFont('verdanaprocondblack', 50)
                 highest = font.render("Niveau suivant débloqué",1,(255,255,255))
-                Display.blit(hsighest, (360, 700))
+                Display.blit(highest, (360, 700))
             font = pygame.font.SysFont('verdanaprocondblack', 50)
             highest = font.render("Nouveau record !",1,(255,255,255))
             Display.blit(highest, (360, 100))
@@ -463,8 +462,6 @@ def GameLoop():
                 bonus_actif = False
                 player.setGravite(0.5)
 
-################################################################################
-
         while GameOver == True:
             time.sleep(1)
             pygame.mixer.music.stop()
@@ -496,11 +493,8 @@ def GameLoop():
                 spacePressed = False
                 vitesseY = 1
 
-        collision_player_platform = pygame.sprite.spritecollide(player,level_en_cours.plats,False)
-        #collision_player_trampoline = pygame.sprite.spritecollide(player,level_en_cours.tramps,False)
+        collision_player_platform = pygame.sprite.spritecollide(player,level_en_cours.platform_list,False)
 
-        #if collision_player_trampoline:
-        #    player.saut(-15)
         if collision_player_platform:
             auSol = False
             for plat in level_en_cours.platform_list:
@@ -509,18 +503,23 @@ def GameLoop():
                 ecartHaut = player.rect.y + player.rect.height - plat.rect.y
                 ecartBas = plat.rect.y + plat.rect.height - player.rect.y
                 if ecartGauche > 50 and ecartGauche < 55:
-                    if ecartHaut > 35 and ecartBas > 15:
+                    if ecartHaut > 35 and ecartBas > 30:
                         if vitesseX == 5:
                             vitesseX = 0
                 if ecartDroite > 25 and ecartDroite < 30:
-                    if ecartHaut > 35 and ecartBas > 15:
+                    if ecartHaut > 35 and ecartBas > 30:
                         if vitesseX == -5:
                             vitesseX = 0
                 if ecartHaut > 20 and ecartHaut < 35:
                     if ecartDroite > 30 and ecartGauche > 55:
-                        auSol = True
-                if ecartBas > -20 and ecartBas < 15:
+                        if plat.type == "platform":
+                            auSol = True
+                        else:
+                            player.setAuSol(True)
+                            player.saut(-15)
+                if ecartBas > 0 and ecartBas < 30:
                     if ecartDroite > 30 and ecartGauche > 55:
+                        player.setAuSol(True)
                         player.saut(0)
             player.setAuSol(auSol)
 
@@ -534,13 +533,6 @@ def GameLoop():
             pygame.mixer.music.stop()
             TIMEFINI=False
             Menu_Victoire()
-
-        # elif collision_player_fin:
-        #     time.sleep(1)
-        #     pygame.mixer.music.stop()
-        #     TIMEAFFICH = 90
-        #     Menu_Victoire()
-
         else :
             level_en_cours.draw(Display)
             sprite_bouge.draw(Display)
@@ -564,7 +556,6 @@ def GameLoop():
 
             scoreScreen = font.render("Score : " + str(score) + " pts",1,(255,255,255))
             Display.blit(scoreScreen, (530, 20))
-            Display.blit(grille, (0, 0)) # POUR TESTS
             if bonus_actif == True:
                 font = pygame.font.SysFont('verdanaprocondblack', 50)
                 actif = font.render("BONUS ACTIF",1,(255,255,255))

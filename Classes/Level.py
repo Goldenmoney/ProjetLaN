@@ -29,9 +29,9 @@ class Level(object):
         self.portables_list = pygame.sprite.Group()
         self.police_list = pygame.sprite.Group()
         self.bonus_list = pygame.sprite.Group()
-        self.plats = pygame.sprite.Group()
+        self.platform_list = pygame.sprite.Group()
         for i in range(0,8):
-            self.plats.add(Platform(i*208-63*(i+1),680))
+            self.platform_list.add(Platform(i*208-63*(i+1),680))
         self.player = player
         self.background = None
 
@@ -41,7 +41,7 @@ class Level(object):
         self.portables_list.draw(screen)
         self.police_list.draw(screen)
         self.bonus_list.draw(screen)
-        self.plats.draw(screen)
+        self.platform_list.draw(screen)
 
     def show_port(self, level_portables):
         self.portables_list.empty()
@@ -121,12 +121,19 @@ class Level_1(Level):
 
         self.show_port(self.level_portables)
 
-        trampolineList = []
+        platformList = [[0,500],
+                        [0,200],
+                        [250,300],
+                        [260,590],
+                        [780,380]]
 
-        self.platform_list.add(Platform(300,550))
+        for plat in platformList:
+            self.platform_list.add(Platform(plat[0],plat[1]))
+
+        trampolineList = [[480,500]]
 
         for tramp in trampolineList:
-            self.trampoline_list.add(Platform(tramp[0],tramp[1],"trampoline"))
+            self.platform_list.add(Platform(tramp[0],tramp[1],"trampoline"))
 
         self.level_police = [[100,170],[600,620],[900,320],[400,360]]
         self.show_police(self.level_police)
